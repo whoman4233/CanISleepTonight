@@ -2,31 +2,38 @@ using UnityEngine;
 
 public class DistractionRuntime
 {
-    // ¿øº» µ¥ÀÌÅÍ
+    // ì›ë³¸ ë°ì´í„°
     public readonly DistractionDataRow data;
 
-    // ½Äº°ÀÚ ÆíÀÇ ÇÁ·ÎÆÛÆ¼
+    // ì‹ë³„ì í¸ì˜ í”„ë¡œí¼í‹°
     public string Id => data.distractionId;
     public string OwnerId => data.ownerId;
 
-    // ¼ÒÀ¯ ÀÌ¿ô
+    // ì†Œìœ  ì´ì›ƒ
     public NeighborRuntime owner;
 
-    // »óÅÂ ÇÃ·¡±×
-    public bool isAlive = true;        // ÆÛÁñ/»óÈ£ÀÛ¿ëÀ¸·Î ¿µ±¸ÀûÀ¸·Î ²¨Á³´ÂÁö
-    public bool isActiveToday = false; // ¿À´Ã ÇÏ·ç È°¼ºÈ­ ¿©ºÎ (ÁØºñ ÆäÀÌÁî¿¡¼­ °áÁ¤)
+    // ìƒíƒœ í”Œë˜ê·¸
+    public bool isAlive = true;        // í¼ì¦/ìƒí˜¸ì‘ìš©ìœ¼ë¡œ ì˜êµ¬ì ìœ¼ë¡œ êº¼ì¡ŒëŠ”ì§€
+    public bool isActiveToday = false; // ì˜¤ëŠ˜ í•˜ë£¨ í™œì„±í™” ì—¬ë¶€ (ì¤€ë¹„ í˜ì´ì¦ˆì—ì„œ ê²°ì •)
 
-    // ¿ùµå »ó À§Ä¡/ÂüÁ¶
-    public Transform worldTransform;   // DistractionAnchor¿¡¼­ °¡Á®¿À´Â Transform
-    public string placeId;             // Noise/Wave¿¡¼­ »ç¿ëÇÒ À§Ä¡ ID
+    // ì›”ë“œ ìƒ ìœ„ì¹˜/ì°¸ì¡°
+    public Transform worldTransform;   // DistractionAnchorì—ì„œ ê°€ì ¸ì˜¤ëŠ” Transform
+    public string placeId;             // Noise/Waveì—ì„œ ì‚¬ìš©í•  ìœ„ì¹˜ ID
 
-    // ¿É¼Ç: ¼ÒÀ½/µğ¹ö±×¿ë Ä³½Ã
-    public bool isNoiseSource = true;      // ½ÇÁ¦ ¼ÒÀ½¿øÀÎÁö ¿©ºÎ(ÇÊ¿äÇÏ¸é »ç¿ë)
-    public float cachedNoiseContribution;  // NoiseManager °è»ê °á°ú Ä³½Ã
+    // ì˜µì…˜: ì†ŒìŒ/ë””ë²„ê·¸ìš© ìºì‹œ
+    public bool isNoiseSource = true;      // ì‹¤ì œ ì†ŒìŒì›ì¸ì§€ ì—¬ë¶€(í•„ìš”í•˜ë©´ ì‚¬ìš©)
+    public float cachedNoiseContribution;  // NoiseManager ê³„ì‚° ê²°ê³¼ ìºì‹œ
+
+    public void SetDead()
+    {
+        isAlive = false;
+        isActiveToday = false;
+        isNoiseSource = false;
+    }
 
     public DistractionRuntime(DistractionDataRow dataRow)
-    {
+    {   
         data = dataRow;
-        placeId = dataRow.placeId; // ±âº»°ªÀº µ¥ÀÌÅÍ ±âÁØ, ÇÁ¸®ÆÕ¿¡¼­ override °¡´É
+        placeId = dataRow.placeId; // ê¸°ë³¸ê°’ì€ ë°ì´í„° ê¸°ì¤€, í”„ë¦¬íŒ¹ì—ì„œ override ê°€ëŠ¥
     }
 }

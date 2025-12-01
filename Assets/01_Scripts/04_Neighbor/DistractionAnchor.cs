@@ -3,17 +3,41 @@ using UnityEngine;
 public class DistractionAnchor : MonoBehaviour
 {
     [Header("Data Link")]
-    [Tooltip("±âÈ¹¼­ÀÇ DistractionID (¿¹: D_N001_A)")]
+    [Tooltip("ê¸°íšì„œì˜ DistractionID (ì˜ˆ: D_N001_A)")]
     public string distractionId;
 
-    [Tooltip("PlaceID (¿¹: P_303, P_202 µî). ºñ¿öµÎ¸é µ¥ÀÌÅÍ ±âº»°ª »ç¿ë")]
+    [Tooltip("PlaceID (ì˜ˆ: P_303, P_202 ë“±). ë¹„ì›Œë‘ë©´ ë°ì´í„° ê¸°ë³¸ê°’ ì‚¬ìš©")]
     public string placeId;
 
     [Header("Noise Source Settings")]
-    [Tooltip("ÀÌ À§Ä¡°¡ ½ÇÁ¦ ¼ÒÀ½ ¹ß»ı À§Ä¡ ¿©ºÎ")]
+    [Tooltip("ì´ ìœ„ì¹˜ê°€ ì‹¤ì œ ì†ŒìŒ ë°œìƒ ìœ„ì¹˜ ì—¬ë¶€")]
     public bool isNoiseOrigin = true;
+
+    // ëŸ°íƒ€ì„ DistractionRuntime ì°¸ì¡°
+    [HideInInspector]
+    public DistractionRuntime runtime;
 
     public string DistractionId => distractionId;
     public string PlaceId => placeId;
     public Transform WorldTransform => transform;
+
+    /// <summary>
+    /// NeighborManagerì—ì„œ ëŸ°íƒ€ì„ ê°ì²´ ì—°ê²°í•  ë•Œ í˜¸ì¶œ
+    /// </summary>
+    public void BindRuntime(DistractionRuntime rt)
+    {
+        runtime = rt;
+
+        // ì›”ë“œ ìœ„ì¹˜ ì—°ê²°
+        rt.worldTransform = transform;
+
+        // Anchorì— PlaceIdê°€ ë“¤ì–´ìˆìœ¼ë©´ ë°ì´í„° ê¸°ë³¸ê°’ë³´ë‹¤ ìš°ì„ 
+        if (!string.IsNullOrEmpty(placeId))
+        {
+            rt.placeId = placeId;
+        }
+
+        // ì†ŒìŒì› ì—¬ë¶€ ë°˜ì˜
+        rt.isNoiseSource = isNoiseOrigin;
+    }
 }

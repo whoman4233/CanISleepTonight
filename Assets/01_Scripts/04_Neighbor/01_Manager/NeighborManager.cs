@@ -15,14 +15,14 @@ public class NeighborManager : MonoBehaviour
     [SerializeField] private int minActiveNeighbors = 2;
     [SerializeField] private int maxActiveNeighbors = 4;
 
-    // ·±Å¸ÀÓ µ¥ÀÌÅÍ
+    // ëŸ°íƒ€ì„ ë°ì´í„°
     private readonly List<NeighborRuntime> _neighbors = new();
     private readonly Dictionary<string, NeighborRuntime> _neighborsById = new();
 
     private readonly List<DistractionRuntime> _allDistractions = new();
     private readonly Dictionary<string, DistractionRuntime> _distractionsById = new();
 
-    // ¿À´Ã È°¼º ÀÌ¿ô/¹æÇØ¿ä¼Ò Ä³½Ã
+    // ì˜¤ëŠ˜ í™œì„± ì´ì›ƒ/ë°©í•´ìš”ì†Œ ìºì‹œ
     private readonly List<NeighborRuntime> _activeNeighborsToday = new();
     private readonly List<DistractionRuntime> _activeDistractionsToday = new();
 
@@ -34,15 +34,15 @@ public class NeighborManager : MonoBehaviour
 
     private void Awake()
     {
-        // ÇÊ¿äÇÏ¸é ½Ì±ÛÅæ ÆĞÅÏ µî ¿©±â¼­ Ã³¸®
+        // í•„ìš”í•˜ë©´ ì‹±ê¸€í†¤ íŒ¨í„´ ë“± ì—¬ê¸°ì„œ ì²˜ë¦¬
         if (houseSlots == null || houseSlots.Count == 0)
         {
-            // ¾À¿¡¼­ ÀÚµ¿ ¼öÁı (¸í½ÃÀûÀ¸·Î ³Ö°í ½ÍÀ¸¸é ÀÎ½ºÆåÅÍ¿¡¼­ ¼³Á¤)
+            // ì”¬ì—ì„œ ìë™ ìˆ˜ì§‘ (ëª…ì‹œì ìœ¼ë¡œ ë„£ê³  ì‹¶ìœ¼ë©´ ì¸ìŠ¤í™í„°ì—ì„œ ì„¤ì •)
             houseSlots = FindObjectsOfType<HouseSlot>().ToList();
         }
     }
 
-    // GameManager¿¡¼­ ÁÖ±âÀûÀ¸·Î È£ÃâÇØÁÙ ÁøÀÔÁ¡µé¸¸ °ø°³·Î ¿­¾îµĞ´Ù.
+    // GameManagerì—ì„œ ì£¼ê¸°ì ìœ¼ë¡œ í˜¸ì¶œí•´ì¤„ ì§„ì…ì ë“¤ë§Œ ê³µê°œë¡œ ì—´ì–´ë‘”ë‹¤.
     public void InitializeWeek()
     {
         if (_initialized) return;
@@ -56,7 +56,7 @@ public class NeighborManager : MonoBehaviour
 
     public void SetupDay(int dayIndex)
     {
-        // ¿À´ÃÀÚ È°¼º »óÅÂ ¸®¼Â
+        // ì˜¤ëŠ˜ì í™œì„± ìƒíƒœ ë¦¬ì…‹
         _activeNeighborsToday.Clear();
         _activeDistractionsToday.Clear();
 
@@ -69,17 +69,17 @@ public class NeighborManager : MonoBehaviour
             }
         }
 
-        // »ì¾Æ ÀÖ´Â ÀÌ¿ô Áß¿¡¼­ ÈÄº¸ ÃßÃâ
+        // ì‚´ì•„ ìˆëŠ” ì´ì›ƒ ì¤‘ì—ì„œ í›„ë³´ ì¶”ì¶œ
         var aliveNeighbors = _neighbors.Where(n => n.isAlive).ToList();
         if (aliveNeighbors.Count == 0)
             return;
 
-        // ¿À´Ã È°¼º ÀÌ¿ô ¼ö °áÁ¤
+        // ì˜¤ëŠ˜ í™œì„± ì´ì›ƒ ìˆ˜ ê²°ì •
         int minCount = Mathf.Clamp(minActiveNeighbors, 1, aliveNeighbors.Count);
         int maxCount = Mathf.Clamp(maxActiveNeighbors, minCount, aliveNeighbors.Count);
         int targetCount = Random.Range(minCount, maxCount + 1);
 
-        // ·£´ı ¼ÅÇÃ ÈÄ »óÀ§ targetCount¸¸ »ç¿ë
+        // ëœë¤ ì…”í”Œ í›„ ìƒìœ„ targetCountë§Œ ì‚¬ìš©
         Shuffle(aliveNeighbors);
         var selected = aliveNeighbors.Take(targetCount).ToList();
 
@@ -100,7 +100,7 @@ public class NeighborManager : MonoBehaviour
 
     public void EndDay()
     {
-        // ÇÏ·ç Á¾·á ½Ã ¿À´ÃÀÚ È°¼º ÇÃ·¡±× Á¤¸® (¿øÇÏ¸é ¿©±â¼­¸¸ ÇØµµ µÇ°í, SetupDay¿¡¼­ µ¤¾î½áµµ µÊ)
+        // í•˜ë£¨ ì¢…ë£Œ ì‹œ ì˜¤ëŠ˜ì í™œì„± í”Œë˜ê·¸ ì •ë¦¬ (ì›í•˜ë©´ ì—¬ê¸°ì„œë§Œ í•´ë„ ë˜ê³ , SetupDayì—ì„œ ë®ì–´ì¨ë„ ë¨)
         _activeNeighborsToday.Clear();
         _activeDistractionsToday.Clear();
 
@@ -114,7 +114,7 @@ public class NeighborManager : MonoBehaviour
         }
     }
 
-    // Æ¯Á¤ DistractionÀ» Dead Ã³¸® (»óÈ£ÀÛ¿ë ½Ã½ºÅÛ¿¡¼­ È£Ãâ)
+    // íŠ¹ì • Distractionì„ Dead ì²˜ë¦¬ (ìƒí˜¸ì‘ìš© ì‹œìŠ¤í…œì—ì„œ í˜¸ì¶œ)
     public void SetDistractionDead(string distractionId)
     {
         if (!_distractionsById.TryGetValue(distractionId, out var runtime))
@@ -123,10 +123,10 @@ public class NeighborManager : MonoBehaviour
         runtime.isAlive = false;
         runtime.isActiveToday = false;
 
-        // Ä³½Ã ¸®½ºÆ®¿¡¼­µµ Á¦°Å
+        // ìºì‹œ ë¦¬ìŠ¤íŠ¸ì—ì„œë„ ì œê±°
         _activeDistractionsToday.Remove(runtime);
 
-        // ÀÌ¿ôÀÇ ¸ğµç DistractionÀÌ DeadÀÌ¸é, ÀÌ¿ôµµ Dead Ã³¸®ÇÒ ¿©Áö
+        // ì´ì›ƒì˜ ëª¨ë“  Distractionì´ Deadì´ë©´, ì´ì›ƒë„ Dead ì²˜ë¦¬í•  ì—¬ì§€
         var owner = runtime.owner;
         if (owner != null && owner.distractions.All(d => !d.isAlive))
         {
@@ -143,7 +143,7 @@ public class NeighborManager : MonoBehaviour
         runtime.isActiveToday = false;
         _activeNeighborsToday.Remove(runtime);
 
-        // ÇØ´ç ÀÌ¿ôÀÇ ¹æÇØ ¿ä¼Òµµ ÀüºÎ Dead Ã³¸®
+        // í•´ë‹¹ ì´ì›ƒì˜ ë°©í•´ ìš”ì†Œë„ ì „ë¶€ Dead ì²˜ë¦¬
         foreach (var d in runtime.distractions)
         {
             d.isAlive = false;
@@ -158,8 +158,17 @@ public class NeighborManager : MonoBehaviour
     public DistractionRuntime GetDistraction(string distractionId)
         => _distractionsById.TryGetValue(distractionId, out var r) ? r : null;
 
+
+    public void KillDistraction(string distractionId)
+    {
+        var d = GetDistraction(distractionId);
+        if (d == null) return;
+
+        d.SetDead();
+    }
+
     // ---------------------------------------
-    // ³»ºÎ ºôµå/À¯Æ¿
+    // ë‚´ë¶€ ë¹Œë“œ/ìœ í‹¸
     // ---------------------------------------
 
     private void ClearAllRuntime()
@@ -180,7 +189,7 @@ public class NeighborManager : MonoBehaviour
             return;
         }
 
-        // NeighborRuntime »ı¼º
+        // NeighborRuntime ìƒì„±
         foreach (var row in masterData.neighborTable.neighbors)
         {
             var runtime = new NeighborRuntime(row);
@@ -188,7 +197,7 @@ public class NeighborManager : MonoBehaviour
             _neighborsById[row.neighborId] = runtime;
         }
 
-        // DistractionRuntime »ı¼º + ÀÌ¿ô¿¡ ¿¬°á
+        // DistractionRuntime ìƒì„± + ì´ì›ƒì— ì—°ê²°
         foreach (var row in masterData.distractionTable.distractions)
         {
             var dr = new DistractionRuntime(row);
@@ -222,7 +231,7 @@ public class NeighborManager : MonoBehaviour
             return;
         }
 
-        // ½½·Ô°ú ÀÌ¿ô ¼ö Áß ÀÛÀº ÂÊ ±âÁØÀ¸·Î ¹èÁ¤
+        // ìŠ¬ë¡¯ê³¼ ì´ì›ƒ ìˆ˜ ì¤‘ ì‘ì€ ìª½ ê¸°ì¤€ìœ¼ë¡œ ë°°ì •
         var shuffledSlots = new List<HouseSlot>(houseSlots);
         Shuffle(shuffledSlots);
 
@@ -235,7 +244,7 @@ public class NeighborManager : MonoBehaviour
 
             neighbor.houseSlot = slot;
 
-            // layoutId·Î ÇÁ¸®ÆÕ Ã£±â
+            // layoutIdë¡œ í”„ë¦¬íŒ¹ ì°¾ê¸°
             var layoutRow = masterData.houseLayoutTable.GetById(neighbor.data.layoutId);
             if (layoutRow == null || layoutRow.housePrefab == null)
             {
@@ -243,7 +252,7 @@ public class NeighborManager : MonoBehaviour
                 continue;
             }
 
-            // Áı ÇÁ¸®ÆÕ ÀÎ½ºÅÏ½º
+            // ì§‘ í”„ë¦¬íŒ¹ ì¸ìŠ¤í„´ìŠ¤
             var instance = Instantiate(layoutRow.housePrefab, slot.InteriorRoot, false);
             neighbor.houseInstance = instance;
         }
@@ -251,7 +260,7 @@ public class NeighborManager : MonoBehaviour
 
     private void LinkDistractionAnchors()
     {
-        // ¸ğµç ÀÌ¿ô Áı ³»ºÎ¿¡¼­ DistractionAnchor¸¦ Ã£¾Æ, runtime¿¡ À§Ä¡/PlaceID ¿¬°á
+        // ëª¨ë“  ì´ì›ƒ ì§‘ ë‚´ë¶€ì—ì„œ DistractionAnchorë¥¼ ì°¾ì•„, runtimeì— ì—°ê²°
         foreach (var neighbor in _neighbors)
         {
             if (neighbor.houseInstance == null)
@@ -269,20 +278,15 @@ public class NeighborManager : MonoBehaviour
                     continue;
                 }
 
-                dr.worldTransform = anchor.transform;
-
-                // ¾ŞÄ¿°¡ placeId¸¦ °¡Áö°í ÀÖÀ¸¸é, µ¥ÀÌÅÍ ±âº»°ªº¸´Ù ¿ì¼±
-                if (!string.IsNullOrEmpty(anchor.PlaceId))
-                {
-                    dr.placeId = anchor.PlaceId;
-                }
+                // ğŸ”¹ Anchor â†” Runtime ë°”ì¸ë”© (ì—¬ê¸° í•œ ì¤„ë¡œ ì •ë¦¬)
+                anchor.BindRuntime(dr);
             }
         }
     }
 
     private void Shuffle<T>(IList<T> list)
     {
-        // °£´ÜÇÑ Fisher?Yates ¼ÅÇÃ
+        // ê°„ë‹¨í•œ Fisher?Yates ì…”í”Œ
         for (int i = 0; i < list.Count; i++)
         {
             int j = Random.Range(i, list.Count);
