@@ -301,23 +301,18 @@ public class NeighborManager : MonoBehaviour
             var anchors = neighbor.houseInstance.GetComponentsInChildren<DistractionAnchor>(true);
             foreach (var anchor in anchors)
             {
-                // 1) ID 정리(Trim)
-                var rawId = anchor.DistractionId;
-                if (string.IsNullOrWhiteSpace(rawId))
+                if (string.IsNullOrEmpty(anchor.DistractionId))
                     continue;
 
-                string id = rawId.Trim();
-
-                // 2) 런타임 맵 조회
-                if (!_distractionsById.TryGetValue(id, out var dr))
+                if (!_distractionsById.TryGetValue(anchor.DistractionId, out var dr))
                 {
                     Debug.LogWarning(
-                        $"[NeighborManager] DistractionAnchor id '{id}' not found in runtime map."
-                    );
+                        $"[NeighborManager] DistractionAnchor id '{anchor.DistractionId}' not found in runtime map.");
                     continue;
                 }
 
-                // 3) 위치 / placeId 연결
+                // ★ anchor 기준으로 묶어두기
+                dr.anchor = anchor;
                 dr.worldTransform = anchor.transform;
 
                 if (!string.IsNullOrEmpty(anchor.PlaceId))
@@ -327,6 +322,7 @@ public class NeighborManager : MonoBehaviour
             }
         }
     }
+
 
 
     private void Shuffle<T>(IList<T> list)
