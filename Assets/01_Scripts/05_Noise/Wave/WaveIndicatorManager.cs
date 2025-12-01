@@ -106,7 +106,7 @@ public class WaveIndicatorManager : MonoBehaviour
         }
 
         // ------------------------------
-        // 2) COMBINED ¡æ raw ¸ÕÀú Ç¥½Ã
+        // 2) COMBINED â†’ raw ë¨¼ì € í‘œì‹œ
         // ------------------------------
         if (debugMode == WaveDebugMode.Combined)
         {
@@ -115,11 +115,11 @@ public class WaveIndicatorManager : MonoBehaviour
                 if (d.worldTransform != null)
                     SpawnWave(d.worldTransform.position, WaveDebugMode.RawSources);
             }
-            // ±× µÚ¿¡ Production ·ÎÁ÷µµ Ç¥½ÃÇÑ´Ù ¡æ ¾Æ·¡¿¡¼­ Ãß°¡ ½ÇÇà
+            // ê·¸ ë’¤ì— Production ë¡œì§ë„ í‘œì‹œí•œë‹¤ â†’ ì•„ë˜ì—ì„œ ì¶”ê°€ ì‹¤í–‰
         }
 
         // ------------------------------
-        // 3) PRODUCTION MODE (±âÈ¹ ±ÔÄ¢)
+        // 3) PRODUCTION MODE (ê¸°íš ê·œì¹™)
         // ------------------------------
         RunProductionWaveLogic(activeList, playerFloor, insideHouse, insideHouseId);
     }
@@ -137,11 +137,11 @@ public class WaveIndicatorManager : MonoBehaviour
         bool hasUpper = false;
         bool hasLower = false;
 
-        // °°Àº Ãş
+        // ê°™ì€ ì¸µ
         HashSet<string> sameFloorHouseIds = new HashSet<string>();
         List<Transform> insideDistractions = new List<Transform>();
 
-        // ºĞ¼®
+        // ë¶„ì„
         foreach (var d in activeList)
         {
             var owner = d.owner;
@@ -157,23 +157,23 @@ public class WaveIndicatorManager : MonoBehaviour
                 hasLower = true;
             else
             {
-                // °°Àº Ãş
+                // ê°™ì€ ì¸µ
                 if (insideHouse && insideHouseId == slot.houseSlotId)
                 {
-                    // ³»ºÎ ¹æÇØ¿ä¼Ò
+                    // ë‚´ë¶€ ë°©í•´ìš”ì†Œ
                     if (d.worldTransform != null)
                         insideDistractions.Add(d.worldTransform);
                 }
                 else
                 {
-                    // °°Àº Ãş but º¹µµ/´Ù¸¥ Áı
+                    // ê°™ì€ ì¸µ but ë³µë„/ë‹¤ë¥¸ ì§‘
                     sameFloorHouseIds.Add(slot.houseSlotId);
                 }
             }
         }
 
         // ---------------------------
-        // À§Ãş / ¾Æ·¡Ãş
+        // ìœ„ì¸µ / ì•„ë˜ì¸µ
         // ---------------------------
         if (hasUpper)
         {
@@ -188,15 +188,15 @@ public class WaveIndicatorManager : MonoBehaviour
         }
 
         // ---------------------------
-        // °°Àº Ãş
+        // ê°™ì€ ì¸µ
         // ---------------------------
         if (insideHouse)
         {
-            // ³»ºÎ ¹æÇØ¿ä¼Ò 1°³¾¿
+            // ë‚´ë¶€ ë°©í•´ìš”ì†Œ 1ê°œì”©
             for (int i = 0; i < insideDistractions.Count; i++)
                 SpawnWave(insideDistractions[i].position, WaveDebugMode.Production);
 
-            // ¹® ¾ÈÂÊ 1°³
+            // ë¬¸ ì•ˆìª½ 1ê°œ
             if (houseSlotMap.TryGetValue(insideHouseId, out var slot))
             {
                 if (slot.doorPoint != null)
@@ -208,7 +208,7 @@ public class WaveIndicatorManager : MonoBehaviour
         }
         else
         {
-            // º¹µµ ¡æ Áı ¹®¸¶´Ù 1°³
+            // ë³µë„ â†’ ì§‘ ë¬¸ë§ˆë‹¤ 1ê°œ
             foreach (var id in sameFloorHouseIds)
             {
                 if (houseSlotMap.TryGetValue(id, out var s))

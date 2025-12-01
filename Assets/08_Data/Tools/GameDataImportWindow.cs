@@ -85,7 +85,7 @@ public class GameDataImportWindow : EditorWindow
             return;
         }
 
-        // Neighbor / Distraction Table SO È®º¸
+        // Neighbor / Distraction Table SO í™•ë³´
         var neighborTable = masterData.neighborTable;
         var distractionTable = masterData.distractionTable;
 
@@ -127,7 +127,7 @@ public class GameDataImportWindow : EditorWindow
         if (lines.Count <= 1)
             throw new Exception("Neighbors CSV has no data rows.");
 
-        // Ã¹ ÁÙÀº Çì´õ
+        // ì²« ì¤„ì€ í—¤ë”
         var header = SplitCsvLine(lines[0]);
         int idxNeighborId = Array.IndexOf(header, "NeighborID");
         int idxName = Array.IndexOf(header, "Name");
@@ -269,7 +269,7 @@ public class GameDataImportWindow : EditorWindow
     }
 
     // =========================
-    // CSV À¯Æ¿ (½ÉÇÃ ¹öÀü)
+    // CSV ìœ í‹¸ (ì‹¬í”Œ ë²„ì „)
     // =========================
 
     private List<string> SplitLines(string text)
@@ -281,7 +281,7 @@ public class GameDataImportWindow : EditorWindow
             .ToList();
     }
 
-    // ÇÁ·ÎÅäÅ¸ÀÔ¿ë ½ÉÇÃ ÆÄ¼­ (µû¿ÈÇ¥/ÄŞ¸¶ Æ÷ÇÔ ÄÉÀÌ½º´Â ¹ÌÁö¿ø)
+    // í”„ë¡œí† íƒ€ì…ìš© ì‹¬í”Œ íŒŒì„œ (ë”°ì˜´í‘œ/ì½¤ë§ˆ í¬í•¨ ì¼€ì´ìŠ¤ëŠ” ë¯¸ì§€ì›)
     private string[] SplitCsvLine(string line)
     {
         return line.Split(',');

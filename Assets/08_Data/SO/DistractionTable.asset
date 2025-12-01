@@ -1,0 +1,231 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: DistractionTable
+  m_EditorClassIdentifier: Assembly-CSharp::DistractionTableSO
+  distractions:
+  - distractionId: D_N001_A
+    ownerId: N_001
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N001_B
+    ownerId: N_001
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N002_A
+    ownerId: N_002
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N002_B
+    ownerId: N_002
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N003_A
+    ownerId: N_003
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N003_B
+    ownerId: N_003
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N004_A
+    ownerId: N_004
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N004_B
+    ownerId: N_004
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N005_A
+    ownerId: N_005
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N005_B
+    ownerId: N_005
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N005_C
+    ownerId: N_005
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N006_A
+    ownerId: N_006
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N006_B
+    ownerId: N_006
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N008_A
+    ownerId: N_008
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N009_A
+    ownerId: N_009
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N010_A
+    ownerId: N_010
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N011_A
+    ownerId: N_011
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N011_B
+    ownerId: N_011
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N011_C
+    ownerId: N_011
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N012_A
+    ownerId: N_012
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N013_A
+    ownerId: N_013
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N013_B
+    ownerId: N_013
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N013_C
+    ownerId: N_013
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N013_G
+    ownerId: N_013
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N014_A
+    ownerId: N_014
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N014_B
+    ownerId: N_014
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
+  - distractionId: D_N014_C
+    ownerId: N_014
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 

@@ -1,4 +1,4 @@
-﻿Distraction ID,Owner ID,Noise ID,Tag,Level,SFX ID,Explaination
+﻿DistractionID,OwnerID,NoiseID,Tag,Level,SFX ID,Explaination
 D_N001_A,N_001,N_001,sound,3,S_001,"""흐읍! 핫!"" 하는 거친 기합 소리"
 D_N001_B,N_001,E_005,sound,5,S_002,무거운 쇳덩이가 바닥을 찍는 진동음
 D_N002_A,N_002,N_002,sound,4,S_003,서로 고함을 지르며 악을 쓰는 남녀의 목소리
