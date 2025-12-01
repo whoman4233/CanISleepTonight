@@ -1,21 +1,18 @@
 using UnityEngine;
 
-namespace SleepGame.Data
+[CreateAssetMenu(fileName = "MasterGameData", menuName = "GameData/Master Game Data")]
+public class MasterGameDataSO : ScriptableObject
 {
-    [CreateAssetMenu(fileName = "MasterGameData", menuName = "GameData/Master Game Data")]
-    public class MasterGameDataSO : ScriptableObject
-    {
-        [Header("Core Tables")]
-        public NeighborTableSO neighborTable;
-        public DistractionTableSO distractionTable;
+    [Header("Core Tables")]
+    public NeighborTableSO neighborTable;
+    public DistractionTableSO distractionTable;
 
-        [Header("Layout / Prefab Mapping")]
-        public HouseLayoutTableSO houseLayoutTable;
+    [Header("Layout / Prefab Mapping")]
+    public HouseLayoutTableSO houseLayoutTable;
 
-        // 이후 필요시 확장용 (지금은 비워두고, 타입만 확보)
-        [Header("Optional (Later)")]
-        public ScriptableObject entityTable;
-        public ScriptableObject placeTable;
-        public ScriptableObject dayConfigTable;
-    }
+    // 이후 필요시 확장용 (지금은 비워두고, 타입만 확보)
+    [Header("Optional (Later)")]
+    public ScriptableObject entityTable;
+    public ScriptableObject placeTable;
+    public ScriptableObject dayConfigTable;
 }

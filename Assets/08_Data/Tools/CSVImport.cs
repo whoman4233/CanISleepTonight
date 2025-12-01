@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using SleepGame.Data;
 
 public class GameDataImportWindow : EditorWindow
 {

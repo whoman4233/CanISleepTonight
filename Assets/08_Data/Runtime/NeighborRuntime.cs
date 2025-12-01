@@ -10,7 +10,7 @@ public class NeighborRuntime
     public string Id => data.neighborId;
 
     // 월드/씬 관련 참조
-    //public HouseSlot houseSlot;        // 씬 상의 집 자리 (MonoBehaviour)
+    public HouseSlot houseSlot;        // 씬 상의 집 자리 (MonoBehaviour)
     public GameObject houseInstance;   // Instantiate된 집 프리팹 루트
 
     // (선택) 이웃 캐릭터 뷰
