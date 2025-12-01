@@ -25,3 +25,7 @@ MonoBehaviour:
     housePrefab: {fileID: 2586724393242575150, guid: f28b9482c0de16043b3bae5e281c363e,
       type: 3}
     description: 
+  - layoutId: EMPTY
+    housePrefab: {fileID: 6759433088582478888, guid: 1d9f11a477af8d44493ea6f6e2700b23,
+      type: 3}
+    description: 

@@ -2694,6 +2694,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5679561543479072655}
   - component: {fileID: 5676589287989660481}
+  - component: {fileID: 114779934382544883}
   m_Layer: 0
   m_Name: N_013_01
   m_TagString: Untagged
@@ -2739,6 +2740,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &114779934382544883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2198032171945934655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec79c5034a39e7248b38148174b882ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distractionId: D_N003_A
+  placeId: 
+  isNoiseOrigin: 1
 --- !u!1 &2270467851716383724
 GameObject:
   m_ObjectHideFlags: 0
@@ -6889,6 +6905,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8381937811810437391}
   - component: {fileID: 3755862597318266193}
+  - component: {fileID: 248238239059268122}
   m_Layer: 0
   m_Name: N_013_02
   m_TagString: Untagged
@@ -6934,6 +6951,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &248238239059268122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6684565266539945815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec79c5034a39e7248b38148174b882ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distractionId: D_N003_B
+  placeId: 
+  isNoiseOrigin: 1
 --- !u!1 &6769404780998664898
 GameObject:
   m_ObjectHideFlags: 0
@@ -8020,7 +8052,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7194922708579379066}
   - component: {fileID: 2036633297576076237}
-  - component: {fileID: 8918443830959736645}
   m_Layer: 0
   m_Name: HumanF_BodyMesh
   m_TagString: Untagged
@@ -8148,21 +8179,6 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.00000020861626, y: -0.12243894, z: 0.06813997}
     m_Extent: {x: 0.8475199, y: 0.93037486, z: 0.25898138}
   m_DirtyAABB: 0
---- !u!114 &8918443830959736645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7162701998750896854}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec79c5034a39e7248b38148174b882ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distractionId: D_N003_B
-  placeId: 
-  isNoiseOrigin: 1
 --- !u!1 &7217440311113093035
 GameObject:
   m_ObjectHideFlags: 0
@@ -8875,7 +8891,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2160768887970063463}
   - component: {fileID: 2000588112579923194}
-  - component: {fileID: 762849975504478735}
   m_Layer: 0
   m_Name: HumanF_BodyMesh
   m_TagString: Untagged
@@ -9003,21 +9018,6 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.00000020861626, y: -0.12243894, z: 0.06813997}
     m_Extent: {x: 0.8475199, y: 0.93037486, z: 0.25898138}
   m_DirtyAABB: 0
---- !u!114 &762849975504478735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7935770796378571098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec79c5034a39e7248b38148174b882ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distractionId: D_N003_A
-  placeId: 
-  isNoiseOrigin: 1
 --- !u!1 &7951648763475360088
 GameObject:
   m_ObjectHideFlags: 0

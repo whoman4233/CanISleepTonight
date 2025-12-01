@@ -231,20 +231,22 @@ public class NeighborManager : MonoBehaviour
             return;
         }
 
-        // 슬롯과 이웃 수 중 작은 쪽 기준으로 배정
         var shuffledSlots = new List<HouseSlot>(houseSlots);
         Shuffle(shuffledSlots);
 
-        int count = Mathf.Min(_neighbors.Count, shuffledSlots.Count);
+        int neighborCount = _neighbors.Count;
+        int slotCount = shuffledSlots.Count;
 
-        for (int i = 0; i < count; i++)
+        int usedCount = Mathf.Min(neighborCount, slotCount);
+
+        // 1) 이웃 배정 슬롯
+        for (int i = 0; i < usedCount; i++)
         {
             var neighbor = _neighbors[i];
             var slot = shuffledSlots[i];
 
             neighbor.houseSlot = slot;
 
-            // layoutId로 프리팹 찾기
             var layoutRow = masterData.houseLayoutTable.GetById(neighbor.data.layoutId);
             if (layoutRow == null || layoutRow.housePrefab == null)
             {
@@ -252,11 +254,42 @@ public class NeighborManager : MonoBehaviour
                 continue;
             }
 
-            // 집 프리팹 인스턴스
             var instance = Instantiate(layoutRow.housePrefab, slot.InteriorRoot, false);
+
+            // 이 부분이 새로 추가된 transform 초기화
+            InitTransform(instance.transform);
+
             neighbor.houseInstance = instance;
+
+            Debug.Log($"[NeighborManager] Neighbor={neighbor.Id} → Slot={slot.houseSlotId}");
+        }
+
+        // 2) 남은 슬롯 = EMPTY 프리팹 배치
+        for (int i = usedCount; i < slotCount; i++)
+        {
+            var slot = shuffledSlots[i];
+
+            var emptyRow = masterData.houseLayoutTable.GetById("EMPTY");
+            if (emptyRow == null || emptyRow.housePrefab == null)
+            {
+                Debug.LogWarning("[NeighborManager] EMPTY layout not found. Empty slots remain blank.");
+                continue;
+            }
+
+            var instance = Instantiate(emptyRow.housePrefab, slot.InteriorRoot, false);
+            InitTransform(instance.transform);
+
+            Debug.Log($"[NeighborManager] EMPTY house spawned at Slot={slot.houseSlotId}");
         }
     }
+
+    private void InitTransform(Transform t)
+    {
+        t.localPosition = Vector3.zero;
+        t.localRotation = Quaternion.Euler(0f, -90f, 0f);
+        t.localScale = new Vector3(1f, 2.0528f, 1f);
+    }
+
 
     private void LinkDistractionAnchors()
     {
