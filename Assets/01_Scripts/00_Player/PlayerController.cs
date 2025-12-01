@@ -31,12 +31,15 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
 
     private InteractionHandler interactionHandler;
+    private Equipment equipment;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
+
         interactionHandler = GetComponent<InteractionHandler>();
+        equipment = GetComponent<Equipment>();
     }
 
     void Start()
@@ -155,6 +158,14 @@ public class PlayerController : MonoBehaviour
     {
         if (callbackContext.phase == InputActionPhase.Started)
             interactionHandler.Interact();
+    }
+
+    public void OnAttackInput(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.phase == InputActionPhase.Started)
+        {
+            equipment.OnAttack();
+        }
     }
 
     public void OnBuilderButton(InputAction.CallbackContext callbackContext)
