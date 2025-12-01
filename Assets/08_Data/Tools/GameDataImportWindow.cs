@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using System.Text;
 
 public class GameDataImportWindow : EditorWindow
 {
@@ -120,57 +121,136 @@ public class GameDataImportWindow : EditorWindow
 
     private int ImportNeighbors(TextAsset csv, NeighborTableSO table)
     {
-        if (clearBeforeImport)
+        if (csv == null)
+            throw new Exception("[Neighbors] CSV TextAsset is null.");
+
+        if (table == null)
+            throw new Exception("[Neighbors] NeighborTableSO is null.");
+
+        if (table.neighbors == null)
+            table.neighbors = new List<NeighborDataRow>();
+        else if (clearBeforeImport)
             table.neighbors.Clear();
 
         var lines = SplitLines(csv.text);
-        if (lines.Count <= 1)
-            throw new Exception("Neighbors CSV has no data rows.");
+        if (lines.Count == 0)
+            throw new Exception("Neighbors CSV has no lines.");
 
-        // 첫 줄은 헤더
-        var header = SplitCsvLine(lines[0]);
-        int idxNeighborId = Array.IndexOf(header, "NeighborID");
-        int idxName = Array.IndexOf(header, "Name");
-        int idxLayoutId = Array.IndexOf(header, "LayoutID");
-        int idxDesc = Array.IndexOf(header, "Description");
+        int lineIndex = 0;
 
-        if (idxNeighborId < 0 || idxName < 0 || idxLayoutId < 0)
-            throw new Exception("Neighbors CSV header must contain NeighborID, Name, LayoutID.");
+        // 1) 헤더 라인 찾기 (완전 빈 줄 스킵)
+        string headerLine = null;
+        for (; lineIndex < lines.Count; lineIndex++)
+        {
+            if (!string.IsNullOrWhiteSpace(lines[lineIndex]))
+            {
+                headerLine = lines[lineIndex];
+                break;
+            }
+        }
+
+        if (headerLine == null)
+            throw new Exception("Neighbors CSV has no header row.");
+
+        // 2) 헤더 파싱 + 열 이름 트림
+        var headerCells = SplitCsvLineToList(headerLine);
+        var headerIndex = new Dictionary<string, int>();
+
+        for (int i = 0; i < headerCells.Count; i++)
+        {
+            string raw = headerCells[i] ?? string.Empty;
+            string trimmed = raw.Trim().Trim('\uFEFF'); // BOM + 공백 제거
+
+            if (string.IsNullOrEmpty(trimmed))
+                continue;
+
+            if (!headerIndex.ContainsKey(trimmed))
+                headerIndex.Add(trimmed, i);
+        }
+
+        int GetHeader(string name, bool required = true, params string[] aliases)
+        {
+            if (headerIndex.TryGetValue(name, out var idx))
+                return idx;
+
+            foreach (var alias in aliases)
+            {
+                if (headerIndex.TryGetValue(alias, out idx))
+                    return idx;
+            }
+
+            if (required)
+                throw new Exception($"[Neighbors] Header '{name}' not found.");
+
+            return -1;
+        }
+
+        // 필수 컬럼들
+        int idxNeighborId = GetHeader("NeighborID");
+        int idxName = GetHeader("Name");
+        int idxLayoutId = GetHeader("LayoutID");
+        // 설명은 Info 또는 Description 둘 다 허용
+        int idxDesc = GetHeader("Description", required: false, aliases: new[] { "Info" });
 
         var idSet = new HashSet<string>();
         int imported = 0;
+        int rowNumber = 0; // 데이터 기준 row 카운트
 
-        for (int i = 1; i < lines.Count; i++)
+        // 3) 데이터 라인 파싱
+        for (lineIndex = lineIndex + 1; lineIndex < lines.Count; lineIndex++)
         {
-            var line = lines[i];
+            string line = lines[lineIndex];
+
+            // 완전 빈 줄이면 스킵
             if (string.IsNullOrWhiteSpace(line))
                 continue;
 
-            var cols = SplitCsvLine(line);
-            if (cols.Length <= idxNeighborId)
+            var cells = SplitCsvLineToList(line);
+
+            string neighborId = GetCellSafe(cells, idxNeighborId).Trim();
+            string name = GetCellSafe(cells, idxName).Trim();
+            string layoutId = GetCellSafe(cells, idxLayoutId).Trim();
+            string desc = idxDesc >= 0 ? GetCellSafe(cells, idxDesc).Trim() : string.Empty;
+
+            // 빈 줄 Skip: 모든 주요 필드가 비어 있으면 무시
+            bool allEmpty =
+                string.IsNullOrWhiteSpace(neighborId) &&
+                string.IsNullOrWhiteSpace(name) &&
+                string.IsNullOrWhiteSpace(layoutId) &&
+                string.IsNullOrWhiteSpace(desc);
+
+            if (allEmpty)
                 continue;
 
-            string id = cols[idxNeighborId].Trim();
-            if (string.IsNullOrEmpty(id))
+            rowNumber++;
+
+            // 필수값 체크
+            if (string.IsNullOrWhiteSpace(neighborId))
             {
-                LogOrThrow($"[Neighbors] Row {i + 1}: NeighborID is empty.");
+                LogOrThrow($"[Neighbors] Row {rowNumber}: NeighborID is empty. (CSV line {lineIndex + 1})");
                 continue;
             }
 
-            if (idSet.Contains(id))
+            if (idSet.Contains(neighborId))
             {
-                LogOrThrow($"[Neighbors] Duplicate NeighborID: {id} at row {i + 1}.");
+                LogOrThrow($"[Neighbors] Duplicate NeighborID '{neighborId}' at CSV line {lineIndex + 1}.");
                 continue;
             }
 
-            idSet.Add(id);
+            if (string.IsNullOrWhiteSpace(layoutId))
+            {
+                LogOrThrow($"[Neighbors] Row {rowNumber}: LayoutID is empty. (NeighborID={neighborId})");
+                continue;
+            }
+
+            idSet.Add(neighborId);
 
             var row = new NeighborDataRow
             {
-                neighborId = id,
-                displayName = SafeGet(cols, idxName),
-                layoutId = SafeGet(cols, idxLayoutId),
-                description = idxDesc >= 0 ? SafeGet(cols, idxDesc) : ""
+                neighborId = neighborId,
+                displayName = name,
+                layoutId = layoutId,
+                description = desc
             };
 
             table.neighbors.Add(row);
@@ -180,85 +260,162 @@ public class GameDataImportWindow : EditorWindow
         return imported;
     }
 
+
     private int ImportDistractions(TextAsset csv, DistractionTableSO table, NeighborTableSO neighborTable)
     {
-        if (clearBeforeImport)
+        if (csv == null)
+            throw new Exception("[Distractions] CSV TextAsset is null.");
+
+        if (table == null)
+            throw new Exception("[Distractions] DistractionTableSO is null.");
+
+        if (neighborTable == null)
+            throw new Exception("[Distractions] NeighborTableSO is null.");
+
+        if (table.distractions == null)
+            table.distractions = new List<DistractionDataRow>();
+        else if (clearBeforeImport)
             table.distractions.Clear();
 
         var lines = SplitLines(csv.text);
-        if (lines.Count <= 1)
-            throw new Exception("Distractions CSV has no data rows.");
+        if (lines.Count == 0)
+            throw new Exception("[Distractions] CSV is empty.");
 
-        var header = SplitCsvLine(lines[0]);
-        int idxDistractionId = Array.IndexOf(header, "DistractionID");
-        int idxOwnerId = Array.IndexOf(header, "OwnerID");
-        int idxSourceId = Array.IndexOf(header, "SourceID");
-        int idxTag = Array.IndexOf(header, "Tag");
-        int idxIntensity = Array.IndexOf(header, "Intensity");
-        int idxSfxId = Array.IndexOf(header, "SfxID");
-        int idxPlaceId = Array.IndexOf(header, "PlaceID");
-        int idxDesc = Array.IndexOf(header, "Description");
+        int lineIndex = 0;
 
-        if (idxDistractionId < 0 || idxOwnerId < 0)
-            throw new Exception("Distractions CSV header must contain DistractionID, OwnerID.");
-
-        var neighborIdSet = new HashSet<string>(neighborTable.neighbors.Select(n => n.neighborId));
-        var idSet = new HashSet<string>();
-        int imported = 0;
-
-        for (int i = 1; i < lines.Count; i++)
+        // 1) 헤더 라인 찾기
+        string headerLine = null;
+        for (; lineIndex < lines.Count; lineIndex++)
         {
-            var line = lines[i];
+            if (!string.IsNullOrWhiteSpace(lines[lineIndex]))
+            {
+                headerLine = lines[lineIndex];
+                break;
+            }
+        }
+
+        if (headerLine == null)
+            throw new Exception("[Distractions] No header found in CSV.");
+
+        // 2) 헤더 파싱
+        var headerCells = SplitCsvLineToList(headerLine);
+        var headerIndex = new Dictionary<string, int>();
+
+        for (int i = 0; i < headerCells.Count; i++)
+        {
+            string raw = headerCells[i] ?? string.Empty;
+            string trimmed = raw.Trim().Trim('\uFEFF'); // BOM 제거
+
+            if (string.IsNullOrEmpty(trimmed))
+                continue;
+
+            if (!headerIndex.ContainsKey(trimmed))
+                headerIndex.Add(trimmed, i);
+        }
+
+        int GetHeader(string name, bool required = true, params string[] aliases)
+        {
+            if (headerIndex.TryGetValue(name, out var idx))
+                return idx;
+
+            foreach (var alias in aliases)
+            {
+                if (headerIndex.TryGetValue(alias, out idx))
+                    return idx;
+            }
+
+            if (required)
+                throw new Exception($"[Distractions] Header '{name}' not found.");
+
+            return -1;
+        }
+
+        // 필수 컬럼
+        int idxDistractionId = GetHeader("DistractionID");
+        int idxOwnerId = GetHeader("OwnerID");
+
+        // 선택 컬럼
+        int idxSourceId = GetHeader("SourceID", required: false);
+        int idxTag = GetHeader("Tag", required: false);
+        int idxIntensity = GetHeader("Intensity", required: false);
+        int idxSfxId = GetHeader("SfxID", required: false, aliases: new[] { "SFXID", "Sfx" });
+        int idxPlaceId = GetHeader("PlaceID", required: false);
+        int idxDesc = GetHeader("Description", required: false, aliases: new[] { "Info" });
+
+        var knownNeighborIds = new HashSet<string>(neighborTable.neighbors.Select(n => n.neighborId));
+        var idSet = new HashSet<string>();
+
+        int imported = 0;
+        int rowNumber = 0;
+
+        // 3) 데이터 파싱
+        for (lineIndex = lineIndex + 1; lineIndex < lines.Count; lineIndex++)
+        {
+            string line = lines[lineIndex];
             if (string.IsNullOrWhiteSpace(line))
                 continue;
 
-            var cols = SplitCsvLine(line);
-            if (cols.Length <= idxDistractionId)
+            var cells = SplitCsvLineToList(line);
+
+            string disId = GetCellSafe(cells, idxDistractionId).Trim();
+            string ownerId = GetCellSafe(cells, idxOwnerId).Trim();
+
+            // 빈 줄 Skip (모든 주요 컬럼 비면 무시)
+            bool allEmpty =
+                string.IsNullOrWhiteSpace(disId) &&
+                string.IsNullOrWhiteSpace(ownerId) &&
+                string.IsNullOrWhiteSpace(GetCellSafe(cells, idxTag)) &&
+                string.IsNullOrWhiteSpace(GetCellSafe(cells, idxPlaceId));
+
+            if (allEmpty)
                 continue;
 
-            string id = cols[idxDistractionId].Trim();
-            if (string.IsNullOrEmpty(id))
-            {
-                LogOrThrow($"[Distractions] Row {i + 1}: DistractionID is empty.");
-                continue;
-            }
+            rowNumber++;
 
-            if (idSet.Contains(id))
+            // 필수 컬럼 체크
+            if (string.IsNullOrWhiteSpace(disId))
             {
-                LogOrThrow($"[Distractions] Duplicate DistractionID: {id} at row {i + 1}.");
-                continue;
-            }
-
-            idSet.Add(id);
-
-            string ownerId = SafeGet(cols, idxOwnerId);
-            if (string.IsNullOrEmpty(ownerId))
-            {
-                LogOrThrow($"[Distractions] Row {i + 1}: OwnerID is empty. (DistractionID={id})");
+                LogOrThrow($"[Distractions] Row {rowNumber}: DistractionID is empty. (CSV line {lineIndex + 1})");
                 continue;
             }
 
-            if (!neighborIdSet.Contains(ownerId))
+            if (idSet.Contains(disId))
             {
-                LogOrThrow($"[Distractions] Row {i + 1}: OwnerID '{ownerId}' not found in NeighborTable. (DistractionID={id})");
+                LogOrThrow($"[Distractions] Duplicate ID '{disId}' at CSV line {lineIndex + 1}.");
+                continue;
+            }
+
+            idSet.Add(disId);
+
+            if (string.IsNullOrWhiteSpace(ownerId))
+            {
+                LogOrThrow($"[Distractions] Row {rowNumber}: OwnerID is empty. (DistractionID={disId})");
+                continue;
+            }
+
+            if (!knownNeighborIds.Contains(ownerId))
+            {
+                LogOrThrow($"[Distractions] OwnerID '{ownerId}' is not found in NeighborTable. (DistractionID={disId})");
+
                 if (strictValidation)
                     continue;
             }
 
+            // intensity parsing
             int intensity = 0;
             if (idxIntensity >= 0)
-                int.TryParse(SafeGet(cols, idxIntensity), out intensity);
+                int.TryParse(GetCellSafe(cells, idxIntensity), out intensity);
 
             var row = new DistractionDataRow
             {
-                distractionId = id,
+                distractionId = disId,
                 ownerId = ownerId,
-                sourceId = idxSourceId >= 0 ? SafeGet(cols, idxSourceId) : "",
-                tag = idxTag >= 0 ? SafeGet(cols, idxTag) : "",
+                sourceId = GetCellSafe(cells, idxSourceId),
+                tag = GetCellSafe(cells, idxTag),
                 intensity = intensity,
-                sfxId = idxSfxId >= 0 ? SafeGet(cols, idxSfxId) : "",
-                placeId = idxPlaceId >= 0 ? SafeGet(cols, idxPlaceId) : "",
-                description = idxDesc >= 0 ? SafeGet(cols, idxDesc) : ""
+                sfxId = GetCellSafe(cells, idxSfxId),
+                placeId = GetCellSafe(cells, idxPlaceId),
+                description = GetCellSafe(cells, idxDesc)
             };
 
             table.distractions.Add(row);
@@ -267,6 +424,7 @@ public class GameDataImportWindow : EditorWindow
 
         return imported;
     }
+
 
     // =========================
     // CSV 유틸 (심플 버전)
@@ -300,6 +458,68 @@ public class GameDataImportWindow : EditorWindow
             throw new Exception(message);
 
         Debug.LogWarning(message);
+    }
+
+    /// <summary>
+    /// 따옴표/콤마를 고려해서 한 줄을 파싱 (리스트 버전)
+    /// 예: "계속 역기를 내려놓으며, 쿵쿵거린다." 같은 필드 지원
+    /// </summary>
+    private List<string> SplitCsvLineToList(string line)
+    {
+        var result = new List<string>();
+
+        if (string.IsNullOrEmpty(line))
+        {
+            result.Add(string.Empty);
+            return result;
+        }
+
+        bool inQuotes = false;
+        var sb = new StringBuilder();
+
+        for (int i = 0; i < line.Length; i++)
+        {
+            char c = line[i];
+
+            if (c == '\"')
+            {
+                // "" → " 로 처리 (CSV 이스케이프)
+                if (inQuotes && i + 1 < line.Length && line[i + 1] == '\"')
+                {
+                    sb.Append('\"');
+                    i++;
+                }
+                else
+                {
+                    inQuotes = !inQuotes;
+                }
+            }
+            else if (c == ',' && !inQuotes)
+            {
+                result.Add(sb.ToString());
+                sb.Length = 0;
+            }
+            else
+            {
+                sb.Append(c);
+            }
+        }
+
+        // 마지막 필드
+        result.Add(sb.ToString());
+
+        return result;
+    }
+
+    /// <summary>
+    /// List 기반 CSV 셀 안전 접근 (범위 밖이면 빈 문자열)
+    /// </summary>
+    private string GetCellSafe(List<string> cells, int index)
+    {
+        if (cells == null || index < 0 || index >= cells.Count)
+            return string.Empty;
+
+        return cells[index] ?? string.Empty;
     }
 }
 #endif
