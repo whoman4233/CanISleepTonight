@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: NeighborTable
+  m_EditorClassIdentifier: Assembly-CSharp::NeighborTableSO
+  neighbors:
+  - neighborId: N_001
+    displayName: "\uADFC\uC721\uB1CC"
+    layoutId: L_01
+    description: 
+  - neighborId: N_002
+    displayName: "\uBD80\uBD80\uC2F8\uC6C0"
+    layoutId: L_02
+    description: 
+  - neighborId: N_003
+    displayName: "\uAC8C\uC784 \uBC29\uC1A1\uC778"
+    layoutId: L_03
+    description: 
+  - neighborId: N_004
+    displayName: "\uCD95\uAD6C\uAD11"
+    layoutId: L_04
+    description: 
+  - neighborId: N_005
+    displayName: "\uB9C8\uC774\uB108\uD55C \uB77D\uBC34\uB4DC"
+    layoutId: L_05
+    description: 
+  - neighborId: N_006
+    displayName: "\uB18D\uAD6C\uD558\uB294 10\uB300"
+    layoutId: L_06
+    description: 
+  - neighborId: N_007
+    displayName: "\uC870\uC6A9\uD55C \uC774\uC6C3"
+    layoutId: L_07
+    description: 
+  - neighborId: N_008
+    displayName: "\uBCF4\uCCAD\uAE30\uAC00 \uC5C6\uB294 \uD560\uC544\uBC84\uC9C0"
+    layoutId: L_08
+    description: 
+  - neighborId: N_009
+    displayName: "\uB9C8\uC74C\uB9CC\uC740 \uC131\uC545\uAC00"
+    layoutId: L_09
+    description: 
+  - neighborId: N_010
+    displayName: "\uC5EC\uC790\uCE5C\uAD6C\uB791 \uD5E4\uC5B4\uC9C4 \uCCAD\uB144"
+    layoutId: L_10
+    description: 
+  - neighborId: N_011
+    displayName: "\uC7A5\uB09C\uAC10 \uAE30\uCC28\uB97C \uD0C0\uB294 \uAF2C\uB9C8"
+    layoutId: L_11
+    description: 
+  - neighborId: N_012
+    displayName: "\uC7AC\uB2A5\uC5C6\uB294 \uD53C\uC544\uB2C8\uC2A4\uD2B8"
+    layoutId: L_12
+    description: 
+  - neighborId: N_013
+    displayName: "\uD30C\uD2F0 \uD53C\uD50C \uC9D1\uC8FC\uC778"
+    layoutId: L_13
+    description: 
+  - neighborId: N_014
+    displayName: "\uCCAD\uC18C \uB9E4\uB2C8\uC544"
+    layoutId: L_14
+    description: 
+  - neighborId: N_015
+    displayName: "\uCF00\uB974\uBCA0\uB85C\uC2A4"
+    layoutId: L_15
+    description: 
+  - neighborId: N_016
+    displayName: "\uB2E4\uC774\uC5B4\uD130"
+    layoutId: L_16
+    description: 
+  - neighborId: N_017
+    displayName: "\uD2F1\uD1A1 \uCC4C\uB9B0\uC9C0 \uC790\uB9E4"
+    layoutId: L_17
+    description: 
+  - neighborId: N_018
+    displayName: "\uB9C8\uAC10\uC774 \uAE09\uD55C \uC791\uAC00"
+    layoutId: L_18
+    description: 
+  - neighborId: N_019
+    displayName: "\uC0AC\uC774\uBE44 \uBB34\uB2F9"
+    layoutId: L_19
+    description: 
+  - neighborId: N_020
+    displayName: "\uC778\uD14C\uB9AC\uC5B4 \uC5C5\uC790"
+    layoutId: L_20
+    description: 
+  - neighborId: N_021
+    displayName: "\uC624\uD1A0\uBC14\uC774 \uD3ED\uC8FC\uC871"
+    layoutId: L_21
+    description: 
+  - neighborId: N_022
+    displayName: "\uCF54\uC778 \uCC44\uAD74\uC7A5 \uC8FC\uC778"
+    layoutId: L_22
+    description: 

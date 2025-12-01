@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232ae0f2ef0c5a54a930c1ea7f0721b7, type: 3}
+  m_Name: MasterGameData
+  m_EditorClassIdentifier: 
+  neighborTable: {fileID: 11400000, guid: f5e8f8c7fe58e7a43a1d1a29fa632300, type: 2}
+  distractionTable: {fileID: 11400000, guid: 6b72c0ae924a1db4bb150a9c0a6f17b1, type: 2}
+  houseLayoutTable: {fileID: 0}
+  entityTable: {fileID: 0}
+  placeTable: {fileID: 0}
+  dayConfigTable: {fileID: 0}
