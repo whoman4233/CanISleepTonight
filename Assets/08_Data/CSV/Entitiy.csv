@@ -1,5 +1,5 @@
-﻿Entitiy ID,이름,위치,타입,설명
-E_001,화재 경보기,All_Stair,None,각 층의 화재 경보기. 각 층의 3호 맞은 편에 설치
+﻿Entitiy ID,Entitiy Name,Location,Type,Info
+E_001,화재 경보기,All_Stair,None,각 층마다 있는 화재 경보기
 E_002,두꺼비집,All_House,None,각 집의 두꺼비집. 각 집의 문(복도 쪽) 좌측에 설치
 E_003,코를 고는 동생,P_303,None,코를 고는 동생
 E_004,동생의 컴퓨터,P_303,Electric,동생의 컴퓨터
