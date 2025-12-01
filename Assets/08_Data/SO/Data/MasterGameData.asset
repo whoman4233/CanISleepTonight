@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   neighborTable: {fileID: 11400000, guid: f5e8f8c7fe58e7a43a1d1a29fa632300, type: 2}
   distractionTable: {fileID: 11400000, guid: 6b72c0ae924a1db4bb150a9c0a6f17b1, type: 2}
-  houseLayoutTable: {fileID: 0}
+  houseLayoutTable: {fileID: 11400000, guid: 62d70bfd8e40c4a4c943b58ca062479f, type: 2}
   entityTable: {fileID: 0}
   placeTable: {fileID: 0}
   dayConfigTable: {fileID: 0}

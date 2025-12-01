@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: HouseLayoutTable
+  m_EditorClassIdentifier: Assembly-CSharp::HouseLayoutTableSO
+  layouts:
+  - layoutId: L_01
+    housePrefab: {fileID: 6759433088582478888, guid: db0bda253e78b7b40a8933f321fce580,
+      type: 3}
+    description: 
+  - layoutId: L_02
+    housePrefab: {fileID: 2489519222581757952, guid: b783cdf2409fae047b7407c033388bdd,
+      type: 3}
+    description: 
+  - layoutId: L_03
+    housePrefab: {fileID: 2586724393242575150, guid: f28b9482c0de16043b3bae5e281c363e,
+      type: 3}
+    description: 

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2288382729875361738}
   - component: {fileID: 8063443099434520046}
   - component: {fileID: 8696628303213024222}
+  - component: {fileID: 1432316113890839234}
   m_Layer: 0
   m_Name: NoiseWaveVFX
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8033727631706629232}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -269.704, y: -154.846, z: -21.581}
   m_LocalScale: {x: 2.6519127, y: 2.6519127, z: 2.6519127}
   m_ConstrainProportionsScale: 0
@@ -4900,3 +4901,16 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &1432316113890839234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8033727631706629232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ae3e839b11d86e4b9d53493567aa54d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particle: {fileID: 8063443099434520046}

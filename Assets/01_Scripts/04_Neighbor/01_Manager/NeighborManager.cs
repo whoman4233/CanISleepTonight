@@ -260,7 +260,6 @@ public class NeighborManager : MonoBehaviour
 
     private void LinkDistractionAnchors()
     {
-        // 모든 이웃 집 내부에서 DistractionAnchor를 찾아, runtime에 연결
         foreach (var neighbor in _neighbors)
         {
             if (neighbor.houseInstance == null)
@@ -269,20 +268,33 @@ public class NeighborManager : MonoBehaviour
             var anchors = neighbor.houseInstance.GetComponentsInChildren<DistractionAnchor>(true);
             foreach (var anchor in anchors)
             {
-                if (string.IsNullOrEmpty(anchor.DistractionId))
+                // 1) ID 정리(Trim)
+                var rawId = anchor.DistractionId;
+                if (string.IsNullOrWhiteSpace(rawId))
                     continue;
 
-                if (!_distractionsById.TryGetValue(anchor.DistractionId, out var dr))
+                string id = rawId.Trim();
+
+                // 2) 런타임 맵 조회
+                if (!_distractionsById.TryGetValue(id, out var dr))
                 {
-                    Debug.LogWarning($"[NeighborManager] DistractionAnchor id '{anchor.DistractionId}' not found in runtime map.");
+                    Debug.LogWarning(
+                        $"[NeighborManager] DistractionAnchor id '{id}' not found in runtime map."
+                    );
                     continue;
                 }
 
-                // 🔹 Anchor ↔ Runtime 바인딩 (여기 한 줄로 정리)
-                anchor.BindRuntime(dr);
+                // 3) 위치 / placeId 연결
+                dr.worldTransform = anchor.transform;
+
+                if (!string.IsNullOrEmpty(anchor.PlaceId))
+                {
+                    dr.placeId = anchor.PlaceId;
+                }
             }
         }
     }
+
 
     private void Shuffle<T>(IList<T> list)
     {

@@ -2,50 +2,26 @@ using UnityEngine;
 
 public class WaveObject : MonoBehaviour
 {
-    [Header("Visual")]
-    public SpriteRenderer spriteRenderer;
-
-    // »ö»ó ¹× ½ºÅ¸ÀÏ Á¤ÀÇ
-    [Header("Colors")]
-    public Color productionColor = Color.white;
-    public Color rawSourceColor = Color.red;
+    public ParticleSystem particle;
 
     public void Show(Vector3 pos, WaveDebugMode mode)
     {
         transform.position = pos;
         gameObject.SetActive(true);
-
-        if (spriteRenderer != null)
-        {
-            switch (mode)
-            {
-                case WaveDebugMode.Production:
-                    spriteRenderer.color = productionColor;
-                    break;
-
-                case WaveDebugMode.RawSources:
-                    spriteRenderer.color = rawSourceColor;
-                    break;
-
-                case WaveDebugMode.Combined:
-                    // Combined¿¡¼­´Â Raw¿Í ProductionÀÌ µÑ ´Ù Ç¥½ÃµÇ¹Ç·Î
-                    // Combined ÀÚÃ¼´Â Production »ö»óÀ¸·Î ÅëÀÏ
-                    spriteRenderer.color = productionColor;
-                    break;
-            }
-        }
+        particle.Play();
     }
 
     public void Hide()
     {
+        particle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         gameObject.SetActive(false);
     }
+}
 
-    public enum WaveDebugMode
-    {
-        Production,     // ±âÈ¹ ±ÔÄ¢ ±â¹İ (A6)
-        RawSources,     // ¿À´Ã È°¼ºµÈ DistractionRuntime À§Ä¡¸¦ ÀüºÎ Ç¥½Ã
-        Combined        // Raw + Production ÆÄµ¿À» ¸ğµÎ Ç¥½Ã
-    }
 
+public enum WaveDebugMode
+{
+    Production,     // ê¸°íš ê·œì¹™ ê¸°ë°˜ (A6)
+    RawSources,     // ì˜¤ëŠ˜ í™œì„±ëœ DistractionRuntime ìœ„ì¹˜ë¥¼ ì „ë¶€ í‘œì‹œ
+    Combined        // Raw + Production íŒŒë™ì„ ëª¨ë‘ í‘œì‹œ
 }

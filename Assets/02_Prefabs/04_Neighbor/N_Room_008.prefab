@@ -495,6 +495,7 @@ GameObject:
   - component: {fileID: 5350432296388881206}
   - component: {fileID: 3345169435664232879}
   - component: {fileID: 1739111430342051912}
+  - component: {fileID: 4596717758273637734}
   m_Layer: 0
   m_Name: Radio001
   m_TagString: Untagged
@@ -567,6 +568,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4596717758273637734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 740909015838390045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec79c5034a39e7248b38148174b882ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distractionId: D_N002_B
+  placeId: 
+  isNoiseOrigin: 1
 --- !u!1 &959228004816107188
 GameObject:
   m_ObjectHideFlags: 0
@@ -1251,6 +1267,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4181862955074067780}
   - component: {fileID: 8064284548911635249}
+  - component: {fileID: 5650908775404900737}
   m_Layer: 0
   m_Name: HumanF_BodyMesh
   m_TagString: Untagged
@@ -1378,6 +1395,21 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.00000020861626, y: -0.12243894, z: 0.06813997}
     m_Extent: {x: 0.8475199, y: 0.93037486, z: 0.25898138}
   m_DirtyAABB: 0
+--- !u!114 &5650908775404900737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2430209152574781160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec79c5034a39e7248b38148174b882ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distractionId: D_N002_A
+  placeId: 
+  isNoiseOrigin: 1
 --- !u!1 &2476997797636624953
 GameObject:
   m_ObjectHideFlags: 0
