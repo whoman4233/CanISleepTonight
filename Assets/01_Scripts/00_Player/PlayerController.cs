@@ -1,4 +1,4 @@
-﻿using DG.Tweening.Core.Easing;
+using DG.Tweening.Core.Easing;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -30,10 +30,13 @@ public class PlayerController : MonoBehaviour
 
     private Animator animator;
 
+    private InteractionHandler interactionHandler;
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
+        interactionHandler = GetComponent<InteractionHandler>();
     }
 
     void Start()
@@ -146,6 +149,12 @@ public class PlayerController : MonoBehaviour
                 return;
             inventory?.Invoke();
         }
+    }
+
+    public void OnInteractionInput(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.phase == InputActionPhase.Started)
+            interactionHandler.Interact();
     }
 
     public void OnBuilderButton(InputAction.CallbackContext callbackContext)
