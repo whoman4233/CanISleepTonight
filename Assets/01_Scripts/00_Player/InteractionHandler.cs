@@ -8,8 +8,7 @@ public class InteractionHandler : MonoBehaviour
     [SerializeField] private float interactRange = 1f;
     [SerializeField] private LayerMask interactableMask;
 
-    [Header("UI")]
-    [SerializeField] private TextMeshProUGUI promptText;
+    private TextMeshProUGUI promptText;
 
     private float lastCheckTime;
     private Camera mainCamera;
@@ -20,6 +19,8 @@ public class InteractionHandler : MonoBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
+
+        promptText = UIManager.Instance.PromptText;
         promptText.gameObject.SetActive(false);
     }
 
