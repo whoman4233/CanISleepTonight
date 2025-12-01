@@ -50,11 +50,6 @@ public class WaveObject : MonoBehaviour
 
         gameObject.SetActive(true);
 
-        // 위치 디버그 로그
-        Debug.Log(
-            $"[WaveObject] Show() mode={mode}, strength={strength01:F2}, color={c}, " +
-            $"targetPos={worldPos}, actualPos={transform.position}, parent={transform.parent?.name}"
-        );
     }
 
     public void Hide()

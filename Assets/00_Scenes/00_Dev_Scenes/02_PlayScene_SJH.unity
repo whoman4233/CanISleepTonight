@@ -69100,7 +69100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighborManager: {fileID: 389792750}
-  playerLocation: {fileID: 4639031508598528944}
+  playerLocation: {fileID: 1707408668}
   tickInterval: 0.2
   debugMode: 1
   wavePrefab: {fileID: 1432316113890839234, guid: f0fe97c481c78f04787bff9e4b24ffc3,
@@ -69108,8 +69108,7 @@ MonoBehaviour:
   poolSize: 20
   waveLayerName: Wave
   maxColorDistance: 15
-  enableDebugLog: 1
-  drawDebugGizmos: 1
+  verboseLogging: 1
 --- !u!4 &1029888774
 Transform:
   m_ObjectHideFlags: 0
@@ -71687,7 +71686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighborManager: {fileID: 389792750}
-  playerLocation: {fileID: 4639031508598528944}
+  playerLocation: {fileID: 0}
   startDayIndex: 0
   startFloor: 3
   startInsideHouse: 1
@@ -100649,6 +100648,26 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1707408659 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2691540278275101339, guid: fad137f78b4ee8a46935b15f383a8779,
+    type: 3}
+  m_PrefabInstance: {fileID: 4639031508598528942}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1707408668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1707408659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f272d4673a7f38a46b6f886db52e5266, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentFloor: 3
+  currentHouseSlotId: 303
 --- !u!43 &1708720428
 Mesh:
   m_ObjectHideFlags: 0
@@ -130561,6 +130580,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2671292543455742032, guid: fad137f78b4ee8a46935b15f383a8779,
         type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 2147484160
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671292543455742032, guid: fad137f78b4ee8a46935b15f383a8779,
+        type: 3}
       propertyPath: m_projectionMatrixMode
       value: 1
       objectReference: {fileID: 0}
@@ -130591,22 +130615,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -1451096723584523086, guid: fad137f78b4ee8a46935b15f383a8779, type: 3}
+    - {fileID: -4418016814040917735, guid: fad137f78b4ee8a46935b15f383a8779, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2691540278275101339, guid: fad137f78b4ee8a46935b15f383a8779,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1707408668}
   m_SourcePrefab: {fileID: 100100000, guid: fad137f78b4ee8a46935b15f383a8779, type: 3}
---- !u!114 &4639031508598528944 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 725902953179562866, guid: fad137f78b4ee8a46935b15f383a8779,
-    type: 3}
-  m_PrefabInstance: {fileID: 4639031508598528942}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f272d4673a7f38a46b6f886db52e5266, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &4939074218800720556
 BoxCollider:
   m_ObjectHideFlags: 0
