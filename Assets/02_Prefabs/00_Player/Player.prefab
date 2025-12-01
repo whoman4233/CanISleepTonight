@@ -729,6 +729,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 513a3d7c82bca684ba76a8dc153eb49c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stress: 20
+  fatigue: 30
+  maxValue: 100
 --- !u!114 &-1451096723584523086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -758,6 +761,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b12852287241934ba24406bb956d933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curEquip: {fileID: 0}
+  equipParent: {fileID: 0}
 --- !u!1 &3000569146519096888
 GameObject:
   m_ObjectHideFlags: 0
