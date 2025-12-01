@@ -2,51 +2,81 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SleepGame.Data
+// ============================
+// Neighbor
+// ============================
+
+[Serializable]
+public class NeighborDataRow
 {
-    [Serializable]
-    public class NeighborDataRow
+    [Tooltip("Neighbor ID (예: N_001)")]
+    public string neighborId;
+
+    [Tooltip("표시용 이름 (예: 근육뇌)")]
+    public string displayName;
+
+    [Tooltip("기획서에 정의된 LayoutID (예: L_01)")]
+    public string layoutId;
+
+    [TextArea]
+    public string description;
+}
+
+[CreateAssetMenu(fileName = "NeighborTable", menuName = "GameData/Neighbor Table")]
+public class NeighborTableSO : ScriptableObject
+{
+    public List<NeighborDataRow> neighbors = new List<NeighborDataRow>();
+
+    public NeighborDataRow GetById(string id)
     {
-        public string neighborId; // N_001
-        public string displayName; // 근육뇌
-        public string layoutId;    // L_01
-        [TextArea]
-        public string description;
+        return neighbors.Find(n => n.neighborId == id);
+    }
+}
+
+// ============================
+// Distraction
+// ============================
+
+[Serializable]
+public class DistractionDataRow
+{
+    [Tooltip("Distraction ID (예: D_N001_A)")]
+    public string distractionId;
+
+    [Tooltip("주인 Neighbor ID (예: N_001)")]
+    public string ownerId;
+
+    [Tooltip("실제 소음원을 대표하는 ID (Neighbor or Entity ID 등)")]
+    public string sourceId;
+
+    [Tooltip("태그 (예: sound 등)")]
+    public string tag;
+
+    [Tooltip("강도 (1~6)")]
+    public int intensity;
+
+    [Tooltip("효과음 ID (예: S_001)")]
+    public string sfxId;
+
+    [Tooltip("기본 위치 PlaceID (예: P_303). 프리팹에서 Override 가능")]
+    public string placeId;
+
+    [TextArea]
+    public string description;
+}
+
+[CreateAssetMenu(fileName = "DistractionTable", menuName = "GameData/Distraction Table")]
+public class DistractionTableSO : ScriptableObject
+{
+    public List<DistractionDataRow> distractions = new List<DistractionDataRow>();
+
+    public DistractionDataRow GetById(string id)
+    {
+        return distractions.Find(d => d.distractionId == id);
     }
 
-    [CreateAssetMenu(fileName = "NeighborTable", menuName = "GameData/NeighborTable")]
-    public class NeighborTableSO : ScriptableObject
+    public IEnumerable<DistractionDataRow> GetByOwnerId(string ownerId)
     {
-        public List<NeighborDataRow> neighbors = new List<NeighborDataRow>();
-
-        public NeighborDataRow GetById(string id)
-        {
-            return neighbors.Find(n => n.neighborId == id);
-        }
-    }
-
-    [Serializable]
-    public class DistractionDataRow
-    {
-        public string distractionId; // D_N001_A
-        public string ownerId;       // N_001
-        public string sourceId;      // N_001 or E_005
-        public string tag;           // sound 등
-        public int intensity;        // 1~6
-        public string sfxId;         // S_001
-        public string placeId;       // P_303 등 (없으면 빈 문자열 가능)
-        [TextArea]
-        public string description;
-    }
-
-    [CreateAssetMenu(fileName = "DistractionTable", menuName = "GameData/DistractionTable")]
-    public class DistractionTableSO : ScriptableObject
-    {
-        public List<DistractionDataRow> distractions = new List<DistractionDataRow>();
-
-        public DistractionDataRow GetById(string id)
-        {
-            return distractions.Find(d => d.distractionId == id);
-        }
+        return distractions.FindAll(d => d.ownerId == ownerId);
     }
 }
