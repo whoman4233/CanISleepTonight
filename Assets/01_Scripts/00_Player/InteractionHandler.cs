@@ -16,6 +16,8 @@ public class InteractionHandler : MonoBehaviour
     private IInteractable curInteractable;
     private GameObject curInteractObject;
 
+    private InteractableOutliner curOutliner;
+
     private void Start()
     {
         mainCamera = Camera.main;
@@ -45,8 +47,17 @@ public class InteractionHandler : MonoBehaviour
             // 새로운 오브젝트를 감지했을 때
             if (curInteractObject != hit.collider.gameObject)
             {
+                ClearInteraction();
+
                 curInteractObject = hit.collider.gameObject;
                 curInteractable = curInteractObject.GetComponent<IInteractable>();
+
+                // 아웃라인 컨트롤러 찾기
+                curOutliner = curInteractObject.GetComponent<InteractableOutliner>();
+                if (curOutliner != null)
+                {
+                    curOutliner.SetHighlight(true);
+                }
 
                 if (curInteractable != null)
                     SetPromptText(curInteractable.GetInteractionPrompt());
@@ -74,6 +85,11 @@ public class InteractionHandler : MonoBehaviour
 
     private void ClearInteraction()
     {
+        if (curOutliner != null)
+        {
+            curOutliner.SetHighlight(false);
+            curOutliner = null;
+        }
         curInteractObject = null;
         curInteractable = null;
 
