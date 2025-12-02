@@ -53,8 +53,11 @@ public class UIInventory : MonoBehaviour
 
     public void OnBackClicked()
     {
+        // 아이템 설명 패널이 켜져있을 경우 => 아이템 설명 패널만 off
         if (detailPanel.gameObject.activeInHierarchy)
             detailPanel.gameObject.SetActive(false);
+
+        // 아이템 설명 패널이 켜져있지 않을 경우 (아이템 슬롯만 켜져있을 경우) => 인벤토리창 자체를 off
         else
             CloseInventory();
     }
