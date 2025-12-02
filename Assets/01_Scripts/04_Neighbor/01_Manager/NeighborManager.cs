@@ -231,77 +231,82 @@ public class NeighborManager : MonoBehaviour
             return;
         }
 
-        var shuffledSlots = new List<HouseSlot>(houseSlots);
-        Shuffle(shuffledSlots);
+        // ★ 플레이어 방 슬롯 ID (예: 303호)
+        const string PlayerHouseSlotId = "303";
+
+        // --- 1) 이웃을 배치할 슬롯만 따로 뽑아서 셔플 (303호는 제외) ---
+        var neighborCandidateSlots = houseSlots
+            .Where(s => s.houseSlotId != PlayerHouseSlotId)
+            .ToList();
+
+        Shuffle(neighborCandidateSlots);
 
         int neighborCount = _neighbors.Count;
-        int slotCount = shuffledSlots.Count;
-        int usedCount = Mathf.Min(neighborCount, slotCount);
+        int slotCountForNeighbors = neighborCandidateSlots.Count;
+        int usedCount = Mathf.Min(neighborCount, slotCountForNeighbors);
 
-        // 1) 이웃 배정 슬롯
+        // 어떤 슬롯에 이웃이 들어갔는지 기록
+        HashSet<string> occupiedSlotIds = new HashSet<string>();
+
+        // --- 2) 이웃 배치 ---
         for (int i = 0; i < usedCount; i++)
         {
             var neighbor = _neighbors[i];
-            var slot = shuffledSlots[i];
+            var slot = neighborCandidateSlots[i];
+
+            occupiedSlotIds.Add(slot.houseSlotId);
 
             neighbor.houseSlot = slot;
 
             if (!string.IsNullOrEmpty(slot.placeId))
-            {
                 neighbor.placeId = slot.placeId;
-            }
 
             var layoutRow = masterData.houseLayoutTable.GetById(neighbor.data.layoutId);
             if (layoutRow == null || layoutRow.housePrefab == null)
             {
-                Debug.LogWarning($"[NeighborManager] No housePrefab for layoutId '{neighbor.data.layoutId}' (NeighborId={neighbor.Id})");
+                Debug.LogWarning(
+                    $"[NeighborManager] No housePrefab for layoutId '{neighbor.data.layoutId}' (NeighborId={neighbor.Id})"
+                );
                 continue;
             }
 
-            // 1단계: 월드 기준으로 먼저 생성
-            var instance = Instantiate(layoutRow.housePrefab);
-
-            // 2단계: 부모를 InteriorRoot로 설정 + 로컬 기준 재정렬
-            instance.transform.SetParent(slot.InteriorRoot, false);
-
-            // 3단계: 로컬 트랜스폼 강제 초기화
+            var instance = Instantiate(layoutRow.housePrefab, slot.InteriorRoot, false);
             InitTransform(instance.transform);
 
             neighbor.houseInstance = instance;
 
-            Debug.Log(
-                $"[NeighborManager] Neighbor={neighbor.Id} → Slot={slot.houseSlotId}, " +
-                $"slotWorld={slot.InteriorRoot.position}, instWorld={instance.transform.position}, instLocal={instance.transform.localPosition}");
+            Debug.Log($"[NeighborManager] Neighbor={neighbor.Id} → Slot={slot.houseSlotId}");
         }
 
-        // 2) 남은 슬롯 = EMPTY 프리팹 배치
-        for (int i = usedCount; i < slotCount; i++)
+        // --- 3) 빈 슬롯에는 EMPTY 프리팹 배치 (303호 포함) ---
+        var emptyRow = masterData.houseLayoutTable.GetById("EMPTY");
+        if (emptyRow == null || emptyRow.housePrefab == null)
         {
-            var slot = shuffledSlots[i];
+            Debug.LogWarning("[NeighborManager] EMPTY layout not found. Empty slots remain blank.");
+            return;
+        }
 
-            var emptyRow = masterData.houseLayoutTable.GetById("EMPTY");
-            if (emptyRow == null || emptyRow.housePrefab == null)
-            {
-                Debug.LogWarning("[NeighborManager] EMPTY layout not found. Empty slots remain blank.");
+        foreach (var slot in houseSlots)
+        {
+            // 이미 이웃이 들어간 슬롯은 스킵
+            if (occupiedSlotIds.Contains(slot.houseSlotId))
                 continue;
-            }
 
-            var instance = Instantiate(emptyRow.housePrefab);
-            instance.transform.SetParent(slot.InteriorRoot, false);
+            // 여기서는 303호도 포함해서 EMPTY 집을 채워줌
+            var instance = Instantiate(emptyRow.housePrefab, slot.InteriorRoot, false);
             InitTransform(instance.transform);
 
-            Debug.Log(
-                $"[NeighborManager] EMPTY house spawned at Slot={slot.houseSlotId}, " +
-                $"slotWorld={slot.InteriorRoot.position}, instWorld={instance.transform.position}, instLocal={instance.transform.localPosition}");
+            Debug.Log($"[NeighborManager] EMPTY house spawned at Slot={slot.houseSlotId}");
         }
     }
 
     private void InitTransform(Transform t)
     {
         t.localPosition = Vector3.zero;
-        t.localRotation = Quaternion.identity;
+        t.localRotation = Quaternion.Euler(0f, 0f, 0f);
         t.localScale = Vector3.one;
     }
+
 
 
 
