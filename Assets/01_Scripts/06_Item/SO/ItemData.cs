@@ -6,6 +6,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ItemData_", menuName = "ItemData")]
 public class ItemData : ScriptableObject
 {
+    [Header("Meta Info")]
+    public int itemID;
+    
     [Header("Display Info")]
     public string itemName;
     public string itemDescription;
