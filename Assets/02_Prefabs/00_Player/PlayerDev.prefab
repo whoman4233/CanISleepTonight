@@ -471,10 +471,8 @@ GameObject:
   - component: {fileID: 6583971040420835058}
   - component: {fileID: 6664894994850183953}
   - component: {fileID: 2708576743036137420}
-  - component: {fileID: -1451096723584523086}
-  - component: {fileID: -4418016814040917735}
   m_Layer: 6
-  m_Name: Player
+  m_Name: PlayerDev
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -686,22 +684,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: aadaa67b-2660-435f-9bf2-ef04ddedb8c4
     m_ActionName: Player/Sprint[/Keyboard/leftShift]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6664894994850183953}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnSettingButton
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 62cb3680-3132-4784-9b44-d6f59e5fa7eb
-    m_ActionName: Player/Setting[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -760,37 +742,6 @@ MonoBehaviour:
   stress: 20
   fatigue: 30
   maxValue: 100
---- !u!114 &-1451096723584523086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2691540278275101339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 723b173268cad4145970f92bc97b8af6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkRate: 0.1
-  interactRange: 1
-  interactableMask:
-    serializedVersion: 2
-    m_Bits: 128
---- !u!114 &-4418016814040917735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2691540278275101339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b12852287241934ba24406bb956d933, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  curEquip: {fileID: 0}
-  equipParent: {fileID: 0}
 --- !u!1 &3000569146519096888
 GameObject:
   m_ObjectHideFlags: 0

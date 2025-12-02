@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        if (GameManager.Instance == null || GameManager.Instance.IsSettingOpen)
+        if (GameManager.Instance == null || UIManager.Instance.IsSettingOpen)
             return;
         Cursor.lockState = CursorLockMode.Locked;
         inventory += ToggleCursor;
@@ -144,15 +144,27 @@ public class PlayerController : MonoBehaviour
         }
         return false;
     }
+
+    // Tab 키로 인벤토리창 on/off
     public void OnInventoryButton(InputAction.CallbackContext callbackContext)
     {
         if (callbackContext.phase == InputActionPhase.Started)
         {
-            if (GameManager.Instance != null && GameManager.Instance.IsSettingOpen)
-                return;
-            inventory?.Invoke();
+            UIManager.Instance.ToggleInventory();
+            ToggleCursor();
         }
     }
+
+    // ESC 키로 설정창 on/off
+    public void OnSettingButton(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.phase == InputActionPhase.Started)
+        {
+            UIManager.Instance.ToggleSetting();
+            ToggleCursor();
+        }
+    }
+
 
     public void OnInteractionInput(InputAction.CallbackContext callbackContext)
     {
@@ -181,16 +193,16 @@ public class PlayerController : MonoBehaviour
 
         bool isLocked = Cursor.lockState == CursorLockMode.Locked;
 
-        if (isLocked)
+        if (UIManager.Instance.IsInventoryOpen || UIManager.Instance.IsSettingOpen)
         {
-            // ▶ 인벤토리 열림 상태 : 커서 보이게 + 카메라 회전 끔
+            // ▶ 인벤토리 OR 설정창 열림 상태 : 커서 보이게 + 카메라 회전 끔
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             canLook = false;
         }
         else
         {
-            // ▶ 인벤토리 닫힘 상태 : 커서 숨기고 + 다시 카메라 회전 켬
+            // ▶ 인벤토리 OR 설정창 닫힘 상태 : 커서 숨기고 + 다시 카메라 회전 켬
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             canLook = true;

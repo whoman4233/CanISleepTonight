@@ -13,16 +13,19 @@ public class DistractionRuntime
     public NeighborRuntime owner;
 
     // 상태 플래그
-    public bool isAlive = true;        // 퍼즐/상호작용으로 영구적으로 꺼졌는지
-    public bool isActiveToday = false; // 오늘 하루 활성화 여부 (준비 페이즈에서 결정)
+    public bool isAlive = true;
+    public bool isActiveToday = false;
 
     // 월드 상 위치/참조
-    public Transform worldTransform;   // DistractionAnchor에서 가져오는 Transform
-    public string placeId;             // Noise/Wave에서 사용할 위치 ID
+    public Transform worldTransform;
+    public string placeId;
 
-    // 옵션: 소음/디버그용 캐시
-    public bool isNoiseSource = true;      // 실제 소음원인지 여부(필요하면 사용)
-    public float cachedNoiseContribution;  // NoiseManager 계산 결과 캐시
+    // 소음/디버그용
+    public bool isNoiseSource = true;
+    public float cachedNoiseContribution;
+
+    // ★ 추가: 어느 DistractionAnchor에서 온 놈인지
+    public DistractionAnchor anchor;
 
     public void SetDead()
     {
@@ -32,8 +35,8 @@ public class DistractionRuntime
     }
 
     public DistractionRuntime(DistractionDataRow dataRow)
-    {   
+    {
         data = dataRow;
-        placeId = dataRow.placeId; // 기본값은 데이터 기준, 프리팹에서 override 가능
+        placeId = dataRow.placeId;
     }
 }
