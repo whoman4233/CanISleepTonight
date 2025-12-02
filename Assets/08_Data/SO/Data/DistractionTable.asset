@@ -13,6 +13,14 @@ MonoBehaviour:
   m_Name: DistractionTable
   m_EditorClassIdentifier: Assembly-CSharp::DistractionTableSO
   distractions:
+  - distractionId: D_N001_A
+    ownerId: N_001
+    sourceId: 
+    tag: sound
+    intensity: 0
+    sfxId: 
+    placeId: 
+    description: 
   - distractionId: D_N001_B
     ownerId: N_001
     sourceId: 
@@ -47,14 +55,6 @@ MonoBehaviour:
     description: 
   - distractionId: D_N003_B
     ownerId: N_003
-    sourceId: 
-    tag: sound
-    intensity: 0
-    sfxId: 
-    placeId: 
-    description: 
-  - distractionId: D_N001_A
-    ownerId: N_001
     sourceId: 
     tag: sound
     intensity: 0

@@ -1,33 +1,26 @@
+// NeighborRuntime ìª½ (í•„ë“œ í•˜ë‚˜ ì¶”ê°€)
 using System.Collections.Generic;
 using UnityEngine;
 
 public class NeighborRuntime
 {
-    // ¿øº» µ¥ÀÌÅÍ
     public readonly NeighborDataRow data;
 
-    // ½Äº°ÀÚ ÆíÀÇ ÇÁ·ÎÆÛÆ¼
     public string Id => data.neighborId;
 
-    // ¿ùµå/¾À °ü·Ã ÂüÁ¶
-    public HouseSlot houseSlot;        // ¾À »óÀÇ Áı ÀÚ¸® (MonoBehaviour)
-    public GameObject houseInstance;   // InstantiateµÈ Áı ÇÁ¸®ÆÕ ·çÆ®
+    public HouseSlot houseSlot;
+    public GameObject houseInstance;
 
-    // (¼±ÅÃ) ÀÌ¿ô Ä³¸¯ÅÍ ºä
-    //public NeighborView neighborView;  // ÀÖÀ¸¸é ¿¬°á
+    // ëŒ€í‘œ ìœ„ì¹˜
+    public string placeId;   // ì´ì›ƒì˜ "ì§‘" ëŒ€í‘œ PlaceID (ì˜ˆ: ê·¸ ì§‘ ë¬¸/ê±°ì‹¤)
 
-    // »óÅÂ
-    public bool isAlive = true;        // ¿µ±¸ÀûÀ¸·Î Á¶¿ëÇØÁ³´ÂÁö(Dead ¿©ºÎ)
-    public bool isActiveToday = false; // ¿À´Ã È°¼º ÀÌ¿ôÀÎÁö
+    public bool isAlive = true;
+    public bool isActiveToday = false;
 
-    // (³ªÁß È®Àå¿ë) ÀÇ½Éµµ
-    public int suspicion = 0;
+    public List<DistractionRuntime> distractions = new();
 
-    // ÇÏÀ§ ¹æÇØ ¿ä¼Òµé
-    public readonly List<DistractionRuntime> distractions = new List<DistractionRuntime>();
-
-    public NeighborRuntime(NeighborDataRow dataRow)
+    public NeighborRuntime(NeighborDataRow row)
     {
-        data = dataRow;
+        data = row;
     }
 }

@@ -13,6 +13,7 @@ public class GameDataImportWindow : EditorWindow
     [Header("CSV Files (TextAsset)")]
     private TextAsset neighborsCsv;
     private TextAsset distractionsCsv;
+    private TextAsset placesCsv;   // ★ 추가
 
     private bool strictValidation = true;
     private bool clearBeforeImport = true;
@@ -52,6 +53,12 @@ public class GameDataImportWindow : EditorWindow
             typeof(TextAsset),
             false
         );
+        placesCsv = (TextAsset)EditorGUILayout.ObjectField(          // ★ 추가
+            "Places CSV",
+            placesCsv,
+            typeof(TextAsset),
+            false
+        );
 
         EditorGUILayout.Space();
 
@@ -79,20 +86,20 @@ public class GameDataImportWindow : EditorWindow
             return;
         }
 
-        if (neighborsCsv == null || distractionsCsv == null)
+        if (neighborsCsv == null || distractionsCsv == null || placesCsv == null)
         {
-            lastResultMessage = "CSV TextAssets are not assigned.";
+            lastResultMessage = "CSV TextAssets are not assigned (Neighbors/Distractions/Places).";
             Debug.LogError(lastResultMessage);
             return;
         }
 
-        // Neighbor / Distraction Table SO 확보
         var neighborTable = masterData.neighborTable;
         var distractionTable = masterData.distractionTable;
+        var placeTable = masterData.placeTable;   // ★ 추가
 
-        if (neighborTable == null || distractionTable == null)
+        if (neighborTable == null || distractionTable == null || placeTable == null)
         {
-            lastResultMessage = "NeighborTableSO or DistractionTableSO is not assigned in MasterGameDataSO.";
+            lastResultMessage = "NeighborTableSO or DistractionTableSO or PlaceTableSO is not assigned in MasterGameDataSO.";
             Debug.LogError(lastResultMessage);
             return;
         }
@@ -101,15 +108,18 @@ public class GameDataImportWindow : EditorWindow
         {
             int importedNeighbors = ImportNeighbors(neighborsCsv, neighborTable);
             int importedDistractions = ImportDistractions(distractionsCsv, distractionTable, neighborTable);
+            int importedPlaces = ImportPlaces(placesCsv, placeTable);   // ★ 추가
 
             EditorUtility.SetDirty(neighborTable);
             EditorUtility.SetDirty(distractionTable);
+            EditorUtility.SetDirty(placeTable);   // ★ 추가
             EditorUtility.SetDirty(masterData);
             AssetDatabase.SaveAssets();
 
             lastResultMessage = $"Import Success\n" +
                                 $"Neighbors: {importedNeighbors}\n" +
-                                $"Distractions: {importedDistractions}";
+                                $"Distractions: {importedDistractions}\n" +
+                                $"Places: {importedPlaces}";
             Debug.Log(lastResultMessage);
         }
         catch (Exception ex)
@@ -118,6 +128,7 @@ public class GameDataImportWindow : EditorWindow
             Debug.LogError(ex);
         }
     }
+
 
     private int ImportNeighbors(TextAsset csv, NeighborTableSO table)
     {
@@ -424,6 +435,92 @@ public class GameDataImportWindow : EditorWindow
 
         return imported;
     }
+
+    private int ImportPlaces(TextAsset csv, PlaceTableSO table)
+    {
+        if (clearBeforeImport)
+            table.places.Clear();
+
+        var lines = SplitLines(csv.text);
+        if (lines.Count <= 1)
+            throw new Exception("Places CSV has no data rows.");
+
+        // ----- 헤더 처리 (Trim 포함) -----
+        var rawHeader = SplitCsvLine(lines[0]);
+        var header = rawHeader
+            .Select(h => h.Trim())
+            .ToArray();
+
+        int idxPlaceId = Array.IndexOf(header, "PlaceID");
+        int idxFloor = Array.IndexOf(header, "Floor");
+        int idxDistanceLevel = Array.IndexOf(header, "DistanceLevel");
+
+        if (idxPlaceId < 0)
+            throw new Exception("Places CSV header must contain PlaceID.");
+
+        var idSet = new HashSet<string>();
+        int imported = 0;
+
+        for (int i = 1; i < lines.Count; i++)
+        {
+            var line = lines[i];
+
+            // 줄 자체가 공백이면 스킵
+            if (string.IsNullOrWhiteSpace(line))
+                continue;
+
+            var cols = SplitCsvLine(line);
+
+            // " , , , " 처럼 콤마만 있고 전부 공백인 행도 스킵
+            bool allEmpty = true;
+            for (int c = 0; c < cols.Length; c++)
+            {
+                if (!string.IsNullOrWhiteSpace(cols[c]))
+                {
+                    allEmpty = false;
+                    break;
+                }
+            }
+            if (allEmpty)
+                continue;
+
+            string placeId = SafeGet(cols, idxPlaceId);
+            if (string.IsNullOrEmpty(placeId))
+            {
+                LogOrThrow($"[Places] Row {i + 1}: PlaceID is empty.");
+                continue;
+            }
+
+            if (idSet.Contains(placeId))
+            {
+                LogOrThrow($"[Places] Duplicate PlaceID: {placeId} at row {i + 1}.");
+                continue;
+            }
+            idSet.Add(placeId);
+
+            int floor = 0;
+            if (idxFloor >= 0)
+                int.TryParse(SafeGet(cols, idxFloor), out floor);
+
+            int distanceLevel = 0;
+            if (idxDistanceLevel >= 0)
+                int.TryParse(SafeGet(cols, idxDistanceLevel), out distanceLevel);
+
+            var row = new PlaceDataRow
+            {
+                placeId = placeId,
+                floor = floor,
+                distanceLevel = distanceLevel
+            };
+
+            table.places.Add(row);
+            imported++;
+        }
+
+        return imported;
+    }
+
+
 
 
     // =========================
