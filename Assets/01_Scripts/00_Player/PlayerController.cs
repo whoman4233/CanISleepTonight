@@ -174,6 +174,9 @@ public class PlayerController : MonoBehaviour
 
     public void OnAttackInput(InputAction.CallbackContext callbackContext)
     {
+        if (UIManager.Instance.IsInventoryOpen || UIManager.Instance.IsSettingOpen)
+            return;
+
         if (callbackContext.phase == InputActionPhase.Started)
         {
             equipment.OnAttack();
