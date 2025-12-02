@@ -62,7 +62,7 @@ public class UIItemDetail : MonoBehaviour
 
     public void OnEquipButtonClicked()
     {
-
+        PlayerManager.Instance.Player.EquipItem(curItem);
     }
 
     public void OnPurchaseButtonClicked()

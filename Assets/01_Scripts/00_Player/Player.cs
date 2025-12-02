@@ -46,5 +46,22 @@ public class Player : MonoBehaviour
         inventory.Add(item);
     }
 
+    public void EquipItem(Item item)
+    {
+        if (!inventory.Contains(item)) return;  // 인벤토리에 없는 아이템이면 그냥 return
 
+        // TODO : Equipment 와 연결
+        if (item.IsEquipped)
+        {
+            item.UnEquipItem();
+            Debug.Log("아이템 해제");
+        }
+        else
+        {
+            item.EquipItem();
+            Debug.Log("아이템 장착");
+        }
+
+        UIManager.Instance.UIItemDetail.UpdateButtonUI();
+    }
 }
