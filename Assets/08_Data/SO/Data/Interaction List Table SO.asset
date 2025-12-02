@@ -1,0 +1,239 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3652ae6513c3f854894ca8de4b23e557, type: 3}
+  m_Name: Interaction List Table SO
+  m_EditorClassIdentifier: 
+  rows:
+  - listId: IL_E003_A
+    targetId: E_003
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_E003_01
+    - I_E003_02
+  - listId: IL_E004_A
+    targetId: E_004
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_E004_01
+  - listId: IL_N001_A
+    targetId: N_001
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_N001_01
+    - I_N001_02
+    - I_N001_03
+  - listId: IL_N002_A
+    targetId: N_002
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_N002_01
+    - I_N002_02
+    - I_N002_03
+  - listId: IL_E006_A
+    targetId: E_006
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_E006_01
+  - listId: IL_N003_A
+    targetId: N_003
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_N003_01
+    - I_N003_02
+  - listId: IL_E007_A
+    targetId: E_007
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_E007_01
+  - listId: IL_N004_A
+    targetId: N_004
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_N004_01
+    - I_N004_02
+    - I_N004_03
+  - listId: IL_E008_A
+    targetId: E_008
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_E008_01
+  - listId: IL_N005_A
+    targetId: N_005
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_N005_01
+    - I_N005_02
+    - I_N005_03
+  - listId: IL_E009_A
+    targetId: E_009
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_E009_01
+  - listId: IL_E010_A
+    targetId: E_010
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_E010_01
+  - listId: IL_E011_A
+    targetId: E_011
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_E011_01
+  - listId: IL_N006_A
+    targetId: N_006
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_N006_01
+    - I_N006_02
+  - listId: IL_E012_A
+    targetId: E_012
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_E012_01
+  - listId: IL_N008_A
+    targetId: N_008
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_N008_01
+    - I_N008_02
+  - listId: IL_E013_A
+    targetId: E_013
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_E013_01
+    - I_E013_02
+  - listId: IL_N009_A
+    targetId: N_009
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_N009_01
+    - I_N009_02
+    - I_N009_03
+  - listId: IL_N010_A
+    targetId: N_010
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_N010_01
+    - I_N010_02
+    - I_N010_03
+  - listId: IL_N011_A
+    targetId: N_011
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_N011_01
+  - listId: IL_E014_A
+    targetId: E_014
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_E014_01
+  - listId: IL_E015_A
+    targetId: E_015
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_E015_01
+  - listId: IL_N012_A
+    targetId: N_012
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_N012_01
+  - listId: IL_E016_A
+    targetId: E_016
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_E016_01
+  - listId: IL_N013_A
+    targetId: N_013
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_N013_01
+    - I_N013_02
+    - I_N013_03
+    - I_N013_04
+  - listId: IL_E017_A
+    targetId: E_017
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_E017_01
+  - listId: IL_E018_A
+    targetId: E_018
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_E018_01
+  - listId: IL_E019_A
+    targetId: E_019
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_E019_01
+  - listId: IL_N014_A
+    targetId: N_014
+    priority: 0
+    conditionKey: None
+    conditionValue: None
+    linkedInteractionIds:
+    - I_N014_01
+    - I_N014_02
