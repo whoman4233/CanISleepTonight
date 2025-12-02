@@ -17,6 +17,10 @@ public class UIManager : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private UIInventory uiInventory;
     [SerializeField] private UISetting uiSetting;
+    [SerializeField] private UIItemDetail uiItemDetail;
+
+    public UIInventory UIInventory => uiInventory;
+    public UIItemDetail UIItemDetail => uiItemDetail;
 
     public bool IsInventoryOpen => uiInventory != null && uiInventory.IsInventoryOpen;
     public bool IsSettingOpen => uiSetting != null && uiSetting.IsSettingOpen;

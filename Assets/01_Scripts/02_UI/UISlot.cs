@@ -26,4 +26,12 @@ public class UISlot : MonoBehaviour
     {
         uiInventory.OnSlotSelected(this);
     }
+
+    public void UpdateSlot()
+    {
+        if (currentItem.IsLocked)
+            lockIcon.gameObject.SetActive(true);
+        else
+            lockIcon.gameObject.SetActive(false);
+    }
 }

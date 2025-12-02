@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class UIItemDetail : MonoBehaviour
 {
@@ -17,8 +18,12 @@ public class UIItemDetail : MonoBehaviour
     [SerializeField] private Button PurchaseButton;
     [SerializeField] private TextMeshProUGUI purchaseButtonText;
 
+    private Item curItem;
+
     public void Show(Item item)
     {
+        curItem = item;
+        
         iconImage.sprite = item.ItemData.itemIcon;
         nameText.text = item.ItemData.itemName;
         descText.text = item.ItemData.itemDescription;
@@ -62,6 +67,14 @@ public class UIItemDetail : MonoBehaviour
 
     public void OnPurchaseButtonClicked()
     {
+        PlayerManager.Instance.Player.PuchaseItem(curItem);
+    }
 
+    public void UpdateButtonUI()
+    {
+        if (curItem.IsLocked)
+            SetPurchaseButton(curItem);
+        else
+            SetEquipButton(curItem);
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UIInventory : MonoBehaviour
@@ -7,6 +8,7 @@ public class UIInventory : MonoBehaviour
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private UIItemDetail detailPanel;
     [SerializeField] private Transform slotParent;
+    [SerializeField] private TextMeshProUGUI balanceText;
 
     private List<UISlot> slots = new List<UISlot>();
     private Item selectedItem;
@@ -35,6 +37,7 @@ public class UIInventory : MonoBehaviour
 
     public void OpenInventory()
     {
+        UpdateSlotUI();
         detailPanel.gameObject.SetActive(false);
         inventoryPanel.SetActive(true);
     }
@@ -55,10 +58,24 @@ public class UIInventory : MonoBehaviour
     {
         // 아이템 설명 패널이 켜져있을 경우 => 아이템 설명 패널만 off
         if (detailPanel.gameObject.activeInHierarchy)
+        {
             detailPanel.gameObject.SetActive(false);
+            UpdateSlotUI();
+        }
 
         // 아이템 설명 패널이 켜져있지 않을 경우 (아이템 슬롯만 켜져있을 경우) => 인벤토리창 자체를 off
         else
             CloseInventory();
+    }
+
+    public void UpdateBalanceUI(int balance)
+    {
+        balanceText.text = $"통장 잔고 : {balance}\u20a9";
+    }
+
+    private void UpdateSlotUI()
+    {
+        foreach (var slot in slots)
+            slot.UpdateSlot();
     }
 }
