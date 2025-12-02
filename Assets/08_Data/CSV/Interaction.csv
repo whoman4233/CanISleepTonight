@@ -31,7 +31,6 @@ I_E007_01,강제 방송 종료,수리,Item,Item_Hammer,ChangeType,N_003,Dead
 I_E007_01,강제 방송 종료,수리,Item,Item_Hammer,ChangeType,D_N003_A,Dead
 I_E007_01,강제 방송 종료,수리,Item,Item_Hammer,ChangeType,D_N003_B,Dead
 I_N004_01,지금이 새벽 시간이라고 말해주기,대화,State,calm,ShowText,N_004,T_N004_01
-I_N004_02,축구광을 축구공 취급하기,설득,None,None,PlayCutScene,System,CS_N004_01
 I_N004_02,축구광을 축구공 취급하기,설득,None,None,ShowText,N_004,T_N004_02
 I_N004_02,축구광을 축구공 취급하기,설득,None,None,ChangeType,N_004,Idle
 I_N004_02,축구광을 축구공 취급하기,설득,None,None,ChangeType,D_N004_A,Idle
@@ -119,12 +118,13 @@ I_E014_01,목마를 부수기,수리,Item,Item_Hammer,ChangeType,E_015,Dead
 I_E014_01,목마를 부수기,수리,Item,Item_Hammer,ChangeType,D_N011_A,Dead
 I_E014_01,목마를 부수기,수리,Item,Item_Hammer,ChangeType,D_N011_B,Dead
 I_E014_01,목마를 부수기,수리,Item,Item_Hammer,ModStat,stress,-10
-I_E015_01,개념없는 부모 참교육하기,설득,Item,Item_Bat,ChangeType,N_011,Dead
-I_E015_01,개념없는 부모 참교육하기,설득,Item,Item_Bat,ChangeType,E_014,Dead
-I_E015_01,개념없는 부모 참교육하기,설득,Item,Item_Bat,ChangeType,E_015,Dead
-I_E015_01,개념없는 부모 참교육하기,설득,Item,Item_Bat,ChangeType,D_N011_A,Dead
-I_E015_01,개념없는 부모 참교육하기,설득,Item,Item_Bat,ChangeType,D_N011_B,Dead
-I_E015_01,개념없는 부모 참교육하기,설득,Item,Item_Bat,ModStat,stress,-10
+I_E015_01,아이를 좀 조용히 시키는 게 어떻냐고 제안하기,대화,State,calm,ShowText,E_015,T_E015_01
+I_E015_02,개념없는 부모 참교육하기,설득,Item,Item_Bat,ChangeType,N_011,Dead
+I_E015_02,개념없는 부모 참교육하기,설득,Item,Item_Bat,ChangeType,E_014,Dead
+I_E015_02,개념없는 부모 참교육하기,설득,Item,Item_Bat,ChangeType,E_015,Dead
+I_E015_02,개념없는 부모 참교육하기,설득,Item,Item_Bat,ChangeType,D_N011_A,Dead
+I_E015_02,개념없는 부모 참교육하기,설득,Item,Item_Bat,ChangeType,D_N011_B,Dead
+I_E015_02,개념없는 부모 참교육하기,설득,Item,Item_Bat,ModStat,stress,-10
 I_N012_01,소음만 만들고 있다며 모욕하기,대화,State,calm,ShowText,N_012,T_N012_01
 I_N012_01,소음만 만들고 있다며 모욕하기,대화,State,calm,ChangeType,N_012,Dead
 I_N012_01,소음만 만들고 있다며 모욕하기,대화,State,calm,ChangeType,D_N012_A,Dead
