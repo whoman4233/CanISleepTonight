@@ -14,15 +14,30 @@ public class DistractionRuntime
 
     // 상태 플래그
     public bool isAlive = true;        // 퍼즐/상호작용으로 영구적으로 꺼졌는지
-    public bool isActiveToday = false; // 오늘 하루 활성화 여부 (준비 페이즈에서 결정)
+    public bool isActiveToday = false; // 오늘 하루 활성화 여부
 
     // 월드 상 위치/참조
     public Transform worldTransform;   // DistractionAnchor에서 가져오는 Transform
-    public string placeId;             // Noise/Wave에서 사용할 위치 ID
+
+    // Place 정보
+    //  - dataPlaceId : CSV에 적힌 원본
+    //  - placeId     : 런타임 최종 값(앵커/하우스 슬롯 등 반영)
+    public string dataPlaceId;
+    public string placeId;
+
+    // 어디 앵커에 붙어있는지 추적용
+    public DistractionAnchor anchor;
 
     // 옵션: 소음/디버그용 캐시
-    public bool isNoiseSource = true;      // 실제 소음원인지 여부(필요하면 사용)
-    public float cachedNoiseContribution;  // NoiseManager 계산 결과 캐시
+    public bool isNoiseSource = true;
+    public float cachedNoiseContribution;
+
+    public DistractionRuntime(DistractionDataRow dataRow)
+    {
+        data = dataRow;
+        dataPlaceId = dataRow.placeId;
+        placeId = dataRow.placeId;     // 기본값은 데이터 기준
+    }
 
     public void SetDead()
     {
@@ -31,43 +46,30 @@ public class DistractionRuntime
         isNoiseSource = false;
     }
 
-    public DistractionRuntime(DistractionDataRow dataRow)
-    {
-        data = dataRow;
-        // 1차 기본값: CSV에서 온 placeId
-        placeId = dataRow.placeId;
-    }
-
     /// <summary>
-    /// Distraction의 최종 placeId를 확정하는 단계.
-    /// 우선순위:
-    /// 1) DistractionAnchor.PlaceId
-    /// 2) CSV 데이터 placeId
-    /// 3) owner.placeId
+    /// NeighborManager.LinkDistractionAnchors() 이후에
+    /// 최종 placeId를 정리해 주기 위한 메서드
     /// </summary>
     public void FinalizePlaceId()
     {
-        // 1) worldTransform 기준으로 DistractionAnchor 우선
-        if (worldTransform != null)
+        // 1순위: 앵커에 명시된 PlaceId
+        if (anchor != null && !string.IsNullOrWhiteSpace(anchor.PlaceId))
         {
-            var anchor = worldTransform.GetComponent<DistractionAnchor>();
-            if (anchor != null && !string.IsNullOrEmpty(anchor.PlaceId))
-            {
-                placeId = anchor.PlaceId;
-                return;
-            }
+            placeId = anchor.PlaceId.Trim();
+            return;
         }
 
-        // 2) 생성자에서 dataRow.placeId를 이미 넣어둠
-        if (!string.IsNullOrEmpty(placeId))
-            return;
-
-        // 3) 데이터/앵커 둘 다 비었으면 owner의 placeId 상속
-        if (owner != null && !string.IsNullOrEmpty(owner.placeId))
+        // 2순위: CSV 데이터
+        if (!string.IsNullOrWhiteSpace(dataPlaceId))
         {
-            placeId = owner.placeId;
+            placeId = dataPlaceId.Trim();
+            return;
+        }
+
+        // 3순위: 오너 이웃이 가지고 있는 placeId (필요하면 사용)
+        if (owner != null && !string.IsNullOrWhiteSpace(owner.placeId))
+        {
+            placeId = owner.placeId.Trim();
         }
     }
-
-
 }

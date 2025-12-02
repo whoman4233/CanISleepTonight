@@ -236,7 +236,6 @@ public class NeighborManager : MonoBehaviour
 
         int neighborCount = _neighbors.Count;
         int slotCount = shuffledSlots.Count;
-
         int usedCount = Mathf.Min(neighborCount, slotCount);
 
         // 1) 이웃 배정 슬롯
@@ -259,16 +258,20 @@ public class NeighborManager : MonoBehaviour
                 continue;
             }
 
-            var instance = Instantiate(layoutRow.housePrefab, slot.InteriorRoot, false);
+            // 1단계: 월드 기준으로 먼저 생성
+            var instance = Instantiate(layoutRow.housePrefab);
 
-            // 이 부분이 새로 추가된 transform 초기화
+            // 2단계: 부모를 InteriorRoot로 설정 + 로컬 기준 재정렬
+            instance.transform.SetParent(slot.InteriorRoot, false);
+
+            // 3단계: 로컬 트랜스폼 강제 초기화
             InitTransform(instance.transform);
 
-            neighbor.houseSlot = slot;
             neighbor.houseInstance = instance;
-            neighbor.placeId = slot.placeId;
 
-            Debug.Log($"[NeighborManager] Neighbor={neighbor.Id} → Slot={slot.houseSlotId}");
+            Debug.Log(
+                $"[NeighborManager] Neighbor={neighbor.Id} → Slot={slot.houseSlotId}, " +
+                $"slotWorld={slot.InteriorRoot.position}, instWorld={instance.transform.position}, instLocal={instance.transform.localPosition}");
         }
 
         // 2) 남은 슬롯 = EMPTY 프리팹 배치
@@ -283,24 +286,27 @@ public class NeighborManager : MonoBehaviour
                 continue;
             }
 
-            var instance = Instantiate(emptyRow.housePrefab, slot.InteriorRoot, false);
+            var instance = Instantiate(emptyRow.housePrefab);
+            instance.transform.SetParent(slot.InteriorRoot, false);
             InitTransform(instance.transform);
 
-            Debug.Log($"[NeighborManager] EMPTY house spawned at Slot={slot.houseSlotId}");
+            Debug.Log(
+                $"[NeighborManager] EMPTY house spawned at Slot={slot.houseSlotId}, " +
+                $"slotWorld={slot.InteriorRoot.position}, instWorld={instance.transform.position}, instLocal={instance.transform.localPosition}");
         }
     }
 
     private void InitTransform(Transform t)
     {
         t.localPosition = Vector3.zero;
-        t.localRotation = Quaternion.Euler(0f, -90f, 0f);
-        t.localScale = new Vector3(1f, 2.0528f, 1f);
+        t.localRotation = Quaternion.identity;
+        t.localScale = Vector3.one;
     }
+
 
 
     private void LinkDistractionAnchors()
     {
-        // 모든 이웃 집 내부에서 DistractionAnchor를 찾아, runtime에 위치/PlaceID 연결
         foreach (var neighbor in _neighbors)
         {
             if (neighbor.houseInstance == null)
@@ -318,22 +324,23 @@ public class NeighborManager : MonoBehaviour
                     continue;
                 }
 
+                // 여기서 Anchor 연결
+                dr.anchor = anchor;
                 dr.worldTransform = anchor.transform;
 
-                // 앵커가 placeId를 가지고 있으면 데이터 기본값보다 우선
+                // 앵커 placeId가 있으면 우선
                 if (!string.IsNullOrEmpty(anchor.PlaceId))
-                {
                     dr.placeId = anchor.PlaceId;
-                }
             }
         }
 
-        // ★ 여기서 최종 placeId 확정
+        // 최종 placeId 확정
         foreach (var d in _allDistractions)
         {
             d.FinalizePlaceId();
         }
     }
+
 
 
 
