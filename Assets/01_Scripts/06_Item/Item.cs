@@ -7,14 +7,29 @@ public class Item
 {
     public ItemData ItemData { get; private set; }
 
-    public bool IsUnlocked { get; private set; }    // 해금되었다면? true
+    public bool IsLocked { get; private set; }    // 해금되었다면? false
 
     public bool IsEquipped { get; private set; }
 
     public Item(ItemData data)
     {
         ItemData = data;
-        IsUnlocked = true;
+        IsLocked = true;
+        IsEquipped = false;
+    }
+
+    public void UnlockItem()
+    {
+        IsLocked = false;
+    }
+
+    public void EquipItem()
+    {
+        IsEquipped = true;
+    }
+
+    public void UnEquipItem()
+    {
         IsEquipped = false;
     }
 }

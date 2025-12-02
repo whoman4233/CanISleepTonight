@@ -4,18 +4,26 @@ using UnityEngine.UI;
 
 public class UISlot : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI itemNameText;
-    [SerializeField] private Image itemIcon;
     [SerializeField] private Image lockIcon;
     [SerializeField] private Button slotButton;
 
-    void Start()
+    [SerializeField] private ItemData itemData;
+
+    public int slotIndex;
+    public Item currentItem;
+
+    private UIInventory uiInventory;
+
+    public void Init(UIInventory inv)
     {
-        
+        uiInventory = inv;
+        currentItem = new Item(itemData);
+
+        lockIcon.gameObject.SetActive(currentItem.IsLocked);
     }
 
-    void Update()
+    public void OnClickSlot()
     {
-        
+        uiInventory.OnSlotSelected(this);
     }
 }
