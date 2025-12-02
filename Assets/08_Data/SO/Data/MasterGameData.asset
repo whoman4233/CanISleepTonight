@@ -16,5 +16,8 @@ MonoBehaviour:
   distractionTable: {fileID: 11400000, guid: 6b72c0ae924a1db4bb150a9c0a6f17b1, type: 2}
   houseLayoutTable: {fileID: 11400000, guid: 62d70bfd8e40c4a4c943b58ca062479f, type: 2}
   placeTable: {fileID: 11400000, guid: ed721681c1d4bbe47b00e0587e5a93f3, type: 2}
+  interactionListTable: {fileID: 11400000, guid: 709b37c0d5a508c4b89e815cb482f3f1,
+    type: 2}
+  interactionTable: {fileID: 11400000, guid: 479d3cad088e2d0478e7508fe8aa8ece, type: 2}
   entityTable: {fileID: 0}
   dayConfigTable: {fileID: 0}

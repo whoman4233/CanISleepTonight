@@ -1,9 +1,14 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class UIInventory : MonoBehaviour
 {
     [Header("인벤토리 UI")]
     [SerializeField] private GameObject inventoryPanel;
+    [SerializeField] private Transform slotParent;
+
+    private List<UISlot> slots = new List<UISlot>();
+    private Item selectedItem;
 
     public bool IsInventoryOpen => inventoryPanel.activeInHierarchy;
 

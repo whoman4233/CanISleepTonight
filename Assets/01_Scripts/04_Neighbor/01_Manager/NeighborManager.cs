@@ -231,58 +231,68 @@ public class NeighborManager : MonoBehaviour
             return;
         }
 
-        var shuffledSlots = new List<HouseSlot>(houseSlots);
-        Shuffle(shuffledSlots);
+        // ★ 플레이어 방 슬롯 ID (예: 303호)
+        const string PlayerHouseSlotId = "303";
+
+        // --- 1) 이웃을 배치할 슬롯만 따로 뽑아서 셔플 (303호는 제외) ---
+        var neighborCandidateSlots = houseSlots
+            .Where(s => s.houseSlotId != PlayerHouseSlotId)
+            .ToList();
+
+        Shuffle(neighborCandidateSlots);
 
         int neighborCount = _neighbors.Count;
-        int slotCount = shuffledSlots.Count;
+        int slotCountForNeighbors = neighborCandidateSlots.Count;
+        int usedCount = Mathf.Min(neighborCount, slotCountForNeighbors);
 
-        int usedCount = Mathf.Min(neighborCount, slotCount);
+        // 어떤 슬롯에 이웃이 들어갔는지 기록
+        HashSet<string> occupiedSlotIds = new HashSet<string>();
 
-        // 1) 이웃 배정 슬롯
+        // --- 2) 이웃 배치 ---
         for (int i = 0; i < usedCount; i++)
         {
             var neighbor = _neighbors[i];
-            var slot = shuffledSlots[i];
+            var slot = neighborCandidateSlots[i];
+
+            occupiedSlotIds.Add(slot.houseSlotId);
 
             neighbor.houseSlot = slot;
 
             if (!string.IsNullOrEmpty(slot.placeId))
-            {
                 neighbor.placeId = slot.placeId;
-            }
 
             var layoutRow = masterData.houseLayoutTable.GetById(neighbor.data.layoutId);
             if (layoutRow == null || layoutRow.housePrefab == null)
             {
-                Debug.LogWarning($"[NeighborManager] No housePrefab for layoutId '{neighbor.data.layoutId}' (NeighborId={neighbor.Id})");
+                Debug.LogWarning(
+                    $"[NeighborManager] No housePrefab for layoutId '{neighbor.data.layoutId}' (NeighborId={neighbor.Id})"
+                );
                 continue;
             }
 
             var instance = Instantiate(layoutRow.housePrefab, slot.InteriorRoot, false);
-
-            // 이 부분이 새로 추가된 transform 초기화
             InitTransform(instance.transform);
 
-            neighbor.houseSlot = slot;
             neighbor.houseInstance = instance;
-            neighbor.placeId = slot.placeId;
 
             Debug.Log($"[NeighborManager] Neighbor={neighbor.Id} → Slot={slot.houseSlotId}");
         }
 
-        // 2) 남은 슬롯 = EMPTY 프리팹 배치
-        for (int i = usedCount; i < slotCount; i++)
+        // --- 3) 빈 슬롯에는 EMPTY 프리팹 배치 (303호 포함) ---
+        var emptyRow = masterData.houseLayoutTable.GetById("EMPTY");
+        if (emptyRow == null || emptyRow.housePrefab == null)
         {
-            var slot = shuffledSlots[i];
+            Debug.LogWarning("[NeighborManager] EMPTY layout not found. Empty slots remain blank.");
+            return;
+        }
 
-            var emptyRow = masterData.houseLayoutTable.GetById("EMPTY");
-            if (emptyRow == null || emptyRow.housePrefab == null)
-            {
-                Debug.LogWarning("[NeighborManager] EMPTY layout not found. Empty slots remain blank.");
+        foreach (var slot in houseSlots)
+        {
+            // 이미 이웃이 들어간 슬롯은 스킵
+            if (occupiedSlotIds.Contains(slot.houseSlotId))
                 continue;
-            }
 
+            // 여기서는 303호도 포함해서 EMPTY 집을 채워줌
             var instance = Instantiate(emptyRow.housePrefab, slot.InteriorRoot, false);
             InitTransform(instance.transform);
 
@@ -293,14 +303,15 @@ public class NeighborManager : MonoBehaviour
     private void InitTransform(Transform t)
     {
         t.localPosition = Vector3.zero;
-        t.localRotation = Quaternion.Euler(0f, -90f, 0f);
-        t.localScale = new Vector3(1f, 2.0528f, 1f);
+        t.localRotation = Quaternion.Euler(0f, 0f, 0f);
+        t.localScale = Vector3.one;
     }
+
+
 
 
     private void LinkDistractionAnchors()
     {
-        // 모든 이웃 집 내부에서 DistractionAnchor를 찾아, runtime에 위치/PlaceID 연결
         foreach (var neighbor in _neighbors)
         {
             if (neighbor.houseInstance == null)
@@ -318,22 +329,23 @@ public class NeighborManager : MonoBehaviour
                     continue;
                 }
 
+                // 여기서 Anchor 연결
+                dr.anchor = anchor;
                 dr.worldTransform = anchor.transform;
 
-                // 앵커가 placeId를 가지고 있으면 데이터 기본값보다 우선
+                // 앵커 placeId가 있으면 우선
                 if (!string.IsNullOrEmpty(anchor.PlaceId))
-                {
                     dr.placeId = anchor.PlaceId;
-                }
             }
         }
 
-        // ★ 여기서 최종 placeId 확정
+        // 최종 placeId 확정
         foreach (var d in _allDistractions)
         {
             d.FinalizePlaceId();
         }
     }
+
 
 
 

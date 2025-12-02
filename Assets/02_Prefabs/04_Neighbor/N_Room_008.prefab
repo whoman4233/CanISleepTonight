@@ -4333,6 +4333,7 @@ GameObject:
   - component: {fileID: 1013280271153168115}
   - component: {fileID: 5191277902447689343}
   - component: {fileID: 1759845243729560948}
+  - component: {fileID: 61099549711709455}
   m_Layer: 0
   m_Name: E_013_Radio
   m_TagString: Untagged
@@ -4405,6 +4406,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &61099549711709455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5819891256483111017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec79c5034a39e7248b38148174b882ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distractionId: D_N002_B
+  placeId: 
+  isNoiseOrigin: 1
 --- !u!1 &6036628429995678274
 GameObject:
   m_ObjectHideFlags: 0
