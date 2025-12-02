@@ -1,100 +1,102 @@
 ﻿InteractionID,InteractionText,Category,ReqType,ReqValue,ResultType,Target,ResultValue
-I_E003_01,두들겨 패서 코골이 기구를 끼고 자라고 하기,설득,None,None,ChangeType,E_003,deactivate
-I_E003_02,머리 밑에 베개 받쳐주기,수리,Item,Item_Pillow,ChangeType,E_003,disable
-I_E004_01,전원을 끈다,수리,None,None,ChangeType,E_004,deactivate
+I_E003_01,두들겨 패서 코골이 기구를 끼고 자라고 하기,설득,None,None,ChangeType,E_003,Idle
+I_E003_02,머리 밑에 베개 받쳐주기,수리,Item,Item_Pillow,ChangeType,E_003,Dead
+I_E004_01,전원을 끈다,수리,None,None,ChangeType,E_004,Idle
 I_N001_01,운동을 멈춰달라고 부탁하기,대화,State,calm,ShowText,N_001,T_N001_01
 I_N001_02,근육으로 가득한 뇌에 교훈을 새겨주기,설득,None,None,GameEnd,System,End_B01
-I_N001_03,근육보다 단단한 망치로 후려치기,설득,Item,Item_Hammer,ChangeType,N_001,disable
-I_N001_03,근육보다 단단한 망치로 후려치기,설득,Item,Item_Hammer,ChangeType,D_N001_A,disable
-I_N001_03,근육보다 단단한 망치로 후려치기,설득,Item,Item_Hammer,ChangeType,D_N001_B,disable
+I_N001_03,근육보다 단단한 망치로 후려치기,설득,Item,Item_Hammer,ChangeType,N_001,Dead
+I_N001_03,근육보다 단단한 망치로 후려치기,설득,Item,Item_Hammer,ChangeType,D_N001_A,Dead
+I_N001_03,근육보다 단단한 망치로 후려치기,설득,Item,Item_Hammer,ChangeType,D_N001_B,Dead
 I_N001_03,근육보다 단단한 망치로 후려치기,설득,Item,Item_Hammer,ModStat,Stress,-10
-I_N002_01,조용히 해달라고 부탁하기,대화,State,calm,ChangeType,N_002,deactivate
-I_N002_01,조용히 해달라고 부탁하기,대화,State,calm,ChangeType,D_N002_A,deactivate
-I_N002_01,조용히 해달라고 부탁하기,대화,State,calm,ChangeType,D_N002_B,deactivate
-I_N002_02,칼을 휘둘러 위협하기,설득,Item,Item_Knife,ChangeType,N_002,deactivate
-I_N002_02,칼을 휘둘러 위협하기,설득,Item,Item_Knife,ChangeType,D_N002_A,deactivate
-I_N002_02,칼을 휘둘러 위협하기,설득,Item,Item_Knife,ChangeType,D_N002_B,deactivate
+I_N002_01,조용히 해달라고 부탁하기,대화,State,calm,ShowText,N_002,T_N002_01
+I_N002_01,조용히 해달라고 부탁하기,대화,State,calm,ChangeType,N_002,Idle
+I_N002_01,조용히 해달라고 부탁하기,대화,State,calm,ChangeType,D_N002_A,Idle
+I_N002_01,조용히 해달라고 부탁하기,대화,State,calm,ChangeType,D_N002_B,Idle
+I_N002_02,칼을 휘둘러 위협하기,설득,Item,Item_Knife,ChangeType,N_002,Idle
+I_N002_02,칼을 휘둘러 위협하기,설득,Item,Item_Knife,ChangeType,D_N002_A,Idle
+I_N002_02,칼을 휘둘러 위협하기,설득,Item,Item_Knife,ChangeType,D_N002_B,Idle
 I_N002_02,칼을 휘둘러 위협하기,설득,Item,Item_Knife,ModStat,Stress,-10
-I_N002_03,배트로 예의를 가르쳐주기,설득,Item,Item_Bat,ChangeType,N_002,disable
-I_N002_03,배트로 예의를 가르쳐주기,설득,Item,Item_Bat,ChangeType,D_N002_A,disable
-I_N002_03,배트로 예의를 가르쳐주기,설득,Item,Item_Bat,ChangeType,D_N002_B,disable
+I_N002_03,배트로 예의를 가르쳐주기,설득,Item,Item_Bat,ChangeType,N_002,Dead
+I_N002_03,배트로 예의를 가르쳐주기,설득,Item,Item_Bat,ChangeType,D_N002_A,Dead
+I_N002_03,배트로 예의를 가르쳐주기,설득,Item,Item_Bat,ChangeType,D_N002_B,Dead
 I_N002_03,배트로 예의를 가르쳐주기,설득,Item,Item_Bat,ModStat,Stress,-10
-I_E006_01,접시를 전부 깨버리기,수리,None,None,ChangeType,D_N002_B,disable
+I_E006_01,접시를 전부 깨버리기,수리,None,None,ChangeType,D_N002_B,Dead
 I_E006_01,접시를 전부 깨버리기,수리,None,None,ModStat,Stress,-5
-I_N003_01,게임 소리를 줄여달라고 부탁하기,대화,State,calm,ChangeType,N_003,deactivate
-I_N003_01,게임 소리를 줄여달라고 부탁하기,대화,State,calm,ChangeType,D_N003_A,deactivate
-I_N003_01,게임 소리를 줄여달라고 부탁하기,대화,State,calm,ChangeType,D_N003_B,deactivate
+I_N003_01,게임 소리를 줄여달라고 부탁하기,대화,State,calm,ShowText,N_003,T_N003_01
+I_N003_01,게임 소리를 줄여달라고 부탁하기,대화,State,calm,ChangeType,N_003,Idle
+I_N003_01,게임 소리를 줄여달라고 부탁하기,대화,State,calm,ChangeType,D_N003_A,Idle
+I_N003_01,게임 소리를 줄여달라고 부탁하기,대화,State,calm,ChangeType,D_N003_B,Idle
 I_N003_02,시끄러운 방송인을 응징하기,설득,None,None,GameEnd,System,End_B02
-I_E007_01,강제 방송 종료,수리,Item,Item_Hammer,ChangeType,N_003,disable
-I_E007_01,강제 방송 종료,수리,Item,Item_Hammer,ChangeType,D_N003_A,disable
-I_E007_01,강제 방송 종료,수리,Item,Item_Hammer,ChangeType,D_N003_B,disable
+I_E007_01,강제 방송 종료,수리,Item,Item_Hammer,ChangeType,N_003,Dead
+I_E007_01,강제 방송 종료,수리,Item,Item_Hammer,ChangeType,D_N003_A,Dead
+I_E007_01,강제 방송 종료,수리,Item,Item_Hammer,ChangeType,D_N003_B,Dead
 I_N004_01,지금이 새벽 시간이라고 말해주기,대화,State,calm,ShowText,N_004,T_N004_01
 I_N004_02,축구광을 축구공 취급하기,설득,None,None,PlayCutScene,System,CS_N004_01
 I_N004_02,축구광을 축구공 취급하기,설득,None,None,ShowText,N_004,T_N004_02
-I_N004_02,축구광을 축구공 취급하기,설득,None,None,ChangeType,N_004,deactivate
-I_N004_02,축구광을 축구공 취급하기,설득,None,None,ChangeType,D_N004_A,deactivate
+I_N004_02,축구광을 축구공 취급하기,설득,None,None,ChangeType,N_004,Idle
+I_N004_02,축구광을 축구공 취급하기,설득,None,None,ChangeType,D_N004_A,Idle
 I_N004_02,축구광을 축구공 취급하기,설득,None,None,VolumeChange,D_N004_B,-2
 I_N004_02,축구광을 축구공 취급하기,설득,None,None,ModStat,stress,-5
-I_N004_03,축구광을 빨갛게 만들어주기,설득,Item,Item_Hammer,ChangeType,N_004,disable
-I_N004_03,축구광을 빨갛게 만들어주기,설득,Item,Item_Hammer,ChangeType,D_N004_A,disable
-I_N004_03,축구광을 빨갛게 만들어주기,설득,Item,Item_Hammer,ChangeType,D_N004_B,disable
+I_N004_03,축구광을 빨갛게 만들어주기,설득,Item,Item_Hammer,ChangeType,N_004,Dead
+I_N004_03,축구광을 빨갛게 만들어주기,설득,Item,Item_Hammer,ChangeType,D_N004_A,Dead
+I_N004_03,축구광을 빨갛게 만들어주기,설득,Item,Item_Hammer,ChangeType,D_N004_B,Dead
 I_N004_03,축구광을 빨갛게 만들어주기,설득,None,Item_Hammer,ModStat,stress,-10
-I_E008_01,TV를 부수기,수리,Item,Item_Bat,ChangeType,N_004,disable
-I_E008_01,TV를 부수기,수리,Item,Item_Bat,ChangeType,D_N004_A,disable
-I_E008_01,TV를 부수기,수리,Item,Item_Bat,ChangeType,D_N004_B,disable
+I_E008_01,TV를 부수기,수리,Item,Item_Bat,ChangeType,N_004,Dead
+I_E008_01,TV를 부수기,수리,Item,Item_Bat,ChangeType,D_N004_A,Dead
+I_E008_01,TV를 부수기,수리,Item,Item_Bat,ChangeType,D_N004_B,Dead
 I_N005_01,연습실을 구하라고 하기,대화,State,Calm,ShowText,N_005,T_N005_01
-I_N005_02,기타로 몸에다 음악을 새겨주기,설득,None,None,ChangeType,N_005,disable
-I_N005_02,기타로 몸에다 음악을 새겨주기,설득,None,None,ChangeType,D_N005_A,disable
-I_N005_02,기타로 몸에다 음악을 새겨주기,설득,None,None,ChangeType,D_N005_B,disable
-I_N005_02,기타로 몸에다 음악을 새겨주기,설득,None,None,ChangeType,D_N005_C,disable
+I_N005_02,기타로 몸에다 음악을 새겨주기,설득,None,None,ChangeType,N_005,Dead
+I_N005_02,기타로 몸에다 음악을 새겨주기,설득,None,None,ChangeType,D_N005_A,Dead
+I_N005_02,기타로 몸에다 음악을 새겨주기,설득,None,None,ChangeType,D_N005_B,Dead
+I_N005_02,기타로 몸에다 음악을 새겨주기,설득,None,None,ChangeType,D_N005_C,Dead
 I_N005_02,기타로 몸에다 음악을 새겨주기,설득,None,None,ModStat,stress,-15
-I_N005_03,배트로 락 정신을 주입하기,설득,Item,Item_Bat,ChangeType,N_005,deactivate
-I_N005_03,배트로 락 정신을 주입하기,설득,Item,Item_Bat,ChangeType,D_N005_A,deactivate
-I_N005_03,배트로 락 정신을 주입하기,설득,Item,Item_Bat,ChangeType,D_N005_B,deactivate
-I_N005_03,배트로 락 정신을 주입하기,설득,Item,Item_Bat,ChangeType,D_N005_C,deactivate
+I_N005_03,배트로 락 정신을 주입하기,설득,Item,Item_Bat,ChangeType,N_005,Idle
+I_N005_03,배트로 락 정신을 주입하기,설득,Item,Item_Bat,ChangeType,D_N005_A,Idle
+I_N005_03,배트로 락 정신을 주입하기,설득,Item,Item_Bat,ChangeType,D_N005_B,Idle
+I_N005_03,배트로 락 정신을 주입하기,설득,Item,Item_Bat,ChangeType,D_N005_C,Idle
 I_N005_03,배트로 락 정신을 주입하기,설득,Item,Item_Bat,ModStat,stress,-20
-I_E009_01,기타 앰프 선 끊기,수리,Item,Item_Nipper,ChangeType,N_005,disable
-I_E009_01,기타 앰프 선 끊기,수리,Item,Item_Nipper,ChangeType,D_N005_A,disable
-I_E009_01,기타 앰프 선 끊기,수리,Item,Item_Nipper,ChangeType,D_N005_B,disable
-I_E009_01,기타 앰프 선 끊기,수리,Item,Item_Nipper,ChangeType,D_N005_C,disable
+I_E009_01,기타 앰프 선 끊기,수리,Item,Item_Nipper,ChangeType,N_005,Dead
+I_E009_01,기타 앰프 선 끊기,수리,Item,Item_Nipper,ChangeType,D_N005_A,Dead
+I_E009_01,기타 앰프 선 끊기,수리,Item,Item_Nipper,ChangeType,D_N005_B,Dead
+I_E009_01,기타 앰프 선 끊기,수리,Item,Item_Nipper,ChangeType,D_N005_C,Dead
 I_E009_01,기타 앰프 선 끊기,수리,Item,Item_Nipper,ModStat,stress,-10
-I_E010_01,베이스 앰프 선 끊기,수리,Item,Item_Nipper,ChangeType,N_005,disable
-I_E010_01,베이스 앰프 선 끊기,수리,Item,Item_Nipper,ChangeType,D_N005_A,disable
-I_E010_01,베이스 앰프 선 끊기,수리,Item,Item_Nipper,ChangeType,D_N005_B,disable
-I_E010_01,베이스 앰프 선 끊기,수리,Item,Item_Nipper,ChangeType,D_N005_C,disable
+I_E010_01,베이스 앰프 선 끊기,수리,Item,Item_Nipper,ChangeType,N_005,Dead
+I_E010_01,베이스 앰프 선 끊기,수리,Item,Item_Nipper,ChangeType,D_N005_A,Dead
+I_E010_01,베이스 앰프 선 끊기,수리,Item,Item_Nipper,ChangeType,D_N005_B,Dead
+I_E010_01,베이스 앰프 선 끊기,수리,Item,Item_Nipper,ChangeType,D_N005_C,Dead
 I_E010_01,베이스 앰프 선 끊기,수리,Item,Item_Nipper,ModStat,stress,-10
-I_E011_01,드럼 부수기,수리,Item,Item_Hammer,ChangeType,N_005,disable
-I_E011_01,드럼 부수기,수리,Item,Item_Hammer,ChangeType,D_N005_A,disable
-I_E011_01,드럼 부수기,수리,Item,Item_Hammer,ChangeType,D_N005_B,disable
-I_E011_01,드럼 부수기,수리,Item,Item_Hammer,ChangeType,D_N005_C,disable
+I_E011_01,드럼 부수기,수리,Item,Item_Hammer,ChangeType,N_005,Dead
+I_E011_01,드럼 부수기,수리,Item,Item_Hammer,ChangeType,D_N005_A,Dead
+I_E011_01,드럼 부수기,수리,Item,Item_Hammer,ChangeType,D_N005_B,Dead
+I_E011_01,드럼 부수기,수리,Item,Item_Hammer,ChangeType,D_N005_C,Dead
 I_E011_01,드럼 부수기,수리,Item,Item_Hammer,ModStat,stress,-15
 I_N006_01,철 없는 소년을 말로 타이르기,대화,State,Calm,ShowText,N_006,T_N006_01
-I_N006_02,효율적인 예절교육(뺨 때리기),설득,None,None,ChangeType,N_006,disable
-I_N006_02,효율적인 예절교육(뺨 때리기),설득,None,None,ChangeType,D_N006_A,disable
-I_N006_02,효율적인 예절교육(뺨 때리기),설득,None,None,ChangeType,D_N006_B,disable
+I_N006_02,효율적인 예절교육(뺨 때리기),설득,None,None,ChangeType,N_006,Dead
+I_N006_02,효율적인 예절교육(뺨 때리기),설득,None,None,ChangeType,D_N006_A,Dead
+I_N006_02,효율적인 예절교육(뺨 때리기),설득,None,None,ChangeType,D_N006_B,Dead
 I_N006_02,효율적인 예절교육(뺨 때리기),설득,None,None,ModStat,stress,-10
-I_E012_01,농구공을 튀길 수 없게 만들기,수리,Item,Item_Knife,ChangeType,N_006,disable
-I_E012_01,농구공을 튀길 수 없게 만들기,수리,Item,Item_Knife,ChangeType,D_N006_A,disable
-I_E012_01,농구공을 튀길 수 없게 만들기,수리,Item,Item_Knife,ChangeType,D_N006_B,disable
+I_E012_01,농구공을 튀길 수 없게 만들기,수리,Item,Item_Knife,ChangeType,N_006,Dead
+I_E012_01,농구공을 튀길 수 없게 만들기,수리,Item,Item_Knife,ChangeType,D_N006_A,Dead
+I_E012_01,농구공을 튀길 수 없게 만들기,수리,Item,Item_Knife,ChangeType,D_N006_B,Dead
 I_E012_01,농구공을 튀길 수 없게 만들기,수리,Item,Item_Knife,ModStat,stress,-10
 I_N008_01,라디오 볼륨을 줄여 달라고 부탁하기,대화,State,calm,ShowText,N_008,T_N008_01
 I_N008_02,라디오는 조용히 들어야 한다는 사실을 알려주기,설득,None,None,GameEnd,System,End_B02
-I_E013_01,라디오의 배터리를 분리하기,수리,None,None,ChangeType,N_008,deactivate
-I_E013_01,라디오의 배터리를 분리하기,수리,None,None,ChangeType,D_N008_A,deactivate
+I_E013_01,라디오의 배터리를 분리하기,수리,None,None,ChangeType,N_008,Idle
+I_E013_01,라디오의 배터리를 분리하기,수리,None,None,ChangeType,D_N008_A,Idle
 I_E013_01,라디오의 배터리를 분리하기,수리,None,None,ModStat,stress,-5
-I_E013_02,라디오 부수기,수리,Item,Item_Hammer,ChangeType,N_008,disable
-I_E013_02,라디오 부수기,수리,Item,Item_Hammer,ChangeType,D_N008_A,disable
+I_E013_02,라디오 부수기,수리,Item,Item_Hammer,ChangeType,N_008,Dead
+I_E013_02,라디오 부수기,수리,Item,Item_Hammer,ChangeType,D_N008_A,Dead
 I_E013_02,라디오 부수기,수리,Item,Item_Hammer,ModStat,stress,-10
 I_N009_01,노래를 잘 한다고 칭찬해주기,대화,State,calm,ShowText,N_009,T_N009_01
-I_N009_01,노래를 잘 한다고 칭찬해주기,대화,State,calm,ChangeType,N_009,deactivate
-I_N009_01,노래를 잘 한다고 칭찬해주기,대화,State,calm,ChangeType,D_N009_A,deactivate
+I_N009_01,노래를 잘 한다고 칭찬해주기,대화,State,calm,ChangeType,N_009,Idle
+I_N009_01,노래를 잘 한다고 칭찬해주기,대화,State,calm,ChangeType,D_N009_A,Idle
 I_N009_02,노래를 못 한다고 비난하기,대화,State,calm,ShowText,N_009,T_N009_02
-I_N009_03,명치 때리기,설득,None,None,ChangeType,N_009,disable
-I_N009_03,명치 때리기,설득,None,None,ChangeType,D_N009_A,disable
+I_N009_03,명치 때리기,설득,None,None,ChangeType,N_009,Dead
+I_N009_03,명치 때리기,설득,None,None,ChangeType,D_N009_A,Dead
 I_N009_03,명치 때리기,설득,None,None,ModStat,stress,-10
 I_N010_01,그만 쳐 울라고 짜증내기,대화,State,calm,ShowText,N_010,T_N010_01
-I_N010_01,그만 쳐 울라고 짜증내기,대화,State,calm,ChangeType,N_010,deactivate
-I_N010_01,그만 쳐 울라고 짜증내기,대화,State,calm,ChangeType,D_N010_01,deactivate
+I_N010_01,그만 쳐 울라고 짜증내기,대화,State,calm,ChangeType,N_010,Idle
+I_N010_01,그만 쳐 울라고 짜증내기,대화,State,calm,ChangeType,D_N010_01,Idle
 I_N010_02,무슨 일 있었냐고 물어보기,대화,State,calm,ShowText,N_010,T_N010_02
 I_N010_02,무슨 일 있었냐고 물어보기,대화,State,calm,ShowText,N_010,T_N010_03
 I_N010_02,무슨 일 있었냐고 물어보기,대화,State,calm,ShowText,N_010,T_N010_04
@@ -103,64 +105,66 @@ I_N010_02,무슨 일 있었냐고 물어보기,대화,State,calm,ShowText,N_010,
 I_N010_02,무슨 일 있었냐고 물어보기,대화,State,calm,ShowText,N_010,T_N010_07
 I_N010_02,무슨 일 있었냐고 물어보기,대화,State,calm,ShowText,N_010,T_N010_08
 I_N010_02,무슨 일 있었냐고 물어보기,대화,State,calm,ShowText,N_010,T_N010_09
-I_N010_02,무슨 일 있었냐고 물어보기,대화,State,calm,ChangeType,N_010,disable
-I_N010_02,무슨 일 있었냐고 물어보기,대화,State,calm,ChangeType,D_N010_01,disable
+I_N010_02,무슨 일 있었냐고 물어보기,대화,State,calm,ChangeType,N_010,Dead
+I_N010_02,무슨 일 있었냐고 물어보기,대화,State,calm,ChangeType,D_N010_01,Dead
 I_N010_02,무슨 일 있었냐고 물어보기,대화,State,calm,ModStat,stress,10
 I_N010_03,조용해질 때까지 때리기,설득,None,None,ShowText,N_010,T_N010_10
-I_N010_03,조용해질 때까지 때리기,설득,None,None,ChangeType,N_010,deactivate
-I_N010_03,조용해질 때까지 때리기,설득,None,None,ChangeType,D_N010_01,deactivate
+I_N010_03,조용해질 때까지 때리기,설득,None,None,ChangeType,N_010,Idle
+I_N010_03,조용해질 때까지 때리기,설득,None,None,ChangeType,D_N010_01,Idle
 I_N010_03,조용해질 때까지 때리기,설득,None,None,ChangeType,stress,-5
 I_N011_01,아이를 발로 차기,설득,None,None,GameEnd,System,End_B03
-I_E014_01,목마를 부수기,수리,Item,Item_Hammer,ChangeType,N_011,disable
-I_E014_01,목마를 부수기,수리,Item,Item_Hammer,ChangeType,E_014,disable
-I_E014_01,목마를 부수기,수리,Item,Item_Hammer,ChangeType,E_015,disable
-I_E014_01,목마를 부수기,수리,Item,Item_Hammer,ChangeType,D_N011_A,disable
-I_E014_01,목마를 부수기,수리,Item,Item_Hammer,ChangeType,D_N011_B,disable
+I_E014_01,목마를 부수기,수리,Item,Item_Hammer,ChangeType,N_011,Dead
+I_E014_01,목마를 부수기,수리,Item,Item_Hammer,ChangeType,E_014,Dead
+I_E014_01,목마를 부수기,수리,Item,Item_Hammer,ChangeType,E_015,Dead
+I_E014_01,목마를 부수기,수리,Item,Item_Hammer,ChangeType,D_N011_A,Dead
+I_E014_01,목마를 부수기,수리,Item,Item_Hammer,ChangeType,D_N011_B,Dead
 I_E014_01,목마를 부수기,수리,Item,Item_Hammer,ModStat,Stress,-10
-I_E015_01,개념없는 부모 참교육하기,설득,Item,Item_Bat,ChangeType,N_011,disable
-I_E015_01,개념없는 부모 참교육하기,설득,Item,Item_Bat,ChangeType,E_014,disable
-I_E015_01,개념없는 부모 참교육하기,설득,Item,Item_Bat,ChangeType,E_015,disable
-I_E015_01,개념없는 부모 참교육하기,설득,Item,Item_Bat,ChangeType,D_N011_A,disable
-I_E015_01,개념없는 부모 참교육하기,설득,Item,Item_Bat,ChangeType,D_N011_B,disable
+I_E015_01,개념없는 부모 참교육하기,설득,Item,Item_Bat,ChangeType,N_011,Dead
+I_E015_01,개념없는 부모 참교육하기,설득,Item,Item_Bat,ChangeType,E_014,Dead
+I_E015_01,개념없는 부모 참교육하기,설득,Item,Item_Bat,ChangeType,E_015,Dead
+I_E015_01,개념없는 부모 참교육하기,설득,Item,Item_Bat,ChangeType,D_N011_A,Dead
+I_E015_01,개념없는 부모 참교육하기,설득,Item,Item_Bat,ChangeType,D_N011_B,Dead
 I_E015_01,개념없는 부모 참교육하기,설득,Item,Item_Bat,ModStat,Stress,-10
-I_N012_01,소음만 만들고 있다며 모욕하기,대화,State,calm,ChangeType,N_012,disable
-I_N012_01,소음만 만들고 있다며 모욕하기,대화,State,calm,ChangeType,D_N012_A,disable
-I_E016_01,피아노 뚜껑을 덮어버리기,수리,None,None,ChangeType,N_012,deactivate
-I_E016_01,피아노 뚜껑을 덮어버리기,수리,None,None,ChangeType,D_N012_A,deactivate
+I_N012_01,소음만 만들고 있다며 모욕하기,대화,State,calm,ShowText,N_012,T_N012_01
+I_N012_01,소음만 만들고 있다며 모욕하기,대화,State,calm,ChangeType,N_012,Dead
+I_N012_01,소음만 만들고 있다며 모욕하기,대화,State,calm,ChangeType,D_N012_A,Dead
+I_E016_01,피아노 뚜껑을 덮어버리기,수리,None,None,ChangeType,N_012,Idle
+I_E016_01,피아노 뚜껑을 덮어버리기,수리,None,None,ChangeType,D_N012_A,Idle
 I_E016_01,피아노 뚜껑을 덮어버리기,수리,None,None,ModStat,Stress,-10
 I_N013_01,아파트에서 파티를 여는 건 민폐라고 말하기,대화,None,None,ShowText,N_013,T_N013_01
 I_N013_02,나도 춤을 추겠다고 말하기,대화,None,None,ModStat,stress,-5
 I_N013_02,나도 춤을 추겠다고 말하기,대화,None,None,ModStat,Time,-10
-I_N013_03,"""파티는 오버야.""(뺨 때리기)",설득,None,None,ChangeType,N_013,deactivate
-I_N013_03,"""파티는 오버야.""(뺨 때리기)",설득,None,None,ChangeType,D_N013_A,deactivate
+I_N013_03,"""파티는 오버야.""(뺨 때리기)",설득,None,None,ChangeType,N_013,Idle
+I_N013_03,"""파티는 오버야.""(뺨 때리기)",설득,None,None,ChangeType,D_N013_A,Idle
 I_N013_03,"""파티는 오버야.""(뺨 때리기)",설득,None,None,VolumeChange,D_N013_C,1
 I_N013_03,"""파티는 오버야.""(뺨 때리기)",설득,None,None,ModStat,stress,5
 I_N013_04,맞는 것도 신날지 확인시켜주기,설득,Item,Item_Hammer,GameEnd,System,End_B04
-I_E017_01,배트로 손님들을 전부 다 후려치기,설득,Item,Item_Bat,ChangeType,N_013,deactivate
-I_E017_01,배트로 손님들을 전부 다 후려치기,설득,Item,Item_Bat,ChangeType,E_017,deactivate
-I_E017_01,배트로 손님들을 전부 다 후려치기,설득,Item,Item_Bat,ChangeType,E_018,deactivate
-I_E017_01,배트로 손님들을 전부 다 후려치기,설득,Item,Item_Bat,ChangeType,E_019,deactivate
-I_E017_01,배트로 손님들을 전부 다 후려치기,설득,Item,Item_Bat,ChangeType,D_N013_A,deactivate
-I_E017_01,배트로 손님들을 전부 다 후려치기,설득,Item,Item_Bat,ChangeType,D_N013_B,deactivate
-I_E017_01,배트로 손님들을 전부 다 후려치기,설득,Item,Item_Bat,ChangeType,D_N013_C,deactivate
+I_E017_01,배트로 손님들을 전부 다 후려치기,설득,Item,Item_Bat,ChangeType,N_013,Idle
+I_E017_01,배트로 손님들을 전부 다 후려치기,설득,Item,Item_Bat,ChangeType,E_017,Idle
+I_E017_01,배트로 손님들을 전부 다 후려치기,설득,Item,Item_Bat,ChangeType,E_018,Idle
+I_E017_01,배트로 손님들을 전부 다 후려치기,설득,Item,Item_Bat,ChangeType,E_019,Idle
+I_E017_01,배트로 손님들을 전부 다 후려치기,설득,Item,Item_Bat,ChangeType,D_N013_A,Idle
+I_E017_01,배트로 손님들을 전부 다 후려치기,설득,Item,Item_Bat,ChangeType,D_N013_B,Idle
+I_E017_01,배트로 손님들을 전부 다 후려치기,설득,Item,Item_Bat,ChangeType,D_N013_C,Idle
 I_E017_01,배트로 손님들을 전부 다 후려치기,설득,Item,Item_Bat,ModStat,stress,-20
-I_E018_01,DJ 턴테이블 부수기,수리,Item,Item_Hammer,ChangeType,N_013,disable
-I_E018_01,DJ 턴테이블 부수기,수리,Item,Item_Hammer,ChangeType,E_017,disable
-I_E018_01,DJ 턴테이블 부수기,수리,Item,Item_Hammer,ChangeType,E_018,disable
-I_E018_01,DJ 턴테이블 부수기,수리,Item,Item_Hammer,ChangeType,E_019,disable
-I_E018_01,DJ 턴테이블 부수기,수리,Item,Item_Hammer,ChangeType,D_N013_A,disable
-I_E018_01,DJ 턴테이블 부수기,수리,Item,Item_Hammer,ChangeType,D_N013_B,disable
-I_E018_01,DJ 턴테이블 부수기,수리,Item,Item_Hammer,ChangeType,D_N013_C,disable
+I_E018_01,DJ 턴테이블 부수기,수리,Item,Item_Hammer,ChangeType,N_013,Dead
+I_E018_01,DJ 턴테이블 부수기,수리,Item,Item_Hammer,ChangeType,E_017,Dead
+I_E018_01,DJ 턴테이블 부수기,수리,Item,Item_Hammer,ChangeType,E_018,Dead
+I_E018_01,DJ 턴테이블 부수기,수리,Item,Item_Hammer,ChangeType,E_019,Dead
+I_E018_01,DJ 턴테이블 부수기,수리,Item,Item_Hammer,ChangeType,D_N013_A,Dead
+I_E018_01,DJ 턴테이블 부수기,수리,Item,Item_Hammer,ChangeType,D_N013_B,Dead
+I_E018_01,DJ 턴테이블 부수기,수리,Item,Item_Hammer,ChangeType,D_N013_C,Dead
 I_E018_01,DJ 턴테이블 부수기,수리,Item,Item_Hammer,ModStat,stress,-10
-I_E019_01,스피커 선 끊기,수리,Item,Item_Nipper,ChangeType,N_013,disable
-I_E019_01,스피커 선 끊기,수리,Item,Item_Nipper,ChangeType,E_017,disable
-I_E019_01,스피커 선 끊기,수리,Item,Item_Nipper,ChangeType,E_018,disable
-I_E019_01,스피커 선 끊기,수리,Item,Item_Nipper,ChangeType,E_019,disable
-I_E019_01,스피커 선 끊기,수리,Item,Item_Nipper,ChangeType,D_N013_A,disable
-I_E019_01,스피커 선 끊기,수리,Item,Item_Nipper,ChangeType,D_N013_B,disable
-I_E019_01,스피커 선 끊기,수리,Item,Item_Nipper,ChangeType,D_N013_C,disable
+I_E019_01,스피커 선 끊기,수리,Item,Item_Nipper,ChangeType,N_013,Dead
+I_E019_01,스피커 선 끊기,수리,Item,Item_Nipper,ChangeType,E_017,Dead
+I_E019_01,스피커 선 끊기,수리,Item,Item_Nipper,ChangeType,E_018,Dead
+I_E019_01,스피커 선 끊기,수리,Item,Item_Nipper,ChangeType,E_019,Dead
+I_E019_01,스피커 선 끊기,수리,Item,Item_Nipper,ChangeType,D_N013_A,Dead
+I_E019_01,스피커 선 끊기,수리,Item,Item_Nipper,ChangeType,D_N013_B,Dead
+I_E019_01,스피커 선 끊기,수리,Item,Item_Nipper,ChangeType,D_N013_C,Dead
 I_E019_01,스피커 선 끊기,수리,Item,Item_Nipper,ModStat,stress,-5
+I_N014_01,뭘 쳐 웃냐고 시비걸기,대화,State,calm,ShowText,N_014,T_N014_01
 I_N014_01,뭘 쳐 웃냐고 시비걸기,대화,State,calm,GameEnd,System,End_B05
-I_N014_02,조용히 하라고 때리기,설득,None,None,ChangeType,N_014,deactivate
+I_N014_02,조용히 하라고 때리기,설득,None,None,ChangeType,N_014,Idle
 I_N014_02,조용히 하라고 때리기,설득,None,None,VolumeChange,D_N014_A,1
 I_N014_02,조용히 하라고 때리기,설득,None,None,ModStat,stress,10
