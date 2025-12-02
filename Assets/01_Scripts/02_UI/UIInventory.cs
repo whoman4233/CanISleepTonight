@@ -50,4 +50,12 @@ public class UIInventory : MonoBehaviour
 
         detailPanel.Show(slot.currentItem);
     }
+
+    public void OnBackClicked()
+    {
+        if (detailPanel.gameObject.activeInHierarchy)
+            detailPanel.gameObject.SetActive(false);
+        else
+            CloseInventory();
+    }
 }
