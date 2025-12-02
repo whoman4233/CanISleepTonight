@@ -14,18 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HouseLayoutTableSO
   layouts:
   - layoutId: L_01
-    housePrefab: {fileID: 6759433088582478888, guid: db0bda253e78b7b40a8933f321fce580,
+    housePrefab: {fileID: 8573771435043746843, guid: db0bda253e78b7b40a8933f321fce580,
       type: 3}
     description: 
   - layoutId: L_02
-    housePrefab: {fileID: 2489519222581757952, guid: b783cdf2409fae047b7407c033388bdd,
+    housePrefab: {fileID: 6181912490900766675, guid: b783cdf2409fae047b7407c033388bdd,
       type: 3}
     description: 
   - layoutId: L_03
-    housePrefab: {fileID: 2586724393242575150, guid: f28b9482c0de16043b3bae5e281c363e,
+    housePrefab: {fileID: 2411787923329385441, guid: f28b9482c0de16043b3bae5e281c363e,
       type: 3}
     description: 
   - layoutId: EMPTY
-    housePrefab: {fileID: 6759433088582478888, guid: 1d9f11a477af8d44493ea6f6e2700b23,
+    housePrefab: {fileID: 680056530095797570, guid: 1d9f11a477af8d44493ea6f6e2700b23,
       type: 3}
     description: 
