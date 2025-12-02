@@ -30,6 +30,8 @@ public class WaveIndicatorManager : MonoBehaviour
     [Header("Verbose Debug Log")]
     public bool verboseLogging;
 
+    [SerializeField] private MasterGameDataSO masterData;
+
     private readonly List<WaveObject> pool = new List<WaveObject>();
     private int poolIndex = 0;
 
@@ -38,6 +40,9 @@ public class WaveIndicatorManager : MonoBehaviour
     private Dictionary<string, HouseSlot> houseSlotMap = new Dictionary<string, HouseSlot>();
 
     private int _waveLayer = -1;
+
+    // placeId → PlaceDataRow
+    private Dictionary<string, PlaceDataRow> _placeMap = new();
 
     private void Awake()
     {
@@ -50,6 +55,7 @@ public class WaveIndicatorManager : MonoBehaviour
 
         BuildPool();
         CacheHouseSlots();
+        BuildPlaceMap();
     }
 
     private void BuildPool()
@@ -76,6 +82,74 @@ public class WaveIndicatorManager : MonoBehaviour
         }
     }
 
+    private void BuildPlaceMap()
+    {
+        _placeMap.Clear();
+
+        if (masterData == null)
+        {
+            Debug.LogWarning("[WaveIndicatorManager] masterData is null. PlaceTable linkage disabled.");
+            return;
+        }
+
+        var table = masterData.placeTable;
+        if (table == null)
+        {
+            Debug.LogWarning("[WaveIndicatorManager] PlaceTableSO is null. Wave ↔ Place 연동이 비활성 상태입니다.");
+            return;
+        }
+
+        foreach (var row in table.places)
+        {
+            if (string.IsNullOrWhiteSpace(row.placeId))
+                continue;
+
+            var id = row.placeId.Trim();
+            if (_placeMap.ContainsKey(id))
+            {
+                Debug.LogWarning($"[WaveIndicatorManager] Duplicate placeId '{id}' in PlaceTable.");
+                continue;
+            }
+
+            _placeMap[id] = row;
+        }
+    }
+
+    private bool TryGetPlaceInfo(DistractionRuntime d, out PlaceDataRow place)
+    {
+        place = null;
+
+        if (d == null || string.IsNullOrWhiteSpace(d.placeId))
+            return false;
+
+        var id = d.placeId.Trim();
+        if (_placeMap.TryGetValue(id, out var row))
+        {
+            place = row;
+            return true;
+        }
+
+        return false;
+    }
+
+    private int GetDistractionFloor(DistractionRuntime d)
+    {
+        // 1순위: PlaceTable.floor
+        if (TryGetPlaceInfo(d, out var place) && place != null)
+        {
+            return place.floor; // PlaceDataRow에 floor 필드 있다고 가정
+        }
+
+        // 2순위: HouseSlot.floor
+        if (d.owner != null && d.owner.houseSlot != null)
+        {
+            return d.owner.houseSlot.floor;
+        }
+
+        // 둘 다 없으면 플레이어 층 기준
+        return playerLocation != null ? playerLocation.currentFloor : 0;
+    }
+
     /// <summary>
     /// 공통 스폰 + 로그 출력
     /// </summary>
@@ -95,7 +169,6 @@ public class WaveIndicatorManager : MonoBehaviour
         activeWaves.Add(wo);
         return wo;
     }
-
 
     private void ClearWaves()
     {
@@ -131,29 +204,39 @@ public class WaveIndicatorManager : MonoBehaviour
         bool insideHouse = playerLocation.IsInsideHouse;
         string insideHouseId = playerLocation.currentHouseSlotId;
 
-        // 1) RAW SOURCES ONLY
+        // 1) RAW SOURCES ONLY (실제 소음 위치에 직접 파동)
         if (debugMode == WaveDebugMode.RawSources)
         {
             foreach (var d in activeList)
             {
                 if (d.worldTransform == null) continue;
 
-                float dist = Vector3.Distance(playerPos, d.worldTransform.position);
-                float strength = 1f - Mathf.Clamp01(dist / maxColorDistance);
+                float strength = ComputeStrength01(d, playerPos);
 
                 string ownerId = d.owner != null ? d.owner.Id : "null-owner";
-                int floor = (d.owner != null && d.owner.houseSlot != null)
-                                    ? d.owner.houseSlot.floor : -1;
+                int slotFloor = (d.owner != null && d.owner.houseSlot != null)
+                    ? d.owner.houseSlot.floor : -1;
                 string houseSlot = (d.owner != null && d.owner.houseSlot != null)
-                                    ? d.owner.houseSlot.houseSlotId : "null-house";
-                Transform anchorTr = d.anchor != null ? d.anchor.transform : d.worldTransform;
+                    ? d.owner.houseSlot.houseSlotId : "null-house";
+
+                int placeFloor = -1;
+                int placeLevel = -1;
+                if (TryGetPlaceInfo(d, out var place) && place != null)
+                {
+                    placeFloor = place.floor;
+                    placeLevel = place.distanceLevel;
+                }
+
+                Transform anchorTr = d.worldTransform;
                 string anchorPath = GetHierarchyPath(anchorTr);
 
                 SpawnWave(
                     d.worldTransform.position,
                     strength,
                     WaveDebugMode.RawSources,
-                    $"RAW DistractionId={d.Id}, Owner={ownerId}, Floor={floor}, HouseSlot={houseSlot}, AnchorPath={anchorPath}"
+                    $"RAW DistractionId={d.Id}, Owner={ownerId}, " +
+                    $"Floor(Place={placeFloor},Slot={slotFloor}), " +
+                    $"DistanceLevel={placeLevel}, HouseSlot={houseSlot}, AnchorPath={anchorPath}"
                 );
             }
             return;
@@ -166,27 +249,36 @@ public class WaveIndicatorManager : MonoBehaviour
             {
                 if (d.worldTransform == null) continue;
 
-                float dist = Vector3.Distance(playerPos, d.worldTransform.position);
-                float strength = 1f - Mathf.Clamp01(dist / maxColorDistance);
+                float strength = ComputeStrength01(d, playerPos);
 
                 string ownerId = d.owner != null ? d.owner.Id : "null-owner";
-                int floor = (d.owner != null && d.owner.houseSlot != null)
-                                    ? d.owner.houseSlot.floor : -1;
+                int slotFloor = (d.owner != null && d.owner.houseSlot != null)
+                    ? d.owner.houseSlot.floor : -1;
                 string houseSlot = (d.owner != null && d.owner.houseSlot != null)
-                                    ? d.owner.houseSlot.houseSlotId : "null-house";
-                Transform anchorTr = d.anchor != null ? d.anchor.transform : d.worldTransform;
+                    ? d.owner.houseSlot.houseSlotId : "null-house";
+
+                int placeFloor = -1;
+                int placeLevel = -1;
+                if (TryGetPlaceInfo(d, out var place) && place != null)
+                {
+                    placeFloor = place.floor;
+                    placeLevel = place.distanceLevel;
+                }
+
+                Transform anchorTr = d.worldTransform;
                 string anchorPath = GetHierarchyPath(anchorTr);
 
                 SpawnWave(
                     d.worldTransform.position,
                     strength,
                     WaveDebugMode.RawSources,
-                    $"COMBINED_RAW DistractionId={d.Id}, Owner={ownerId}, Floor={floor}, HouseSlot={houseSlot}, AnchorPath={anchorPath}"
+                    $"COMBINED_RAW DistractionId={d.Id}, Owner={ownerId}, " +
+                    $"Floor(Place={placeFloor},Slot={slotFloor}), " +
+                    $"DistanceLevel={placeLevel}, HouseSlot={houseSlot}, AnchorPath={anchorPath}"
                 );
             }
             // 아래에서 Production 로직 계속
         }
-
 
         // 3) PRODUCTION: 기획서 A6 규칙 (문/위/아래 집계)
         RunProductionWaveLogic(activeList, playerFloor, insideHouse, insideHouseId, playerPos);
@@ -196,7 +288,7 @@ public class WaveIndicatorManager : MonoBehaviour
     {
         if (t == null) return "null";
 
-        var names = new System.Collections.Generic.List<string>();
+        var names = new List<string>();
         while (t != null)
         {
             names.Add(t.name);
@@ -205,7 +297,6 @@ public class WaveIndicatorManager : MonoBehaviour
         names.Reverse();
         return string.Join("/", names);
     }
-
 
     // ============================================================
     // PRODUCTION MODE LOGIC
@@ -232,7 +323,7 @@ public class WaveIndicatorManager : MonoBehaviour
                 continue;
 
             var slot = owner.houseSlot;
-            int floor = slot.floor;
+            int floor = GetDistractionFloor(d);
 
             if (floor > playerFloor)
                 hasUpper = true;
@@ -243,13 +334,11 @@ public class WaveIndicatorManager : MonoBehaviour
                 // 같은 층
                 if (insideHouse && insideHouseId == slot.houseSlotId)
                 {
-                    // 내부 방해요소
                     if (d.worldTransform != null)
                         insideDistractions.Add(d.worldTransform);
                 }
                 else
                 {
-                    // 같은 층 but 복도/다른 집
                     sameFloorHouseIds.Add(slot.houseSlotId);
                 }
             }
@@ -321,5 +410,26 @@ public class WaveIndicatorManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// 거리 + PlaceTable.distanceLevel을 섞어서 0~1 강도 계산
+    /// </summary>
+    private float ComputeStrength01(DistractionRuntime d, Vector3 playerPos)
+    {
+        float worldDist = (d.worldTransform != null)
+            ? Vector3.Distance(playerPos, d.worldTransform.position)
+            : maxColorDistance;
+
+        float distFactor = 1f - Mathf.Clamp01(worldDist / maxColorDistance);
+
+        if (TryGetPlaceInfo(d, out var place) && place != null)
+        {
+            // distanceLevel이 낮을수록(0,1) 더 강하게
+            float levelFactor = 1f - Mathf.Clamp01(place.distanceLevel / 5f);
+            return Mathf.Clamp01(0.5f * distFactor + 0.5f * levelFactor);
+        }
+
+        return distFactor;
     }
 }

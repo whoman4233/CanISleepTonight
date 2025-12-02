@@ -10,9 +10,10 @@ public class MasterGameDataSO : ScriptableObject
     [Header("Layout / Prefab Mapping")]
     public HouseLayoutTableSO houseLayoutTable;
 
-    // ÀÌÈÄ ÇÊ¿ä½Ã È®Àå¿ë (Áö±İÀº ºñ¿öµÎ°í, Å¸ÀÔ¸¸ È®º¸)
+    public PlaceTableSO placeTable;
+
+    // ì´í›„ í•„ìš”ì‹œ í™•ì¥ìš© (ì§€ê¸ˆì€ ë¹„ì›Œë‘ê³ , íƒ€ì…ë§Œ í™•ë³´)
     [Header("Optional (Later)")]
     public ScriptableObject entityTable;
-    public ScriptableObject placeTable;
     public ScriptableObject dayConfigTable;
 }

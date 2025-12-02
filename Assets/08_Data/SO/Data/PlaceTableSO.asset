@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: PlaceTableSO
+  m_EditorClassIdentifier: Assembly-CSharp::PlaceTableSO
+  places:
+  - placeId: P_303
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_203
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_300
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_302
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_304
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_403
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_103
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_200
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_202
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_204
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_301
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_305
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_400
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_402
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_404
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_503
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_100
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_102
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_104
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_201
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_205
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_401
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_405
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_500
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_502
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_504
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_101
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_105
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_501
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_505
+    floor: 0
+    distanceLevel: 0
+  - placeId: P_000
+    floor: 0
+    distanceLevel: 0

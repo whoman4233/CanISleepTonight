@@ -247,6 +247,11 @@ public class NeighborManager : MonoBehaviour
 
             neighbor.houseSlot = slot;
 
+            if (!string.IsNullOrEmpty(slot.placeId))
+            {
+                neighbor.placeId = slot.placeId;
+            }
+
             var layoutRow = masterData.houseLayoutTable.GetById(neighbor.data.layoutId);
             if (layoutRow == null || layoutRow.housePrefab == null)
             {
@@ -259,7 +264,9 @@ public class NeighborManager : MonoBehaviour
             // 이 부분이 새로 추가된 transform 초기화
             InitTransform(instance.transform);
 
+            neighbor.houseSlot = slot;
             neighbor.houseInstance = instance;
+            neighbor.placeId = slot.placeId;
 
             Debug.Log($"[NeighborManager] Neighbor={neighbor.Id} → Slot={slot.houseSlotId}");
         }
@@ -293,6 +300,7 @@ public class NeighborManager : MonoBehaviour
 
     private void LinkDistractionAnchors()
     {
+        // 모든 이웃 집 내부에서 DistractionAnchor를 찾아, runtime에 위치/PlaceID 연결
         foreach (var neighbor in _neighbors)
         {
             if (neighbor.houseInstance == null)
@@ -306,20 +314,24 @@ public class NeighborManager : MonoBehaviour
 
                 if (!_distractionsById.TryGetValue(anchor.DistractionId, out var dr))
                 {
-                    Debug.LogWarning(
-                        $"[NeighborManager] DistractionAnchor id '{anchor.DistractionId}' not found in runtime map.");
+                    Debug.LogWarning($"[NeighborManager] DistractionAnchor id '{anchor.DistractionId}' not found in runtime map.");
                     continue;
                 }
 
-                // ★ anchor 기준으로 묶어두기
-                dr.anchor = anchor;
                 dr.worldTransform = anchor.transform;
 
+                // 앵커가 placeId를 가지고 있으면 데이터 기본값보다 우선
                 if (!string.IsNullOrEmpty(anchor.PlaceId))
                 {
                     dr.placeId = anchor.PlaceId;
                 }
             }
+        }
+
+        // ★ 여기서 최종 placeId 확정
+        foreach (var d in _allDistractions)
+        {
+            d.FinalizePlaceId();
         }
     }
 

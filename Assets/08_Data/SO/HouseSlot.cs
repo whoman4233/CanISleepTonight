@@ -3,17 +3,19 @@ using UnityEngine;
 public class HouseSlot : MonoBehaviour
 {
     [Header("Identification")]
-    [Tooltip("È£¼ö ID (¿¹: 303, 201 µî)")]
+    [Tooltip("í˜¸ìˆ˜ ID (ì˜ˆ: 303, 201 ë“±)")]
     public string houseSlotId;
 
-    [Tooltip("Ãþ Á¤º¸ (¿¹: 3ÃþÀÌ¸é 3)")]
+    public string placeId;
+
+    [Tooltip("ì¸µ ì •ë³´ (ì˜ˆ: 3ì¸µì´ë©´ 3)")]
     public int floor;
 
     [Header("Prefab Placement")]
-    [Tooltip("Áý ÀÎÅ×¸®¾î°¡ ÀÎ½ºÅÏ½ºµÉ ±âÁØ Transform")]
+    [Tooltip("ì§‘ ì¸í…Œë¦¬ì–´ê°€ ì¸ìŠ¤í„´ìŠ¤ë  ê¸°ì¤€ Transform")]
     public Transform interiorRoot;
 
-    [Tooltip("º¹µµ ±âÁØ ¹® À§Ä¡ (ÆÄµ¿ Ç¥½Ã¿ë)")]
+    [Tooltip("ë³µë„ ê¸°ì¤€ ë¬¸ ìœ„ì¹˜ (íŒŒë™ í‘œì‹œìš©)")]
     public Transform doorPoint;
 
     public Transform InteriorRoot => interiorRoot;
