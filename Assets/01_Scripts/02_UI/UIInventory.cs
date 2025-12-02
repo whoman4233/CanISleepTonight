@@ -2,29 +2,26 @@ using UnityEngine;
 
 public class UIInventory : MonoBehaviour
 {
-    [Header("인벤토리 UI 오브젝트")]
-    [SerializeField] private GameObject testInventory;
+    [Header("인벤토리 UI")]
+    [SerializeField] private GameObject inventoryPanel;
 
-    private PlayerController controller;
+    public bool IsInventoryOpen => inventoryPanel.activeInHierarchy;
 
-    void Start()
+    public void ToggleInventory()
     {
-        controller = PlayerManager.Instance.Player.controller;
-        controller.inventory += ToggleInventory;
-
-        testInventory.SetActive(false);
+        if (IsInventoryOpen) 
+            CloseInventory();
+        else 
+            OpenInventory();
     }
 
-    void ToggleInventory()
+    public void OpenInventory()
     {
-        if (IsInventoryOpen())
-            testInventory.SetActive(false);
-        else
-            testInventory.SetActive(true);
+        inventoryPanel.SetActive(true);
     }
 
-    public bool IsInventoryOpen()
+    public void CloseInventory()
     {
-        return testInventory.activeInHierarchy;
+        inventoryPanel.SetActive(false);
     }
 }

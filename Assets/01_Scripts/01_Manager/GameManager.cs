@@ -1,10 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    bool isOpened = false;
-    public bool IsSettingOpen => isOpened;
 
     void Awake()
     {
@@ -17,5 +15,4 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
-
 }
