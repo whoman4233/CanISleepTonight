@@ -7,17 +7,18 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance { get; private set; }
 
     [Header("HUD UI")]
+    [SerializeField] private TextMeshProUGUI promptText;
     [SerializeField] private Image stressBar;
     [SerializeField] private Image fatigueBar;
-    [SerializeField] private TextMeshProUGUI promptText;
+    
     public Image StressBar => stressBar;
     public Image FatigueBar => fatigueBar;
     public TextMeshProUGUI PromptText => promptText;
 
     [Header("UI References")]
     [SerializeField] private UIInventory uiInventory;
-    [SerializeField] private UISetting uiSetting;
     [SerializeField] private UIItemDetail uiItemDetail;
+    [SerializeField] private UISetting uiSetting;
 
     public UIInventory UIInventory => uiInventory;
     public UIItemDetail UIItemDetail => uiItemDetail;
