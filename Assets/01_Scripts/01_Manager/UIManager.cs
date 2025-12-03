@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -52,5 +53,15 @@ public class UIManager : MonoBehaviour
             uiInventory.CloseInventory();
 
         uiSetting.ToggleSetting();
+    }
+
+    public void OnStartButtonClicked()
+    {
+        SceneManager.LoadScene("PlayScene_JAR");
+    }
+
+    public void OnEndButtonClicked()
+    {
+        UnityEditor.EditorApplication.isPlaying = false;
     }
 }
