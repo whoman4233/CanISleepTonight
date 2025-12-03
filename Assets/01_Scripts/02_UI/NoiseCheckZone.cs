@@ -54,6 +54,7 @@ public class NoiseCheckZone : MonoBehaviour
             // UIManager에 소음 전달
             if (UIManager.Instance != null)
             {
+                // TODO : GameManager.Instance.CalculateCurrentNoise() 완성되면 currentNoise 를 인자로 전달하기
                 UIManager.Instance.UpdateNoiseLevel(GameManager.Instance.CurrentNoise);
             }
         }
