@@ -368,6 +368,7 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
+
     public void OnPlayerStartSleep()
     {
         if (!CanSleep(out string reason))
@@ -397,17 +398,21 @@ public class GameManager : MonoBehaviour
         OnSleepStarted?.Invoke(_currentSleepQuality);
 
         // TODO: 수면 UI/애니메이션 전환
+
+        // 즉시 정산 페이즈로 이동 (남은 시간 전부 수면)
+        _isActionPhaseRunning = false;
+        StartCoroutine(TransitionToSettlementAfterSleep());
     }
 
-    public void OnPlayerWakeUp()
+
+    // 수면 후, 즉시 정산페이즈로
+    private IEnumerator TransitionToSettlementAfterSleep()
     {
-        if (!_isSleeping)
-            return;
+        // 수면 연출 대기 (페이드 아웃 등)
+        yield return new WaitForSeconds(1f);
 
-        _isSleeping = false;
-        OnSleepEnded?.Invoke();
-
-        Debug.Log("[GameManager] 수면 종료 (플레이어가 깸)");
+        // 정산 페이즈로 전환
+        EnterPhase(GamePhase.Settlement);
     }
 
 
@@ -581,9 +586,6 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z))
             OnPlayerStartSleep();
-
-        if (Input.GetKeyDown(KeyCode.X))
-            OnPlayerWakeUp();
 
         if (Input.GetKeyDown(KeyCode.N) && _currentPhase == GamePhase.Action)
         {
