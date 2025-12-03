@@ -93,6 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4808853105520044928}
   - component: {fileID: 1179183561722955165}
+  - component: {fileID: 3467445183079226327}
   m_Layer: 8
   m_Name: PW_Hammer001
   m_TagString: Untagged
@@ -130,3 +131,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRate: 1
   attackDistance: 2
+--- !u!114 &3467445183079226327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7491632381170637937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 027333b0ecab9744d933de2462d55771, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponClips:
+  - {fileID: 8300000, guid: 05db09dffc964f74e9d60f68cd1e4301, type: 3}
+  - {fileID: 8300000, guid: 460a0f8fe6b35194a8aa465d7616e54d, type: 3}
+  - {fileID: 8300000, guid: 7c51cc443e4ab3d448d2ccc36581bbf9, type: 3}
