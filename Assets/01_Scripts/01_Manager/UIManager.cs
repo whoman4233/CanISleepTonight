@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private UIItemDetail uiItemDetail;
     [SerializeField] private UISetting uiSetting;
     [SerializeField] private UITimer uiTimer;
+    [SerializeField] private UINoisePanel uiNoisePanel;
 
     public UIInventory UIInventory => uiInventory;
     public UIItemDetail UIItemDetail => uiItemDetail;
@@ -78,8 +79,27 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    // 타이머 패널 (DayText, TimeText) 갱신
     public void UpdateTimer(int currentDay, float remainingSeconds)
     {
         uiTimer.UpdateTimer(currentDay, remainingSeconds);
+    }
+
+    // 소음 UI 표시/숨김
+    public void ShowNoiseUI(bool show)
+    {
+        if (uiNoisePanel != null)
+        {
+            uiNoisePanel.gameObject.SetActive(show);
+        }
+    }
+
+    // 소음 수치 업데이트
+    public void UpdateNoiseLevel(float noiseValue)
+    {
+        if (uiNoisePanel != null)
+        {
+            uiNoisePanel.UpdateNoiseLevel(noiseValue);
+        }
     }
 }
