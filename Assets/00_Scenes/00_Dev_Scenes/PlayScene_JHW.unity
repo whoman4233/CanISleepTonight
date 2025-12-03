@@ -49086,8 +49086,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87107302d1ecb5942814cbd4bbb92cd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmSource: {fileID: 0}
-  sfxSource: {fileID: 0}
+  bgmSource: {fileID: 613444510}
+  sfxSource: {fileID: 613444510}
   mainMixer: {fileID: 24100000, guid: 32103dfd3fbedbb49aec8241bdea1bc0, type: 2}
 --- !u!4 &613444509
 Transform:
