@@ -789,8 +789,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b12852287241934ba24406bb956d933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curEquip: {fileID: 0}
-  equipParent: {fileID: 0}
+  curEquip: {fileID: 1179183561722955165, guid: 29eee1671b5ec704983a9e6311ad5fa5,
+    type: 3}
+  equipParent: {fileID: 3006036203992772196}
 --- !u!1 &3000569146519096888
 GameObject:
   m_ObjectHideFlags: 0
@@ -1136,7 +1137,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3751142371561410086}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &4611767522502581432
 MonoBehaviour:
   m_ObjectHideFlags: 0

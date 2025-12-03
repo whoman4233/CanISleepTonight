@@ -27,12 +27,10 @@ public class PlayerController : MonoBehaviour
     public Action inventory;
     public Action builder;
     private Rigidbody _rigidbody;
-
-    private Animator animator;
-
     private InteractionHandler interactionHandler;
     private Equipment equipment;
-
+    private Animator animator;
+    private static readonly int AttackTrigger = Animator.StringToHash("Attack");
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -179,6 +177,7 @@ public class PlayerController : MonoBehaviour
 
         if (callbackContext.phase == InputActionPhase.Started)
         {
+            animator.SetTrigger(AttackTrigger);
             equipment.OnAttack();
         }
     }
