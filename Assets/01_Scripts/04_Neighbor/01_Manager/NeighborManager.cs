@@ -15,6 +15,9 @@ public class NeighborManager : MonoBehaviour
     [SerializeField] private int minActiveNeighbors = 2;
     [SerializeField] private int maxActiveNeighbors = 4;
 
+
+    public PlayerLocationTracker locationTracker;
+
     // 런타임 데이터
     private readonly List<NeighborRuntime> _neighbors = new();
     private readonly Dictionary<string, NeighborRuntime> _neighborsById = new();
@@ -32,6 +35,10 @@ public class NeighborManager : MonoBehaviour
 
     private bool _initialized = false;
 
+    [Header("Debug")]
+    [SerializeField] private bool noiseDebugLog = true;
+
+
     private void Awake()
     {
         // 필요하면 싱글톤 패턴 등 여기서 처리
@@ -40,6 +47,9 @@ public class NeighborManager : MonoBehaviour
             // 씬에서 자동 수집 (명시적으로 넣고 싶으면 인스펙터에서 설정)
             houseSlots = FindObjectsOfType<HouseSlot>().ToList();
         }
+
+        if (locationTracker == null)
+            locationTracker = FindObjectOfType<PlayerLocationTracker>();
     }
 
     // GameManager에서 주기적으로 호출해줄 진입점들만 공개로 열어둔다.
@@ -54,9 +64,9 @@ public class NeighborManager : MonoBehaviour
         LinkDistractionAnchors();
     }
 
+
     public void SetupDay(int dayIndex)
     {
-        // 오늘자 활성 상태 리셋
         _activeNeighborsToday.Clear();
         _activeDistractionsToday.Clear();
 
@@ -69,17 +79,18 @@ public class NeighborManager : MonoBehaviour
             }
         }
 
-        // 살아 있는 이웃 중에서 후보 추출
-        var aliveNeighbors = _neighbors.Where(n => n.isAlive).ToList();
+        // 집이 실제로 배정된 이웃만 오늘 후보
+        var aliveNeighbors = _neighbors
+            .Where(n => n.isAlive && n.houseSlot != null)
+            .ToList();
+
         if (aliveNeighbors.Count == 0)
             return;
 
-        // 오늘 활성 이웃 수 결정
         int minCount = Mathf.Clamp(minActiveNeighbors, 1, aliveNeighbors.Count);
         int maxCount = Mathf.Clamp(maxActiveNeighbors, minCount, aliveNeighbors.Count);
         int targetCount = Random.Range(minCount, maxCount + 1);
 
-        // 랜덤 셔플 후 상위 targetCount만 사용
         Shuffle(aliveNeighbors);
         var selected = aliveNeighbors.Take(targetCount).ToList();
 
@@ -96,7 +107,14 @@ public class NeighborManager : MonoBehaviour
                 _activeDistractionsToday.Add(d);
             }
         }
+
+        // ★ 오늘자 소음 후보 디버그 덤프
+        if (noiseDebugLog)
+        {
+            DumpTodayNoiseState($"SetupDay({dayIndex})");
+        }
     }
+
 
     public void EndDay()
     {
@@ -232,42 +250,61 @@ public class NeighborManager : MonoBehaviour
             return;
         }
 
-        // ★ 플레이어 방 슬롯 ID (예: 303호)
-        const string PlayerHouseSlotId = "303";
+        // 0) EMPTY 레이아웃 미리 확보
+        var emptyRow = masterData.houseLayoutTable.GetById("EMPTY");
+        if (emptyRow == null || emptyRow.housePrefab == null)
+        {
+            Debug.LogWarning("[NeighborManager] EMPTY layout not found. Empty slots remain blank.");
+        }
 
-        // --- 1) 이웃을 배치할 슬롯만 따로 뽑아서 셔플 (303호는 제외) ---
-        var neighborCandidateSlots = houseSlots
-            .Where(s => s.houseSlotId != PlayerHouseSlotId)
-            .ToList();
+        // 1) 플레이어 방(303호) 슬롯 분리
+        HouseSlot playerSlot = null;
+        var candidateSlots = new List<HouseSlot>();
 
-        Shuffle(neighborCandidateSlots);
+        foreach (var slot in houseSlots)
+        {
+            if (!string.IsNullOrEmpty(locationTracker.currentHouseSlotId) &&
+                slot.placeId == locationTracker.currentHouseSlotId)       // ex) P_303
+            {
+                playerSlot = slot;
+            }
+            else
+            {
+                candidateSlots.Add(slot);
+            }
+        }
+
+        // 303호 슬롯을 못 찾았더라도 나머지 로직은 돌아가도록
+        if (playerSlot == null)
+        {
+            Debug.LogWarning($"[NeighborManager] Player house slot (placeId={locationTracker.currentHouseSlotId}) not found. " +
+                             "모든 슬롯이 일반 이웃 배치 대상이 됩니다.");
+        }
+
+        // 2) 플레이어 방을 제외한 슬롯만 셔플
+        Shuffle(candidateSlots);
 
         int neighborCount = _neighbors.Count;
-        int slotCountForNeighbors = neighborCandidateSlots.Count;
-        int usedCount = Mathf.Min(neighborCount, slotCountForNeighbors);
+        int slotCount = candidateSlots.Count;
+        int usedCount = Mathf.Min(neighborCount, slotCount);
 
-        // 어떤 슬롯에 이웃이 들어갔는지 기록
-        HashSet<string> occupiedSlotIds = new HashSet<string>();
-
-        // --- 2) 이웃 배치 ---
+        // 3) 이웃 → 랜덤 슬롯 배정
         for (int i = 0; i < usedCount; i++)
         {
             var neighbor = _neighbors[i];
-            var slot = neighborCandidateSlots[i];
-
-            occupiedSlotIds.Add(slot.houseSlotId);
+            var slot = candidateSlots[i];
 
             neighbor.houseSlot = slot;
 
             if (!string.IsNullOrEmpty(slot.placeId))
+            {
                 neighbor.placeId = slot.placeId;
+            }
 
             var layoutRow = masterData.houseLayoutTable.GetById(neighbor.data.layoutId);
             if (layoutRow == null || layoutRow.housePrefab == null)
             {
-                Debug.LogWarning(
-                    $"[NeighborManager] No housePrefab for layoutId '{neighbor.data.layoutId}' (NeighborId={neighbor.Id})"
-                );
+                Debug.LogWarning($"[NeighborManager] No housePrefab for layoutId '{neighbor.data.layoutId}' (NeighborId={neighbor.Id})");
                 continue;
             }
 
@@ -276,30 +313,33 @@ public class NeighborManager : MonoBehaviour
 
             neighbor.houseInstance = instance;
 
-            Debug.Log($"[NeighborManager] Neighbor={neighbor.Id} → Slot={slot.houseSlotId}");
+            Debug.Log($"[NeighborManager] Neighbor={neighbor.Id} → Slot={slot.houseSlotId} (placeId={slot.placeId})");
         }
 
-        // --- 3) 빈 슬롯에는 EMPTY 프리팹 배치 (303호 포함) ---
-        var emptyRow = masterData.houseLayoutTable.GetById("EMPTY");
-        if (emptyRow == null || emptyRow.housePrefab == null)
+        // 4) 남은 일반 슬롯들 = EMPTY 채우기
+        for (int i = usedCount; i < slotCount; i++)
         {
-            Debug.LogWarning("[NeighborManager] EMPTY layout not found. Empty slots remain blank.");
-            return;
-        }
+            var slot = candidateSlots[i];
 
-        foreach (var slot in houseSlots)
-        {
-            // 이미 이웃이 들어간 슬롯은 스킵
-            if (occupiedSlotIds.Contains(slot.houseSlotId))
+            if (emptyRow == null || emptyRow.housePrefab == null)
                 continue;
 
-            // 여기서는 303호도 포함해서 EMPTY 집을 채워줌
             var instance = Instantiate(emptyRow.housePrefab, slot.InteriorRoot, false);
             InitTransform(instance.transform);
 
-            Debug.Log($"[NeighborManager] EMPTY house spawned at Slot={slot.houseSlotId}");
+            Debug.Log($"[NeighborManager] EMPTY house spawned at Slot={slot.houseSlotId} (placeId={slot.placeId})");
+        }
+
+        // 5) 플레이어 슬롯(303호)에도 항상 EMPTY 배치
+        if (playerSlot != null && emptyRow != null && emptyRow.housePrefab != null)
+        {
+            var instance = Instantiate(emptyRow.housePrefab, playerSlot.InteriorRoot, false);
+            InitTransform(instance.transform);
+
+            Debug.Log($"[NeighborManager] Player house EMPTY spawned at Slot={playerSlot.houseSlotId} (placeId={playerSlot.placeId})");
         }
     }
+
 
     private void InitTransform(Transform t)
     {
@@ -359,4 +399,29 @@ public class NeighborManager : MonoBehaviour
             (list[i], list[j]) = (list[j], list[i]);
         }
     }
+
+    private void DumpTodayNoiseState(string tag)
+    {
+        Debug.Log($"[NoiseDebug] ===== {tag} : ActiveNeighborsToday / ActiveDistractionsToday =====");
+
+        // 1) 오늘 활성 이웃
+        foreach (var n in _activeNeighborsToday)
+        {
+            string slotId = n.houseSlot != null ? n.houseSlot.houseSlotId : "null-slot";
+            string placeId = string.IsNullOrEmpty(n.placeId) ? "null-place" : n.placeId;
+
+            Debug.Log($"[NoiseDebug] Neighbor={n.Id}  slot={slotId}  place={placeId}  alive={n.isAlive}  today={n.isActiveToday}");
+        }
+
+        // 2) 오늘 활성 소음 후보
+        foreach (var d in _activeDistractionsToday)
+        {
+            string ownerId = d.owner != null ? d.owner.Id : "null-owner";
+            string placeId = string.IsNullOrEmpty(d.placeId) ? "null-place" : d.placeId;
+            Vector3 pos = d.worldTransform != null ? d.worldTransform.position : Vector3.zero;
+
+            Debug.Log($"[NoiseDebug]   Distraction={d.Id}  owner={ownerId}  alive={d.isAlive}  today={d.isActiveToday}  place={placeId}  pos={pos}");
+        }
+    }
+
 }

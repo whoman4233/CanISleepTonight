@@ -6,8 +6,11 @@ public class NoiseManager : MonoBehaviour
     [Header("Managers")]
     public NeighborManager neighborManager;
 
+    [Header("Debug")]
+    [SerializeField] private bool noiseVerboseLog = true;
+
     [Header("Update Settings")]
-    [Tooltip("¼ÒÀ½ °è»ê Æ½ °£°İ (ÃÊ)")]
+    [Tooltip("ì†ŒìŒ ê³„ì‚° í‹± ê°„ê²© (ì´ˆ)")]
     public float tickInterval = 0.1f;
 
     [Header("Runtime Noise Value")]
@@ -16,7 +19,7 @@ public class NoiseManager : MonoBehaviour
 
     private float _tickTimer;
 
-    // °Å¸®·¹º§ ¡æ °Å¸®°è¼ö ÇÏµåÄÚµù (ÇÁ·ÎÅäÅ¸ÀÔ ±âÁØ)
+    // ê±°ë¦¬ë ˆë²¨ â†’ ê±°ë¦¬ê³„ìˆ˜ í•˜ë“œì½”ë”© (í”„ë¡œí† íƒ€ì… ê¸°ì¤€)
     private static readonly Dictionary<int, float> distanceCoef = new Dictionary<int, float>()
     {
         {0, 1.5f},
@@ -27,7 +30,7 @@ public class NoiseManager : MonoBehaviour
         {5, 0.1f},
     };
 
-    // ÀÓ½Ã PlaceID¡æDistanceLevel ¸ÅÇÎ (³ªÁß¿¡ PlaceTableSO·Î ´ëÃ¼)
+    // ì„ì‹œ PlaceIDâ†’DistanceLevel ë§¤í•‘ (ë‚˜ì¤‘ì— PlaceTableSOë¡œ ëŒ€ì²´)
     private static int GetDistanceLevel(string placeId)
     {
         if (string.IsNullOrEmpty(placeId))
@@ -55,25 +58,78 @@ public class NoiseManager : MonoBehaviour
     private void CalculateNoise()
     {
         if (neighborManager == null)
+        {
+            if (noiseVerboseLog)
+                Debug.LogWarning("[NoiseDebug] neighborManager ê°€ ë¹„ì–´ìˆì–´ì„œ ê³„ì‚°ì„ ê±´ë„ˆëœë‹ˆë‹¤.");
             return;
+        }
+
+        var list = neighborManager.ActiveDistractionsToday;
+        if (list == null || list.Count == 0)
+        {
+            if (noiseVerboseLog)
+                Debug.Log("[NoiseDebug] ActiveDistractionsToday ê°€ ë¹„ì–´ìˆìŠµë‹ˆë‹¤. totalNoise = 0");
+            currentNoise = 0f;
+            return;
+        }
 
         float totalNoise = 0f;
-        var list = neighborManager.ActiveDistractionsToday;
+        int usedCount = 0;
 
         for (int i = 0; i < list.Count; i++)
         {
             var d = list[i];
-            if (!d.isAlive || !d.isActiveToday)
+            if (d == null)
+            {
+                if (noiseVerboseLog)
+                    Debug.LogWarning($"[NoiseDebug] index={i} Distraction ê°€ null ì…ë‹ˆë‹¤.");
                 continue;
+            }
 
+            // 1) ì£½ì€ ì†ŒìŒì›
+            if (!d.isAlive)
+            {
+                if (noiseVerboseLog)
+                    Debug.Log($"[NoiseDebug] {d.Id} skip: isAlive=false");
+                continue;
+            }
+
+            // 2) ì˜¤ëŠ˜ ë¹„í™œì„± ì†ŒìŒì›
+            if (!d.isActiveToday)
+            {
+                if (noiseVerboseLog)
+                    Debug.Log($"[NoiseDebug] {d.Id} skip: isActiveToday=false");
+                continue;
+            }
+
+            // 3) ìœ„ì¹˜/PlaceId ì²´í¬
+            string placeId = string.IsNullOrEmpty(d.placeId) ? "null-place" : d.placeId;
             int level = GetDistanceLevel(d.placeId);
-            float coef = distanceCoef.ContainsKey(level) ? distanceCoef[level] : 0.1f;
+            if (!distanceCoef.TryGetValue(level, out float coef))
+            {
+                coef = 0.1f;
+            }
 
-            float noise = d.data.intensity * coef;
+            float intensity = d.data != null ? d.data.intensity : 0f;
+            float noise = intensity * coef;
             totalNoise += noise;
+            usedCount++;
+
+            if (noiseVerboseLog)
+            {
+                string ownerId = d.owner != null ? d.owner.Id : "null-owner";
+                Debug.Log($"[NoiseDebug] + {d.Id} (owner={ownerId}) " +
+                          $"alive={d.isAlive}, today={d.isActiveToday}, " +
+                          $"place={placeId}, level={level}, intensity={intensity}, coef={coef}, add={noise}");
+            }
         }
 
         currentNoise = Mathf.Clamp(totalNoise, 0f, 100f);
+
+        if (noiseVerboseLog)
+        {
+            Debug.Log($"[NoiseDebug] === Tick Done: used={usedCount}/{list.Count}, totalNoise={totalNoise}, clamped={currentNoise} ===");
+        }
     }
 
     public float GetCurrentNoise()
