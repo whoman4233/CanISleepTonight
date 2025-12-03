@@ -28644,7 +28644,7 @@ PrefabInstance:
     - target: {fileID: 7912069184471780495, guid: d2732d67960b65e4ca4e595262fc0a01,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -119222,7 +119222,6 @@ GameObject:
   - component: {fileID: 1907057031}
   - component: {fileID: 1907057030}
   - component: {fileID: 1907057029}
-  - component: {fileID: 1907057033}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -119315,18 +119314,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1907057033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1907057028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5a1e508102eeb0479294d5a9aa5505d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!43 &1911228738
 Mesh:
   m_ObjectHideFlags: 0
