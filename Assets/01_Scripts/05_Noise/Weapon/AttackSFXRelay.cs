@@ -6,16 +6,18 @@ public class AttackSFXRelay : MonoBehaviour
     [SerializeField] private Transform weaponRoot;
 
     private WeaponSFX currentWeaponSfx;
+    private EquipItem currentEquipItem; // Hit 중계 기능
 
     private void Awake()
     {
-        CacheCurrentWeaponSfx();
+        CacheCurrentWeaponRefs();
     }
 
     // 무기가 바뀌었을 때 다시 호출
-    public void CacheCurrentWeaponSfx()
+    public void CacheCurrentWeaponRefs()
     {
         currentWeaponSfx = null;
+        currentEquipItem = null;
 
         if (weaponRoot == null)
         {
@@ -23,9 +25,10 @@ public class AttackSFXRelay : MonoBehaviour
         }
 
         currentWeaponSfx = weaponRoot.GetComponentInChildren<WeaponSFX>();
+        currentEquipItem = weaponRoot.GetComponentInChildren<EquipItem>();
     }
 
-    /// <summary>
+
     /// Attack 애니메이션 이벤트에서 호출할 함수
     /// </summary>
     public void PlayWeaponSwingSFX()
@@ -43,6 +46,25 @@ public class AttackSFXRelay : MonoBehaviour
         else
         {
             Debug.Log("장착된 WeaponSFX 를 찾지 못했습니다.");
+        }
+    }
+
+    /// Attack 애니메이션 이벤트에서 호출할 함수 (실제 타격 처리)
+    /// </summary>
+    public void DoWeaponHit()
+    {
+        if (currentEquipItem == null && weaponRoot != null)
+        {
+            currentEquipItem = weaponRoot.GetComponentInChildren<EquipItem>();
+        }
+
+        if (currentEquipItem != null)
+        {
+            currentEquipItem.OnHit();   // EquipItem 의 OnHit 호출
+        }
+        else
+        {
+            Debug.Log("장착된 EquipItem 을 찾지 못했습니다.");
         }
     }
 }

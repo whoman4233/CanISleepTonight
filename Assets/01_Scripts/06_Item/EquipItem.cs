@@ -6,8 +6,10 @@ public class EquipItem : MonoBehaviour
     [Header("공격 세팅")]
     [SerializeField] private float attackRate = 1.0f;
     [SerializeField] private float attackDistance = 2.0f;
+    [SerializeField] private LayerMask hitLayerMask;
 
     private Camera mainCamera;
+    private float nextAttackTime = 0f;
 
     private ItemData curEquipItem;
     public ItemData CurEquipItem => curEquipItem;
@@ -20,18 +22,41 @@ public class EquipItem : MonoBehaviour
 
     public void OnUse()
     {
-        Debug.Log("공격 중,,,");
-        // TODO : Attack 애니메이션 trigger 로 호출
+        if (Time.time < nextAttackTime)
+            return;
+
+        nextAttackTime = Time.time + attackRate;
+
+        Debug.Log("공격 시작");
     }
 
     // TODO : Attack 애니메이션에서 이벤트로 호출
     public void OnHit()
     {
-        Ray ray = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+        if (mainCamera == null)
+            return;
 
-        if (Physics.Raycast(ray, out RaycastHit hit, attackDistance))
+        Vector3 screenCenter = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0f);
+        Ray ray = mainCamera.ScreenPointToRay(screenCenter);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, attackDistance, hitLayerMask))
         {
-            
+            Debug.Log($"무기 Hit : {hit.collider.name}");
+
+            // 이웃 레그돌 처리
+            RagdollSetting ragdoll = hit.collider.GetComponentInParent<RagdollSetting>();
+            if (ragdoll != null)
+            {
+                ragdoll.ActivateRagdoll(hit.point, ray.direction);
+            }
+
+            // 기존 소음 오브젝트(DistractionAnchor 등) 처리 ----
+            // IHittable 활용
+            IHittable hittable = hit.collider.GetComponentInParent<IHittable>();
+            if (hittable != null)
+            {
+                hittable.OnHit();
+            }
         }
     }
 }
