@@ -39136,10 +39136,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2947e47379bd561458200a40ded16a45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  promptText: {fileID: 892154740}
   stressBar: {fileID: 0}
   fatigueBar: {fileID: 0}
-  promptText: {fileID: 892154740}
   uiInventory: {fileID: 0}
+  uiItemDetail: {fileID: 0}
   uiSetting: {fileID: 0}
 --- !u!43 &569406907
 Mesh:
