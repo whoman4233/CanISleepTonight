@@ -2852,6 +2852,7 @@ GameObject:
   - component: {fileID: 4823840372910345642}
   - component: {fileID: 4282847442943014795}
   - component: {fileID: 16462549418479145}
+  - component: {fileID: 7761022874157688536}
   m_Layer: 0
   m_Name: N_009
   m_TagString: Untagged
@@ -2909,9 +2910,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec79c5034a39e7248b38148174b882ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distractionId: D_N003_B
+  distractionId: D_N009_A
   placeId: 
   isNoiseOrigin: 1
+--- !u!65 &7761022874157688536
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9067396837239074550}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.8848126, z: 1}
+  m_Center: {x: 0, y: 0.82558167, z: -0}
 --- !u!1 &9185540884915277696
 GameObject:
   m_ObjectHideFlags: 0

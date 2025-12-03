@@ -14,7 +14,6 @@ public class DistractionRuntime
 
     // 상태 플래그
     public bool isAlive = true;        // 퍼즐/상호작용으로 영구적으로 꺼졌는지
-    public bool isActiveToday = false; // 오늘 하루 활성화 여부
 
     // 월드 상 위치/참조
     public Transform worldTransform;   // DistractionAnchor에서 가져오는 Transform
@@ -72,4 +71,8 @@ public class DistractionRuntime
             placeId = owner.placeId.Trim();
         }
     }
+
+    public bool wasHitToday;      // 플레이어가 때렸는지
+    public bool isSilencedToday;  // 오늘 소음 OFF인지
+    public bool isActiveToday;    // NeighborManager에서 ‘오늘 활성’로 선정된 소음원인지
 }

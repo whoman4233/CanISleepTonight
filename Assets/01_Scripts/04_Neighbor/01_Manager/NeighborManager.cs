@@ -120,7 +120,8 @@ public class NeighborManager : MonoBehaviour
         if (!_distractionsById.TryGetValue(distractionId, out var runtime))
             return;
 
-        runtime.isAlive = false;
+        runtime.wasHitToday = true;
+        runtime.isSilencedToday = true;
         runtime.isActiveToday = false;
 
         // 캐시 리스트에서도 제거

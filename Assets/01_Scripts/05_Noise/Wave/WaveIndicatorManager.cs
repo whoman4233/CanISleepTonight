@@ -209,7 +209,11 @@ public class WaveIndicatorManager : MonoBehaviour
         {
             foreach (var d in activeList)
             {
-                if (d.worldTransform == null) continue;
+                if (d.isSilencedToday)
+                    continue;   // ★ 오늘 맞아서 조용해진 소음 → 파동 생성 금지
+
+                if (d.worldTransform == null)
+                    continue;
 
                 float strength = ComputeStrength01(d, playerPos);
 
@@ -247,7 +251,11 @@ public class WaveIndicatorManager : MonoBehaviour
         {
             foreach (var d in activeList)
             {
-                if (d.worldTransform == null) continue;
+                if (d.isSilencedToday)
+                    continue;   // ★ 오늘 맞아서 조용해진 소음 → 파동 생성 금지
+
+                if (d.worldTransform == null)
+                    continue;
 
                 float strength = ComputeStrength01(d, playerPos);
 
