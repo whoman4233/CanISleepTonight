@@ -70942,7 +70942,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 1
-    functionName: 
+    functionName: PlayWeaponSwingSFX
     data: 
     objectReferenceParameter: {fileID: 7491632381170637937, guid: 29eee1671b5ec704983a9e6311ad5fa5,
       type: 3}
