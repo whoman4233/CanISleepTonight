@@ -10,7 +10,10 @@ public class PlayerCondition : MonoBehaviour
 
     [SerializeField] private float stress;
     [SerializeField] private float fatigue;
-    [SerializeField] private float maxValue;
+    private float maxValue = 100;
+
+    public float Stress => stress;
+    public float Fatigue => fatigue;
 
     private void Start()
     {
