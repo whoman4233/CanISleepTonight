@@ -5426,6 +5426,7 @@ GameObject:
   - component: {fileID: 4074340335928997771}
   - component: {fileID: 861972388542816526}
   - component: {fileID: 7392794800152208196}
+  - component: {fileID: 4090987081427822177}
   m_Layer: 0
   m_Name: N_005_01
   m_TagString: Untagged
@@ -5483,9 +5484,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec79c5034a39e7248b38148174b882ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distractionId: D_N003_B
+  distractionId: D_N005_A
   placeId: 
   isNoiseOrigin: 1
+--- !u!65 &4090987081427822177
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7255817198473679339}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.6877649, z: 1}
+  m_Center: {x: 0, y: 0.72903955, z: 0}
 --- !u!1 &7393776783686489798
 GameObject:
   m_ObjectHideFlags: 0
@@ -6091,6 +6113,7 @@ GameObject:
   - component: {fileID: 429557578715597206}
   - component: {fileID: 104140265367608322}
   - component: {fileID: 3534349843210047738}
+  - component: {fileID: 6541111465278329939}
   m_Layer: 0
   m_Name: N_005_03
   m_TagString: Untagged
@@ -6148,9 +6171,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec79c5034a39e7248b38148174b882ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distractionId: D_N003_B
+  distractionId: D_N005_C
   placeId: 
   isNoiseOrigin: 1
+--- !u!65 &6541111465278329939
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7808267446507022007}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.9428158, z: 1}
+  m_Center: {x: 0, y: 0.7244301, z: 0}
 --- !u!1 &7905656718161375309
 GameObject:
   m_ObjectHideFlags: 0
@@ -6162,6 +6206,7 @@ GameObject:
   - component: {fileID: 4063070919703915842}
   - component: {fileID: 3135537067400889724}
   - component: {fileID: 3829812786243469419}
+  - component: {fileID: 2186803573431557345}
   m_Layer: 0
   m_Name: N_005_02
   m_TagString: Untagged
@@ -6219,9 +6264,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec79c5034a39e7248b38148174b882ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distractionId: D_N003_B
+  distractionId: D_N005_B
   placeId: 
   isNoiseOrigin: 1
+--- !u!65 &2186803573431557345
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7905656718161375309}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.4859538, z: 1}
+  m_Center: {x: 0, y: 0.7791573, z: 0}
 --- !u!1 &7911367457611230795
 GameObject:
   m_ObjectHideFlags: 0

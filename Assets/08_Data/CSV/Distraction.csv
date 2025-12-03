@@ -1,6 +1,4 @@
 ﻿DistractionID,OwnerID,NoiseID,Tag,Level,SFXID,Info
-D_E003_A,E_003,E_003,sound,4,S_001,코 고는 소리
-D_E004_A,E_004,E_004,sound,2,S_002,컴퓨터 화면에서 인터넷 방송이 나오고 있다
 D_N001_A,N_001,N_001,sound,3,S_003,"""흐읍! 핫!"" 하는 거친 기합 소리"
 D_N001_B,N_001,E_005,sound,5,S_004,무거운 쇳덩이가 바닥을 찍는 진동음
 D_N002_A,N_002,N_002,sound,4,S_005,서로 고함을 지르며 악을 쓰는 남녀의 목소리
