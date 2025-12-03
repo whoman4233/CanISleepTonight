@@ -50,7 +50,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Walk();
+        if (GameManager.Instance.CanMove)
+            Walk();
     }
 
     private void LateUpdate()

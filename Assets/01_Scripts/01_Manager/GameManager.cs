@@ -82,6 +82,9 @@ public class GameManager : MonoBehaviour
 
     private bool _isGameOver = false;
 
+    private bool _canMove = true;
+    public bool CanMove => _canMove;
+
 
     // 프로퍼티
     public GamePhase CurrentPhase => _currentPhase;
@@ -242,17 +245,21 @@ public class GameManager : MonoBehaviour
     private void OnEnterPreparation()
     {
         // TODO: Day X 시작 UI 표시
+        _canMove = false;
         StartCoroutine(AutoTransitionAfterDelay(2f, GamePhase.Commute));
     }
 
     private void OnEnterCommute()
     {
         // TODO: 퇴근 연출
+        _canMove = false;
         StartCoroutine(AutoTransitionAfterDelay(1f, GamePhase.Action));
     }
 
     private void OnEnterAction()
     {
+        _canMove = true;
+
         _actionPhaseTimer = actionPhaseDuration;
         _isSleeping = false;
         _sleepStartTime = -1f;
@@ -423,6 +430,8 @@ public class GameManager : MonoBehaviour
     // 정산 페이즈
     private void OnEnterSettlement()
     {
+        _canMove = false;
+
         _isActionPhaseRunning = false;
         _isSleeping = false;
 
@@ -488,6 +497,8 @@ public class GameManager : MonoBehaviour
 
     private void OnEnterGoToWork()
     {
+        _canMove = false;
+
         // Bootstrap의 EndDay 재활용
         NeighborManager.EndDay();
 
