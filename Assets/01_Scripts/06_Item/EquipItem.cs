@@ -9,6 +9,9 @@ public class EquipItem : MonoBehaviour
 
     private Camera mainCamera;
 
+    private ItemData curEquipItem;
+    public ItemData CurEquipItem => curEquipItem;
+
 
     private void Start()
     {

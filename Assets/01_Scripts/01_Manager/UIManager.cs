@@ -64,4 +64,16 @@ public class UIManager : MonoBehaviour
     {
         UnityEditor.EditorApplication.isPlaying = false;
     }
+
+    public void OnQuitButtonClicked()
+    {
+        SceneManager.LoadScene("IntroScene_JAR");
+    }
+
+    // Retry 버튼 이벤트
+    public void OnRetryButtonClicked()
+    {
+        // 재시작 로직
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }
