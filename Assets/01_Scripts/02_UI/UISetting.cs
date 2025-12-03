@@ -213,20 +213,4 @@ public class UISetting : MonoBehaviour
         if (sfxSlider != null)
             sfxSlider.interactable = !isMuted;
     }
-
-    // Quit 버튼 이벤트
-    public void OnQuitButtonClicked()
-    {
-        CloseSetting();
-
-        // TODO : IntroScene 과 연결
-        // Application.Quit();
-    }
-
-    // Retry 버튼 이벤트
-    public void OnRetryButtonClicked()
-    {
-        // 재시작 로직
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
 }

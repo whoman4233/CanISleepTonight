@@ -141812,6 +141812,36 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 36332367923697239, guid: cd3dc64310fbc484392e23f59eb3b475,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 565809387}
+    - target: {fileID: 36332367923697239, guid: cd3dc64310fbc484392e23f59eb3b475,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnQuitButtonClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 36332367923697239, guid: cd3dc64310fbc484392e23f59eb3b475,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760654502214111626, guid: cd3dc64310fbc484392e23f59eb3b475,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 565809387}
+    - target: {fileID: 1760654502214111626, guid: cd3dc64310fbc484392e23f59eb3b475,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnRetryButtonClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760654502214111626, guid: cd3dc64310fbc484392e23f59eb3b475,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2489797302532018472, guid: cd3dc64310fbc484392e23f59eb3b475,
         type: 3}
       propertyPath: m_AnchorMax.y
