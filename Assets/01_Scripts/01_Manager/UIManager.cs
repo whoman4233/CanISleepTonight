@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private UIInventory uiInventory;
     [SerializeField] private UIItemDetail uiItemDetail;
     [SerializeField] private UISetting uiSetting;
+    [SerializeField] private UITimer uiTimer;
 
     public UIInventory UIInventory => uiInventory;
     public UIItemDetail UIItemDetail => uiItemDetail;
@@ -75,5 +76,10 @@ public class UIManager : MonoBehaviour
     {
         // 재시작 로직
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void UpdateTimer(int currentDay, float remainingSeconds)
+    {
+        uiTimer.UpdateTimer(currentDay, remainingSeconds);
     }
 }
