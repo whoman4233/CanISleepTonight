@@ -37,15 +37,15 @@ public class RagdollSetting : MonoBehaviour
     {
         isRagdoll = useRagdoll;
 
-        // 애니메이터 on/off
+        // 애니메이터 활성/비활성
         if (animator != null)
             animator.enabled = !useRagdoll;
 
-        // 루트 Rigidbody/Collider는 레그돌일 때 끄고,
-        // 애니메이션 상태일 때만 사용
+        // 루트 Rigidbody는 항상 kinematic 유지 (둘 다 true)
         if (mainRigidbody != null)
-            mainRigidbody.isKinematic = useRagdoll;
+            mainRigidbody.isKinematic = true;
 
+        // 루트 콜라이더는 레그돌 상태에서 끄기
         if (mainCollider != null)
             mainCollider.enabled = !useRagdoll;
 
