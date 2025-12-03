@@ -85,6 +85,9 @@ public class GameManager : MonoBehaviour
     private bool _canMove = true;
     public bool CanMove => _canMove;
 
+    private float _currentNoise;
+    public float CurrentNoise => _currentNoise;
+
 
     // 프로퍼티
     public GamePhase CurrentPhase => _currentPhase;
@@ -101,7 +104,6 @@ public class GameManager : MonoBehaviour
     public event Action<int> OnDayChanged;
     public event Action<string> OnGameEnded;
     public event Action<SleepQuality> OnSleepStarted;
-    public event Action OnSleepEnded;
 
 
     private void Awake()
@@ -158,6 +160,11 @@ public class GameManager : MonoBehaviour
         {
             UpdateActionPhase();
         }
+
+        if (Input.GetKeyDown(KeyCode.Equals))
+            _currentNoise += 20;
+        if (Input.GetKeyDown(KeyCode.Minus))
+            _currentNoise -= 20;
 
         // 피로도 100 체크 (실시간)
         CheckFatigueGameOver();
@@ -510,7 +517,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    // 엔딩 처리
+    // 배드 엔딩 처리
     private void CheckFatigueGameOver()
     {
         if (_isGameOver || playerCondition == null)
