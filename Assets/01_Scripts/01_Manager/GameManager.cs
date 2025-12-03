@@ -169,7 +169,7 @@ public class GameManager : MonoBehaviour
     {
         if (bootstrap == null || NeighborManager == null)
         {
-            Debug.LogError("[GameManager] Bootstrap 또는 NeighborManager가 없습니다!");
+            //Debug.LogError("[GameManager] Bootstrap 또는 NeighborManager가 없습니다!");
             return;
         }
 
