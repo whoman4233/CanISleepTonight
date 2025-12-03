@@ -23803,18 +23803,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!114 &381240702 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6664894994850183953, guid: fad137f78b4ee8a46935b15f383a8779,
-    type: 3}
-  m_PrefabInstance: {fileID: 779978599}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f07690e0cb0d3849aa09178027730a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &390455156
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55589,6 +55577,37 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &652084697
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 652084698}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &652084698
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652084697}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &655865265
 Mesh:
   m_ObjectHideFlags: 0
@@ -59592,17 +59611,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -4418016814040917735, guid: fad137f78b4ee8a46935b15f383a8779,
-        type: 3}
-      propertyPath: curEquip
-      value: 
-      objectReference: {fileID: -7443346339393059970, guid: 29eee1671b5ec704983a9e6311ad5fa5,
-        type: 3}
-    - target: {fileID: -4418016814040917735, guid: fad137f78b4ee8a46935b15f383a8779,
-        type: 3}
-      propertyPath: equipParent
-      value: 
-      objectReference: {fileID: 1160077079}
     - target: {fileID: 2315567840927736431, guid: fad137f78b4ee8a46935b15f383a8779,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -59657,66 +59665,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 3751142371561410086, guid: fad137f78b4ee8a46935b15f383a8779,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8278086473308376910, guid: fad137f78b4ee8a46935b15f383a8779,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.size
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8278086473308376910, guid: fad137f78b4ee8a46935b15f383a8779,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.data[7].m_ActionId
-      value: 62cb3680-3132-4784-9b44-d6f59e5fa7eb
-      objectReference: {fileID: 0}
-    - target: {fileID: 8278086473308376910, guid: fad137f78b4ee8a46935b15f383a8779,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.data[7].m_ActionName
-      value: Player/Setting[/Keyboard/escape]
-      objectReference: {fileID: 0}
-    - target: {fileID: 8278086473308376910, guid: fad137f78b4ee8a46935b15f383a8779,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8278086473308376910, guid: fad137f78b4ee8a46935b15f383a8779,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8278086473308376910, guid: fad137f78b4ee8a46935b15f383a8779,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 381240702}
-    - target: {fileID: 8278086473308376910, guid: fad137f78b4ee8a46935b15f383a8779,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8278086473308376910, guid: fad137f78b4ee8a46935b15f383a8779,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnSettingButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 8278086473308376910, guid: fad137f78b4ee8a46935b15f383a8779,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PlayerController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8278086473308376910, guid: fad137f78b4ee8a46935b15f383a8779,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 8999744634474656686, guid: fad137f78b4ee8a46935b15f383a8779,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -85106,12 +85054,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1753456830}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1160077079 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3326543301446836660, guid: fad137f78b4ee8a46935b15f383a8779,
-    type: 3}
-  m_PrefabInstance: {fileID: 779978599}
-  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1163315840
 Mesh:
   m_ObjectHideFlags: 0
@@ -142037,3 +141979,4 @@ SceneRoots:
   - {fileID: 290926099}
   - {fileID: 565809386}
   - {fileID: 613444509}
+  - {fileID: 652084698}
