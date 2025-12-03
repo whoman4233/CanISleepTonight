@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class Day : MonoBehaviour
 {
     // ▶ 코드에서만 설정하는 값들
-    private const float FULL_DAY_LENGTH = 60f;  // 하루 길이(초)
+    private const float FULL_DAY_LENGTH = 360f;  // 하루 길이(초)
     private const float START_TIME = 0.5f;   // 시작 시간(0~1)
 
     [Range(0.0f, 1.0f)]
