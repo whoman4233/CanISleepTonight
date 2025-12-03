@@ -19,10 +19,10 @@ public class PlayerInteractionDebug : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, rayDistance, interactionMask))
         {
             var anchor = hit.collider.GetComponent<DistractionAnchor>();
-            if (anchor != null && anchor.runtime.isAlive)
+            if (anchor != null && anchor.Runtime.isAlive)
             {
-                neighborManager.KillDistraction(anchor.runtime.Id);
-                Debug.Log($"Distraction Dead: {anchor.runtime.Id}");
+                neighborManager.KillDistraction(anchor.Runtime.Id);
+                Debug.Log($"Distraction Dead: {anchor.Runtime.Id}");
             }
         }
     }
