@@ -260,7 +260,11 @@ public class GameManager : MonoBehaviour
         _currentSleepQuality = SleepQuality.None;
         _isActionPhaseRunning = true;
 
-        Debug.Log($"[GameManager] 액션 페이즈 시작 - {actionPhaseDuration}초");
+        // 플레이어를 303호 시작 위치로 리셋
+        if (PlayerManager.Instance != null)
+            PlayerManager.Instance.ResetToHomePosition();
+
+        Debug.Log($"[GameManager] 액션 페이즈 시작 : 남은 시간 {actionPhaseDuration}초");
     }
 
     private void UpdateActionPhase()
