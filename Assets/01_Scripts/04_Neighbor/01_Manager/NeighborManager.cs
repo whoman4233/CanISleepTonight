@@ -7,6 +7,10 @@ public class NeighborManager : MonoBehaviour
 {
     [Header("Data")]
     [SerializeField] private MasterGameDataSO masterData;
+    
+    [Header("Sound Data")]
+    [SerializeField] private NoiseSfxTableSO noiseSfxTable;
+
 
     [Header("Scene References")]
     [SerializeField] private List<HouseSlot> houseSlots = new List<HouseSlot>();
@@ -333,7 +337,7 @@ public class NeighborManager : MonoBehaviour
         // 5) 플레이어 슬롯(303호)에도 항상 EMPTY 배치
         if (playerSlot != null && emptyRow != null && emptyRow.housePrefab != null)
         {
-            var instance = Instantiate(emptyRow.housePrefab, playerSlot.InteriorRoot, false);
+            var instance = Instantiate(masterData.houseLayoutTable.GetById("N_Room_Player").housePrefab, playerSlot.InteriorRoot, false);
             InitTransform(instance.transform);
 
             Debug.Log($"[NeighborManager] Player house EMPTY spawned at Slot={playerSlot.houseSlotId} (placeId={playerSlot.placeId})");
@@ -370,22 +374,28 @@ public class NeighborManager : MonoBehaviour
                     continue;
                 }
 
-                // 여기서 Anchor 연결
-                dr.anchor = anchor;
-                dr.worldTransform = anchor.transform;
+                // NoiseSfxEntry 찾기
+                NoiseSfxEntry sfxEntry = null;
+                if (noiseSfxTable != null && !string.IsNullOrWhiteSpace(dr.data.sfxId))
+                {
+                    sfxEntry = noiseSfxTable.GetById(dr.data.sfxId);
+                }
 
-                // 앵커 placeId가 있으면 우선
-                if (!string.IsNullOrEmpty(anchor.PlaceId))
-                    dr.placeId = anchor.PlaceId;
+                // 앵커에 런타임 + SFX 바인딩
+                anchor.BindRuntime(dr, sfxEntry);
+
+                // 앵커에서 placeId를 덮어쓰고 싶으면 여기서도 가능하지만,
+                // 지금은 BindRuntime 내부에서 처리하게 두었습니다.
             }
         }
 
-        // 최종 placeId 확정
+        // 최종 placeId 정리 (이미 쓰고 계신 부분 그대로 유지)
         foreach (var d in _allDistractions)
         {
             d.FinalizePlaceId();
         }
     }
+
 
 
 

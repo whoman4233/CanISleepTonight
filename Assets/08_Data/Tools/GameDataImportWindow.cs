@@ -421,12 +421,12 @@ public class GameDataImportWindow : EditorWindow
             {
                 distractionId = disId,
                 ownerId = ownerId,
-                sourceId = GetCellSafe(cells, idxSourceId),
+                noiseId = GetCellSafe(cells, idxSourceId),
                 tag = GetCellSafe(cells, idxTag),
-                intensity = intensity,
+                level = intensity,
                 sfxId = GetCellSafe(cells, idxSfxId),
                 placeId = GetCellSafe(cells, idxPlaceId),
-                description = GetCellSafe(cells, idxDesc)
+                info = GetCellSafe(cells, idxDesc)
             };
 
             table.distractions.Add(row);
