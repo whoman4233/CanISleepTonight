@@ -558,9 +558,10 @@ public class NeighborManager : MonoBehaviour
     public string GetNeighborHouse(string NeighborId)
     {
         var n = GetNeighbor("N_003");
-        Debug.Log(n.placeId);   // ex) P_302
+        Debug.Log(n.placeId);   
 
-        return n.placeId;
+        string placeId = "P_" + n.placeId.ToString(); // ex) P_302
+
+        return placeId;
     }
-
 }
