@@ -5,8 +5,6 @@ public class NoiseManager : MonoBehaviour
 {
     [Header("Managers")]
     public NeighborManager neighborManager;
-
-    [Header("Debug")]
     [SerializeField] private bool noiseVerboseLog = true;
 
     [Header("Update Settings")]
@@ -19,7 +17,6 @@ public class NoiseManager : MonoBehaviour
 
     private float _tickTimer;
 
-    // 거리레벨 → 거리계수 하드코딩 (프로토타입 기준)
     private static readonly Dictionary<int, float> distanceCoef = new Dictionary<int, float>()
     {
         {0, 1.5f},
@@ -30,7 +27,6 @@ public class NoiseManager : MonoBehaviour
         {5, 0.1f},
     };
 
-    // 임시 PlaceID→DistanceLevel 매핑 (나중에 PlaceTableSO로 대체)
     private static int GetDistanceLevel(string placeId)
     {
         if (string.IsNullOrEmpty(placeId))
@@ -58,69 +54,58 @@ public class NoiseManager : MonoBehaviour
     private void CalculateNoise()
     {
         if (neighborManager == null)
-        {
-            if (noiseVerboseLog)
-                Debug.LogWarning("[NoiseDebug] neighborManager 가 비어있어서 계산을 건너뜁니다.");
             return;
-        }
 
+        float totalNoise = 0f;
         var list = neighborManager.ActiveDistractionsToday;
+
         if (list == null || list.Count == 0)
         {
-            if (noiseVerboseLog)
-                Debug.Log("[NoiseDebug] ActiveDistractionsToday 가 비어있습니다. totalNoise = 0");
             currentNoise = 0f;
             return;
         }
 
-        float totalNoise = 0f;
-        int usedCount = 0;
-
         for (int i = 0; i < list.Count; i++)
         {
             var d = list[i];
-            if (d == null)
+
+            // 1) 런타임 상태 체크
+            if (!d.isAlive || !d.isActiveToday)
             {
                 if (noiseVerboseLog)
-                    Debug.LogWarning($"[NoiseDebug] index={i} Distraction 가 null 입니다.");
+                {
+                    Debug.Log($"[NoiseManager] SKIP {d.Id} alive={d.isAlive}, activeToday={d.isActiveToday}");
+                }
+
+                // 혹시 앵커가 있으면, 여기서도 사운드 끄기
+                if (d.anchor != null)
+                    d.anchor.EnsureAudioForToday(verbose: noiseVerboseLog);
+
                 continue;
             }
 
-            // 1) 죽은 소음원
-            if (!d.isAlive)
-            {
-                if (noiseVerboseLog)
-                    Debug.Log($"[NoiseDebug] {d.Id} skip: isAlive=false");
-                continue;
-            }
-
-            // 2) 오늘 비활성 소음원
-            if (!d.isActiveToday)
-            {
-                if (noiseVerboseLog)
-                    Debug.Log($"[NoiseDebug] {d.Id} skip: isActiveToday=false");
-                continue;
-            }
-
-            // 3) 위치/PlaceId 체크
-            string placeId = string.IsNullOrEmpty(d.placeId) ? "null-place" : d.placeId;
+            // 2) 소음 계산
             int level = GetDistanceLevel(d.placeId);
-            if (!distanceCoef.TryGetValue(level, out float coef))
-            {
-                coef = 0.1f;
-            }
+            float coef = distanceCoef.ContainsKey(level) ? distanceCoef[level] : 0.1f;
 
-            float intensity = d.data != null ? d.data.level : 0f;
-            float noise = intensity * coef;
+            float noise = d.data.level * coef;
             totalNoise += noise;
-            usedCount++;
+
+            // 3) 소리 재생 보장 + 디버그
+            if (d.anchor != null)
+            {
+                d.anchor.EnsureAudioForToday(verbose: noiseVerboseLog);
+            }
+            else if (noiseVerboseLog)
+            {
+                Debug.LogWarning($"[NoiseManager] {d.Id} 에 연결된 DistractionAnchor 없음 (anchor == null)");
+            }
 
             if (noiseVerboseLog)
             {
-                string ownerId = d.owner != null ? d.owner.Id : "null-owner";
-                Debug.Log($"[NoiseDebug] + {d.Id} (owner={ownerId}) " +
-                          $"alive={d.isAlive}, today={d.isActiveToday}, " +
-                          $"place={placeId}, level={level}, intensity={intensity}, coef={coef}, add={noise}");
+                Debug.Log(
+                    $"[NoiseManager] {d.Id} place={d.placeId}, level={level}, coef={coef}, " +
+                    $"intensity={d.data.level}, noise={noise}");
             }
         }
 
@@ -128,7 +113,7 @@ public class NoiseManager : MonoBehaviour
 
         if (noiseVerboseLog)
         {
-            Debug.Log($"[NoiseDebug] === Tick Done: used={usedCount}/{list.Count}, totalNoise={totalNoise}, clamped={currentNoise} ===");
+            Debug.Log($"[NoiseManager] TOTAL={currentNoise}");
         }
     }
 

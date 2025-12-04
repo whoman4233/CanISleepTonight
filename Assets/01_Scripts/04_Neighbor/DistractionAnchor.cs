@@ -53,24 +53,21 @@ public class DistractionAnchor : MonoBehaviour, IHittable
         if (Runtime == null)
             return;
 
-        // 위치 연결
+        // ★ 역참조 연결
+        Runtime.anchor = this;
+
         Runtime.worldTransform = transform;
 
-        // 앵커에 placeId가 있으면 테이블 기본값보다 우선
         if (!string.IsNullOrWhiteSpace(placeId))
-        {
             Runtime.placeId = placeId.Trim();
-        }
 
-        // 사운드 세팅
         if (audioSource != null && noiseSfx != null)
         {
             audioSource.clip = noiseSfx.clip;
             audioSource.volume = noiseSfx.baseVolume;
-            audioSource.loop = true;   // 소음은 보통 루프
+            audioSource.loop = true;
         }
 
-        // 하루 시작 시 초기화 가정
         _hasBeenHitThisDay = false;
         SetHitColliders(true);
     }
@@ -134,4 +131,60 @@ public class DistractionAnchor : MonoBehaviour, IHittable
             audioSource.Play();
         }
     }
+
+    /// <summary>
+    /// 오늘 이 Distraction이 활성 상태라면, 오디오가 제대로 재생 중인지 확인하고 없으면 재생
+    /// NoiseManager 등에서 주기적으로 호출해도 무방
+    /// </summary>
+    public void EnsureAudioForToday(bool verbose = false)
+    {
+        if (Runtime == null)
+        {
+            if (verbose)
+                Debug.Log($"[DistractionAnchor] EnsureAudioForToday: Runtime 없음 (id={distractionId})");
+            return;
+        }
+
+        // 오늘 살아 있고, 오늘 활성인 경우에만 소리 재생 대상
+        if (!Runtime.isAlive || !Runtime.isActiveToday)
+        {
+            if (verbose)
+                Debug.Log($"[DistractionAnchor] {Runtime.Id} alive={Runtime.isAlive}, activeToday={Runtime.isActiveToday} → 재생 대상 아님");
+            // 혹시 재생 중이면 꺼도 됨
+            if (audioSource != null && audioSource.isPlaying)
+                audioSource.Stop();
+            return;
+        }
+
+        if (audioSource == null)
+        {
+            if (verbose)
+                Debug.LogWarning($"[DistractionAnchor] {Runtime.Id} AudioSource 없음");
+            return;
+        }
+
+        if (audioSource.clip == null)
+        {
+            if (verbose)
+            {
+                var sfxCode = Runtime.data.sfxId;
+                Debug.LogWarning($"[DistractionAnchor] {Runtime.Id} SFXID={sfxCode} 이지만 AudioClip 할당 안 됨");
+            }
+            return;
+        }
+
+        if (!audioSource.isPlaying)
+        {
+            audioSource.Play();
+            if (verbose)
+            {
+                Debug.Log($"[DistractionAnchor] {Runtime.Id} / clip={audioSource.clip.name} 재생 시작");
+            }
+        }
+        else if (verbose)
+        {
+            Debug.Log($"[DistractionAnchor] {Runtime.Id} / clip={audioSource.clip.name} 이미 재생 중");
+        }
+    }
+
 }
