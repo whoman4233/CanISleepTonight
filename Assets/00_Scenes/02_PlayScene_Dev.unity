@@ -67319,9 +67319,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bootstrap: {fileID: 1091680779}
   playerCondition: {fileID: 1830166817}
-  _currentPhase: 0
-  _actionPhaseTimer: 0
-  showDebugGUI: 1
+  actionPhaseDuration: 240
+  totalDays: 7
+  deepSleepNoiseThreshold: 30
+  lightSleepNoiseThreshold: 60
+  deepSleepRecoveryRate: 0.25
+  lightSleepRecoveryRate: 0.15
+  noisePenaltyCoefficient: 0.2
 --- !u!43 &898863331
 Mesh:
   m_ObjectHideFlags: 0
@@ -72012,7 +72016,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   neighborManager: {fileID: 389792750}
   playerLocation: {fileID: 1830166821}
-  tickInterval: 0.2
+  tickInterval: 0.4
   debugMode: 1
   wavePrefab: {fileID: 1432316113890839234, guid: f0fe97c481c78f04787bff9e4b24ffc3,
     type: 3}
