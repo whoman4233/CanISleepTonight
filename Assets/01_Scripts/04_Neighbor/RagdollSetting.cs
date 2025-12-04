@@ -14,6 +14,9 @@ public class RagdollSetting : MonoBehaviour
     private Collider[] ragdollColliders;
     private bool isRagdoll = false;
 
+    [Header("Hit Sounds")]
+    [SerializeField] private AudioClip[] hittingSounds;
+
     private void Awake()
     {
         if (animator == null)
@@ -71,6 +74,8 @@ public class RagdollSetting : MonoBehaviour
         if (isRagdoll)
             return;
 
+        PlayRandomHittingSFX();
+
         SetRagdollActive(true);
 
         // 맞은 위치와 가장 가까운 뼈를 찾아서 힘 가하기 (선택 사항)
@@ -94,5 +99,16 @@ public class RagdollSetting : MonoBehaviour
             Vector3 force = hitDirection.normalized * hitForce;
             closestBody.AddForce(force, ForceMode.Impulse);
         }
+    }
+
+    private void PlayRandomHittingSFX()
+    {
+        if (hittingSounds == null || hittingSounds.Length == 0)
+            return;     // 피격음 없으면, 바로 return
+
+        int rand = Random.Range(0, hittingSounds.Length);
+        AudioClip hitSFX = hittingSounds[rand];
+
+        AudioManager.Instance.PlaySFX(hitSFX);
     }
 }
