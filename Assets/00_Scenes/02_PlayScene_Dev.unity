@@ -105271,6 +105271,8 @@ MonoBehaviour:
   bgmSource: {fileID: 1764996017}
   sfxSource: {fileID: 1764996016}
   mainMixer: {fileID: 24100000, guid: 32103dfd3fbedbb49aec8241bdea1bc0, type: 2}
+  sfxMixerGroup: {fileID: 2771328213540697003, guid: 32103dfd3fbedbb49aec8241bdea1bc0,
+    type: 2}
 --- !u!82 &1764996016
 AudioSource:
   m_ObjectHideFlags: 0

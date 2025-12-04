@@ -11,6 +11,8 @@ public class AudioManager : MonoBehaviour
 
     [Header("Audio Mixer")]
     [SerializeField] private AudioMixer mainMixer;
+    [SerializeField] private AudioMixerGroup sfxMixerGroup;
+    public AudioMixerGroup SfxMixerGroup => sfxMixerGroup;
 
     private const string MasterVolumeParameterName = "MasterVolume";
     private const string BgmVolumeParameterName = "BGMVolume";

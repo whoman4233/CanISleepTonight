@@ -66,6 +66,9 @@ public class DistractionAnchor : MonoBehaviour, IHittable
             audioSource.clip = noiseSfx.clip;
             audioSource.volume = noiseSfx.baseVolume;
             audioSource.loop = true;
+
+            audioSource.outputAudioMixerGroup = AudioManager.Instance.SfxMixerGroup;  //SFX 그룹 연결
+
         }
 
         _hasBeenHitThisDay = false;
