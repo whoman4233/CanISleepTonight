@@ -17815,7 +17815,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighborManager: {fileID: 389792750}
-  noiseVerboseLog: 1
+  noiseVerboseLog: 0
   tickInterval: 0.1
   currentNoise: 0
 --- !u!4 &315623572
@@ -21166,6 +21166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masterData: {fileID: 11400000, guid: b1f89e571a051b24ba164885952e9f39, type: 2}
+  noiseSfxTable: {fileID: 0}
   houseSlots:
   - {fileID: 537369684}
   - {fileID: 1540153069}
@@ -21175,7 +21176,7 @@ MonoBehaviour:
   minActiveNeighbors: 2
   maxActiveNeighbors: 4
   locationTracker: {fileID: 0}
-  noiseDebugLog: 1
+  noiseDebugLog: 0
 --- !u!4 &389792751
 Transform:
   m_ObjectHideFlags: 0
@@ -55745,11 +55746,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   promptText: {fileID: 1118776005}
   stressBar: {fileID: 1118776004}
+  stressText: {fileID: 0}
   fatigueBar: {fileID: 1118776003}
+  fatigueText: {fileID: 0}
   uiInventory: {fileID: 1118776002}
   uiItemDetail: {fileID: 1118776001}
   uiSetting: {fileID: 1118776000}
   uiTimer: {fileID: 1118775999}
+  uiNoisePanel: {fileID: 0}
+  uiEndingPanel: {fileID: 0}
 --- !u!4 &752044991
 Transform:
   m_ObjectHideFlags: 0
@@ -69247,7 +69252,7 @@ MonoBehaviour:
   poolSize: 20
   waveLayerName: Wave
   maxColorDistance: 15
-  verboseLogging: 1
+  verboseLogging: 0
   masterData: {fileID: 11400000, guid: b1f89e571a051b24ba164885952e9f39, type: 2}
 --- !u!4 &1029888774
 Transform:
@@ -78175,11 +78180,51 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4635557366444580292, guid: cd3dc64310fbc484392e23f59eb3b475,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635557366444580292, guid: cd3dc64310fbc484392e23f59eb3b475,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635557366444580292, guid: cd3dc64310fbc484392e23f59eb3b475,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635557366444580292, guid: cd3dc64310fbc484392e23f59eb3b475,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6622717170319384003, guid: cd3dc64310fbc484392e23f59eb3b475,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1764996015}
+    - target: {fileID: 8286234308930735333, guid: cd3dc64310fbc484392e23f59eb3b475,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8286234308930735333, guid: cd3dc64310fbc484392e23f59eb3b475,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8286234308930735333, guid: cd3dc64310fbc484392e23f59eb3b475,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8286234308930735333, guid: cd3dc64310fbc484392e23f59eb3b475,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8612960945941841150, guid: cd3dc64310fbc484392e23f59eb3b475,
         type: 3}
       propertyPath: m_AnchorMax.y
