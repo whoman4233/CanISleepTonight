@@ -205,6 +205,7 @@ public class GameManager : MonoBehaviour
 
         // Bootstrap의 SetupDay 로직 활용
         NeighborManager.ResetHousesForNewDay();
+        NeighborManager.SetupDay(dayIndex);
 
         if (PlayerLocation != null)
         {

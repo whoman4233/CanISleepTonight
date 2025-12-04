@@ -141,18 +141,18 @@ public class NeighborManager : MonoBehaviour
         if (!_distractionsById.TryGetValue(distractionId, out var runtime))
             return;
 
-        // 하루 동안만 OFF
+        // 오늘 맞음 + 오늘 소음 OFF
+        runtime.wasHitToday = true;
+        runtime.isSilencedToday = true;
+
+        // 오늘 활성에서는 제외
         runtime.isActiveToday = false;
-
-        // 굳이 isAlive를 false로 둘 필요 없음 (영구 죽음 없음)
-        // runtime.isAlive = false;  // <-- 이 줄은 제거
-
-        // 오늘자 활성 리스트에서 제거
         _activeDistractionsToday.Remove(runtime);
 
-        // 이웃 전체를 죽이는 로직도 지금은 필요 없음
-        // (영구 Dead 개념을 안 쓸 거라면)
+        // 영구 죽음은 쓰지 않으므로 isAlive 는 유지
+        // runtime.isAlive = false; // 사용 안 함
     }
+
 
     public void ResetHousesForNewDay()
     {

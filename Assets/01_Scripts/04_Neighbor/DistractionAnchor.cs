@@ -190,4 +190,20 @@ public class DistractionAnchor : MonoBehaviour, IHittable
         }
     }
 
+    public void StopAudioForToday(bool verbose = false)
+    {
+        if (audioSource == null)
+            return;
+
+        if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
+            if (verbose)
+            {
+                Debug.Log($"[DistractionAnchor] Stop SFX for {distractionId}");
+            }
+        }
+    }
+
+
 }
