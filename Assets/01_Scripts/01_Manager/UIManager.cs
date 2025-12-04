@@ -143,5 +143,6 @@ public class UIManager : MonoBehaviour
     public void ShowEndingPanel(string endingType)
     {
         uiEndingPanel.gameObject.SetActive(true);
+        ToggleCursor();
     }
 }

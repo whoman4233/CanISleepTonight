@@ -529,6 +529,8 @@ public class GameManager : MonoBehaviour
             _isGameOver = true;
             _currentPhase = GamePhase.GameOver;
             ShowEnding("Bad");
+            _canMove = false;
+            Time.timeScale = 0f;
         }
     }
 
@@ -556,8 +558,8 @@ public class GameManager : MonoBehaviour
 
         OnGameEnded?.Invoke(endingType);
 
-        // TODO: 엔딩 UI 표시
-        // UIManager.Instance?.ShowEndingScreen(endingType);
+        // 엔딩 UI 표시
+        UIManager.Instance?.ShowEndingPanel(endingType);
     }
 
 
