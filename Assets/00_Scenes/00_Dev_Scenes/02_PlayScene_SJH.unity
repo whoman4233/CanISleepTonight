@@ -17352,7 +17352,7 @@ MonoBehaviour:
   - {fileID: 1619564760}
   minActiveNeighbors: 2
   maxActiveNeighbors: 4
-  locationTracker: {fileID: 1830166821}
+  locationTracker: {fileID: 0}
   noiseDebugLog: 1
 --- !u!4 &389792751
 Transform:
@@ -45705,14 +45705,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   promptText: {fileID: 1118776005}
   stressBar: {fileID: 1118776004}
-  stressText: {fileID: 0}
+  stressText: {fileID: 2073395258}
   fatigueBar: {fileID: 1118776003}
-  fatigueText: {fileID: 0}
+  fatigueText: {fileID: 1624028126}
   uiInventory: {fileID: 1118776002}
   uiItemDetail: {fileID: 1118776001}
   uiSetting: {fileID: 1118776000}
   uiTimer: {fileID: 1118775999}
   uiNoisePanel: {fileID: 0}
+  uiEndingPanel: {fileID: 0}
 --- !u!4 &752044991
 Transform:
   m_ObjectHideFlags: 0
@@ -55467,7 +55468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighborManager: {fileID: 389792750}
-  playerLocation: {fileID: 1830166821}
+  playerLocation: {fileID: 0}
   tickInterval: 0.2
   debugMode: 1
   wavePrefab: {fileID: 1432316113890839234, guid: f0fe97c481c78f04787bff9e4b24ffc3,
@@ -74912,6 +74913,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 514686258}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1624028126 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7053186239524412395, guid: cd3dc64310fbc484392e23f59eb3b475,
+    type: 3}
+  m_PrefabInstance: {fileID: 1118775998}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1643601152
 Mesh:
   m_ObjectHideFlags: 0
@@ -77413,11 +77426,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2691540278275101339, guid: fad137f78b4ee8a46935b15f383a8779,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1830166821}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fad137f78b4ee8a46935b15f383a8779, type: 3}
 --- !u!114 &1830166817 stripped
 MonoBehaviour:
@@ -77425,7 +77434,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1830166816}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1830166820}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 513a3d7c82bca684ba76a8dc153eb49c, type: 3}
@@ -77437,7 +77446,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1830166816}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1830166820}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f07690e0cb0d3849aa09178027730a2, type: 3}
@@ -77449,26 +77458,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1830166816}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1830166820 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2691540278275101339, guid: fad137f78b4ee8a46935b15f383a8779,
-    type: 3}
-  m_PrefabInstance: {fileID: 1830166816}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1830166821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1830166820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f272d4673a7f38a46b6f886db52e5266, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentFloor: 3
-  currentHouseSlotId: 303
 --- !u!43 &1846906166
 Mesh:
   m_ObjectHideFlags: 0
@@ -86216,6 +86205,18 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!114 &2073395258 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 268820001964806928, guid: cd3dc64310fbc484392e23f59eb3b475,
+    type: 3}
+  m_PrefabInstance: {fileID: 1118775998}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &2081458078
 Mesh:
   m_ObjectHideFlags: 0
