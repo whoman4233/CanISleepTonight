@@ -348,7 +348,7 @@ public class GameDataImportWindow : EditorWindow
         // 선택 컬럼
         int idxSourceId = GetHeader("SourceID", required: false);
         int idxTag = GetHeader("Tag", required: false);
-        int idxIntensity = GetHeader("Intensity", required: false);
+        int idxLevel = GetHeader("Level", required: false, aliases: new[] { "Intensity", "NoiseLevel" });
         int idxSfxId = GetHeader("SfxID", required: false, aliases: new[] { "SFXID", "Sfx" });
         int idxPlaceId = GetHeader("PlaceID", required: false);
         int idxDesc = GetHeader("Description", required: false, aliases: new[] { "Info" });
@@ -413,9 +413,10 @@ public class GameDataImportWindow : EditorWindow
             }
 
             // intensity parsing
-            int intensity = 0;
-            if (idxIntensity >= 0)
-                int.TryParse(GetCellSafe(cells, idxIntensity), out intensity);
+            int level = 0;
+            if (idxLevel >= 0)
+                int.TryParse(GetCellSafe(cells, idxLevel), out level);
+
 
             var row = new DistractionDataRow
             {
@@ -423,7 +424,7 @@ public class GameDataImportWindow : EditorWindow
                 ownerId = ownerId,
                 noiseId = GetCellSafe(cells, idxSourceId),
                 tag = GetCellSafe(cells, idxTag),
-                level = intensity,
+                level = level,
                 sfxId = GetCellSafe(cells, idxSfxId),
                 placeId = GetCellSafe(cells, idxPlaceId),
                 info = GetCellSafe(cells, idxDesc)
