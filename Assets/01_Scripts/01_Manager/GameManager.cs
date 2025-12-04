@@ -85,9 +85,6 @@ public class GameManager : MonoBehaviour
     private bool _canMove = true;
     public bool CanMove => _canMove;
 
-    private float _currentNoise;
-    public float CurrentNoise => _currentNoise;
-
     private bool _isGameEnded = false;
     public bool IsGameEnded => _isGameEnded;
 
@@ -134,7 +131,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // TODO : 인트로 씬 구현 후, 버튼과 연결
+        // TODO : 인트로 씬 구현 후, 게임 시작 버튼과 연결
         StartNewGame();
     }
 
@@ -164,24 +161,17 @@ public class GameManager : MonoBehaviour
             UpdateActionPhase();
         }
 
-        if (Input.GetKeyDown(KeyCode.Equals))
-            _currentNoise += 20;
-        if (Input.GetKeyDown(KeyCode.Minus))
-            _currentNoise -= 20;
 
         // 피로도 100 체크 (실시간)
         CheckFatigueGameOver();
     }
 
 
+    // TODO : 인트로 씬 구현 후, 게임 시작 버튼과 연결
     // 게임 시작 (외부에서 호출)
     public void StartNewGame()
     {
-        if (bootstrap == null || NeighborManager == null)
-        {
-            //Debug.LogError("[GameManager] Bootstrap 또는 NeighborManager가 없습니다!");
-            return;
-        }
+        if (bootstrap == null || NeighborManager == null) return;
 
         Debug.Log("[GameManager] ===== 새 게임 시작 =====");
 
@@ -218,7 +208,6 @@ public class GameManager : MonoBehaviour
         }
 
         OnDayChanged?.Invoke(_currentDay);
-        Debug.Log($"[GameManager] Day {_currentDay + 1} / {totalDays} 시작");
 
         EnterPhase(GamePhase.Preparation);
     }
@@ -255,14 +244,14 @@ public class GameManager : MonoBehaviour
     // 페이즈별 처리
     private void OnEnterPreparation()
     {
-        // TODO: Day X 시작 UI 표시
+        // TODO: "Day N" 시작 UI 표시
         _canMove = false;
         StartCoroutine(AutoTransitionAfterDelay(2f, GamePhase.Commute));
     }
 
     private void OnEnterCommute()
     {
-        // TODO: 퇴근 연출
+        // TODO: 퇴근 연출 추가
         _canMove = false;
         playerCondition.AddFatigue(30);
         StartCoroutine(AutoTransitionAfterDelay(1f, GamePhase.Action));
@@ -380,9 +369,7 @@ public class GameManager : MonoBehaviour
         }
 
         // 현재 소음 확인
-        // TODO : 소음 계산식 완성되면, 주석 해제
-        //float currentNoise = CalculateCurrentNoise();
-        _currentNoise = CalculateCurrentNoise();
+        float _currentNoise = CalculateCurrentNoise();
 
         // 소음 >= 60 -> 수면 불가
         if (_currentNoise >= lightSleepNoiseThreshold)
@@ -401,7 +388,6 @@ public class GameManager : MonoBehaviour
         if (!CanSleep(out string reason))
         {
             Debug.LogWarning($"[GameManager] 수면 불가: {reason}");
-            // TODO: UI 메시지 표시
             return;
         }
 
@@ -424,7 +410,7 @@ public class GameManager : MonoBehaviour
 
         OnSleepStarted?.Invoke(_currentSleepQuality);
 
-        // TODO: 수면 UI/애니메이션 전환
+        // TODO: 수면 UI 또는 애니메이션 전환
 
         // 즉시 정산 페이즈로 이동 (남은 시간 전부 수면)
         _isActionPhaseRunning = false;
@@ -497,12 +483,12 @@ public class GameManager : MonoBehaviour
 
         if (_currentSleepQuality == SleepQuality.DeepSleep)
         {
-            // 숙면: (남은 시간) × 0.25
+            // 숙면: (남은 시간) × (숙면 계수)
             recovery = sleepTime * deepSleepRecoveryRate;
         }
         else if (_currentSleepQuality == SleepQuality.LightSleep)
         {
-            // 수면: (남은 시간) × 0.20 - (잔존 소음) × 0.01
+            // 수면: (남은 시간) × (일반 수면 계수) - (잔존 소음) × (소음 계수)
             float baseRecovery = sleepTime * lightSleepRecoveryRate;
             float noisePenalty = _noiseAtSleepStart * noisePenaltyCoefficient;
             recovery = Mathf.Max(0f, baseRecovery - noisePenalty);
@@ -515,7 +501,7 @@ public class GameManager : MonoBehaviour
     {
         _canMove = false;
 
-        // Bootstrap의 EndDay 재활용
+        // Bootstrap의 EndDay 재사용
         NeighborManager.EndDay();
 
         // TODO: 출근 연출
@@ -584,48 +570,4 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
         callback?.Invoke();
     }
-
-
-    // 디버그 (에디터 전용)
-/*#if UNITY_EDITOR
-    [Header("Debug")]
-    [SerializeField] private bool showDebugGUI = true;
-
-    private void OnGUI()
-    {
-        if (!showDebugGUI)
-            return;
-
-        GUILayout.BeginArea(new Rect(10, 10, 350, 180));
-        GUILayout.Box("=== GAME MANAGER DEBUG ===");
-        GUILayout.Label($"Phase: {_currentPhase}");
-        GUILayout.Label($"Day: {_currentDay + 1} / {totalDays}");
-        GUILayout.Label($"Timer: {_actionPhaseTimer:F1}s / {actionPhaseDuration}s");
-        GUILayout.Label($"Current Noise: {CalculateCurrentNoise():F1}");
-        GUILayout.Label($"Sleeping: {_isSleeping} ({_currentSleepQuality})");
-
-        if (playerCondition != null)
-        {
-            GUILayout.Label($"Fatigue: {playerCondition.Fatigue:F1} / 100");
-            GUILayout.Label($"Stress: {playerCondition.Stress:F1} / 100");
-        }
-
-        GUILayout.Label("");
-        GUILayout.Label("Keys: [F]+20피로 [Z]수면 [X]깨기 [N]다음날");
-        GUILayout.EndArea();
-
-        // 디버그 키
-        if (Input.GetKeyDown(KeyCode.F))
-            playerCondition?.AddFatigue(20f);
-
-        *//*if (Input.GetKeyDown(KeyCode.Z))
-            OnPlayerStartSleep();*//*
-
-        if (Input.GetKeyDown(KeyCode.N) && _currentPhase == GamePhase.Action)
-        {
-            _isActionPhaseRunning = false;
-            EnterPhase(GamePhase.Settlement);
-        }
-    }
-#endif*/
 }
