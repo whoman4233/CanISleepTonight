@@ -851,7 +851,7 @@ GameObject:
   - component: {fileID: 2179960128012390096}
   - component: {fileID: 8887920883265594180}
   - component: {fileID: 7366678493923276310}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RoomWall_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1018,7 +1018,7 @@ GameObject:
   - component: {fileID: 8625293085542739826}
   - component: {fileID: 6877061074094574975}
   - component: {fileID: 4205575298626019253}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RoomWall_09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1382,7 +1382,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5453905665450822124}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HouseModule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1695,7 +1695,7 @@ GameObject:
   - component: {fileID: 3290445643744793456}
   - component: {fileID: 5944636942458925321}
   - component: {fileID: 7254478623865827945}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RoomWall_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2518,7 +2518,7 @@ GameObject:
   - component: {fileID: 7520385037621087179}
   - component: {fileID: 2239036840278407406}
   - component: {fileID: 3001583498608184741}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RoomFloor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2754,7 +2754,7 @@ GameObject:
   - component: {fileID: 4435338666904345418}
   - component: {fileID: 1678935978580098281}
   - component: {fileID: 6760067745780350007}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RoomWall_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2985,7 +2985,7 @@ GameObject:
   - component: {fileID: 8107005768865751354}
   - component: {fileID: 336264505565127858}
   - component: {fileID: 4233908555776617461}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RoomWall_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3122,7 +3122,7 @@ GameObject:
   - component: {fileID: 3119166677485954941}
   - component: {fileID: 2642088797126729615}
   - component: {fileID: 6837964171035828801}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RoomCeiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3385,7 +3385,7 @@ GameObject:
   - component: {fileID: 7811111682968249459}
   - component: {fileID: 3343038573867479875}
   - component: {fileID: 3519222185892755963}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RoomWall_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3521,7 +3521,7 @@ GameObject:
   - component: {fileID: 8366848066830531407}
   - component: {fileID: 5599587855570707778}
   - component: {fileID: 539542592140383746}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RoomWall_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3657,7 +3657,7 @@ GameObject:
   - component: {fileID: 3093946469262902769}
   - component: {fileID: 5965603059839057014}
   - component: {fileID: 7040768565121865406}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RoomWall_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3957,7 +3957,7 @@ GameObject:
   - component: {fileID: 6902296974741829229}
   - component: {fileID: 3224620556017438029}
   - component: {fileID: 619976169934981226}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RoomWall_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4483,7 +4483,7 @@ GameObject:
   - component: {fileID: 8473933139861426986}
   - component: {fileID: 8242866655012410089}
   - component: {fileID: 7521106290544056567}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RoomWall_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
