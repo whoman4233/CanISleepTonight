@@ -324,7 +324,7 @@ public class GameManager : MonoBehaviour
             if (noiseIntensity <= 0f)
                 continue;
 
-            string neighborPlace = distraction.owner.placeId;
+            string neighborPlace = NeighborManager.GetNeighborHouse(distraction.owner.Id);
 
             int distanceLevel = NeighborManager.GetDistanceLevel(neighborPlace);
 
