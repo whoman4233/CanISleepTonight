@@ -7,11 +7,12 @@ public class EquipItem : MonoBehaviour
     [SerializeField] private float attackDistance = 2.0f;
     [SerializeField] private LayerMask hitLayerMask;
 
-    [Header("히트 판정 세팅")]
-    [SerializeField] private float screenCenterX = 0.5f;   // 화면 중앙 X (0~1 비율)
-    [SerializeField] private float screenCenterY = 0.5f;   // 화면 중앙 Y (0~1 비율)
-    [SerializeField] private float minWeaponVelocitySqr = 0.01f; // 최소 속도 제곱
-    [SerializeField] private float fallbackImpactScale = 3f;     // 속도 너무 낮을 때 보정 세기
+    // ─────────────────── 히트 판정 / 물리 관련 상수 ────────────────────
+    private const float ScreenCenterX = 0.5f;          // 화면 중앙 X (0~1 비율)
+    private const float ScreenCenterY = 0.5f;          // 화면 중앙 Y (0~1 비율)
+    private const float MinWeaponVelocitySqr = 0.01f;  // 최소 속도 제곱
+    private const float FallbackImpactScale = 3f;      // 속도 너무 낮을 때 방향 보정 세기
+    // ────────────────────────────────────────────────────────────────
 
     private Camera mainCamera;
     private float nextAttackTime = 0f;
@@ -46,7 +47,7 @@ public class EquipItem : MonoBehaviour
         // 여기서 애니메이션 트리거를 쏘는 식으로 확장하면 됨.
     }
 
-    /// <summary>
+      /// <summary>
     /// Attack 애니메이션 이벤트에서 호출되는 실제 타격 처리
     /// </summary>
     public void OnHit()
@@ -59,8 +60,8 @@ public class EquipItem : MonoBehaviour
 
         // 화면 중앙에서 레이 발사
         Vector3 screenCenter = new Vector3(
-            Screen.width * screenCenterX,
-            Screen.height * screenCenterY,
+            Screen.width * ScreenCenterX,
+            Screen.height * ScreenCenterY,
             0f);
 
         Ray ray = mainCamera.ScreenPointToRay(screenCenter);
@@ -75,9 +76,9 @@ public class EquipItem : MonoBehaviour
                 Vector3 impactDir = weaponVelocity.Velocity;
 
                 // 무기 속도가 너무 낮으면 레이 방향을 사용해서 기본 힘을 준다
-                if (impactDir.sqrMagnitude < minWeaponVelocitySqr)
+                if (impactDir.sqrMagnitude < MinWeaponVelocitySqr)
                 {
-                    impactDir = ray.direction * fallbackImpactScale;
+                    impactDir = ray.direction * FallbackImpactScale;
                 }
 
                 float impactStrength = impactDir.magnitude;

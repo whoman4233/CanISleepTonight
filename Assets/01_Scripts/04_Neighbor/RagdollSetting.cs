@@ -7,20 +7,19 @@ public class RagdollSetting : MonoBehaviour
     [SerializeField] private Rigidbody mainRigidbody;   // 루트 몸통
     [SerializeField] private Collider mainCollider;     // 루트 콜라이더
 
-    [Header("레그돌 힘 세팅")]
-    [SerializeField] private float hitForce = 10f;              // ActivateRagdoll()에서 사용
-    [SerializeField] private float impactForceMultiplier = 0.2f; // 속도 → 힘 배율
-    [SerializeField] private float minImpactForce = 5f;          // 최소 힘
-
-    [Header("디버그용 고정 힘")]
-    [SerializeField] private bool useDebugForce = true;   // 지금은 true 유지
-    [SerializeField] private float debugForce = 500f;     // 디버그용 고정 힘
-
-    [Header("위쪽으로 튕겨올리는 정도")]
-    [SerializeField] private float upwardBiasAmount = 0.5f;
-
     [Header("Hit Sounds")]
     [SerializeField] private AudioClip[] hittingSounds;
+
+    // 레그돌 물리 수치 ──────────────────────────────────────────────
+    private const float HitForce = 10f;              // ActivateRagdoll()에서 사용
+    private const float ImpactForceMultiplier = 0.2f; // 속도 → 힘 배율
+    private const float MinImpactForce = 2f;          // 최소 힘
+
+    private const bool UseDebugForce = true;   // 디버그 모드 사용 여부
+    private const float DebugForce = 300f;     // 디버그용 고정 힘
+
+    private const float UpwardBiasAmount = 0.1f; // 위로 튕겨올리는 정도
+    // ─────────────────────────────────────────────────────────────
 
     private Rigidbody[] ragdollRigidbodies;
     private Collider[] ragdollColliders;
@@ -105,14 +104,12 @@ public class RagdollSetting : MonoBehaviour
 
         if (closestBody != null)
         {
-            Vector3 force = hitDirection.normalized * hitForce;
+            Vector3 force = hitDirection.normalized * HitForce;
             closestBody.AddForce(force, ForceMode.Impulse);
         }
     }
 
-    /// <summary>
-    /// 피격 사운드 재생
-    /// </summary>
+    // 피격 사운드 재생
     private void PlayRandomHittingSFX()
     {
         if (hittingSounds == null || hittingSounds.Length == 0)
@@ -155,17 +152,17 @@ public class RagdollSetting : MonoBehaviour
 
         // 힘 크기 계산
         float forceMagnitude;
-        if (useDebugForce)
+        if (UseDebugForce)
         {
             // 디버그: 항상 같은 큰 힘 사용
-            forceMagnitude = debugForce;
+            forceMagnitude = DebugForce;
         }
         else
         {
             // 실제 게임용: 무기 속도 기반
             forceMagnitude = Mathf.Max(
-                strength * impactForceMultiplier,
-                minImpactForce
+                strength * ImpactForceMultiplier,
+                MinImpactForce
             );
         }
 
@@ -175,7 +172,7 @@ public class RagdollSetting : MonoBehaviour
             : -transform.forward;
 
         // 약간 위로 튕겨 올라가게 bias 추가
-        Vector3 upwardBias = Vector3.up * upwardBiasAmount;
+        Vector3 upwardBias = Vector3.up * UpwardBiasAmount;
         forceDirection = (forceDirection + upwardBias).normalized;
 
         // 최종 힘 적용

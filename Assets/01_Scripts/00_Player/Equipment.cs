@@ -35,7 +35,6 @@ public class Equipment : MonoBehaviour
             return;
         }
 
-        Debug.Log($"장착 중인 {curEquip.name} 으로 공격합니다.");
         curEquip.OnUse();
     }
 }

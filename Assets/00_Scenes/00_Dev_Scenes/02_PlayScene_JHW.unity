@@ -1922,9 +1922,6 @@ MonoBehaviour:
   animator: {fileID: 41098941}
   mainRigidbody: {fileID: 41098938}
   mainCollider: {fileID: 41098939}
-  hitForce: 20
-  impactForceMultiplier: 1
-  minImpactForce: 10
   hittingSounds:
   - {fileID: 8300000, guid: 9fe36cbf86b2b7f4cab5ec7dabe08a5d, type: 3}
   - {fileID: 8300000, guid: 4afca8adcd975c346ab5c921a4407274, type: 3}
@@ -1992,7 +1989,12 @@ MonoBehaviour:
   distractionId: D_N001_A
   placeId: 
   hitColliders: []
-  debugLog: 1
+  audioSource: {fileID: 0}
+  noiseSfx:
+    sfxId: 
+    clip: {fileID: 0}
+    baseVolume: 1
+  neighborManager: {fileID: 0}
 --- !u!95 &41098941
 Animator:
   serializedVersion: 5
@@ -19754,7 +19756,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &290891227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20167,7 +20169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &315623571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23759,7 +23761,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &388336557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23810,7 +23812,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &389792750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23824,6 +23826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masterData: {fileID: 11400000, guid: b1f89e571a051b24ba164885952e9f39, type: 2}
+  noiseSfxTable: {fileID: 0}
   houseSlots:
   - {fileID: 537369684}
   - {fileID: 1540153069}
@@ -35733,9 +35736,6 @@ MonoBehaviour:
   animator: {fileID: 467195436}
   mainRigidbody: {fileID: 467195433}
   mainCollider: {fileID: 467195434}
-  hitForce: 20
-  impactForceMultiplier: 1
-  minImpactForce: 10
   hittingSounds:
   - {fileID: 8300000, guid: 9fe36cbf86b2b7f4cab5ec7dabe08a5d, type: 3}
   - {fileID: 8300000, guid: 4afca8adcd975c346ab5c921a4407274, type: 3}
@@ -35803,7 +35803,12 @@ MonoBehaviour:
   distractionId: D_N001_A
   placeId: 
   hitColliders: []
-  debugLog: 1
+  audioSource: {fileID: 0}
+  noiseSfx:
+    sfxId: 
+    clip: {fileID: 0}
+    baseVolume: 1
+  neighborManager: {fileID: 0}
 --- !u!95 &467195436
 Animator:
   serializedVersion: 5
@@ -38045,7 +38050,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &535342951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38096,7 +38101,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &537369684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61439,7 +61444,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   promptText: {fileID: 1118776005}
   stressBar: {fileID: 1118776004}
+  stressText: {fileID: 0}
   fatigueBar: {fileID: 1118776003}
+  fatigueText: {fileID: 0}
   uiInventory: {fileID: 1118776002}
   uiItemDetail: {fileID: 1118776001}
   uiSetting: {fileID: 1118776000}
@@ -86552,6 +86559,26 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4635557366444580292, guid: cd3dc64310fbc484392e23f59eb3b475,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635557366444580292, guid: cd3dc64310fbc484392e23f59eb3b475,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635557366444580292, guid: cd3dc64310fbc484392e23f59eb3b475,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635557366444580292, guid: cd3dc64310fbc484392e23f59eb3b475,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6504870988813124739, guid: cd3dc64310fbc484392e23f59eb3b475,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -86577,6 +86604,26 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1764996015}
+    - target: {fileID: 8286234308930735333, guid: cd3dc64310fbc484392e23f59eb3b475,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8286234308930735333, guid: cd3dc64310fbc484392e23f59eb3b475,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8286234308930735333, guid: cd3dc64310fbc484392e23f59eb3b475,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8286234308930735333, guid: cd3dc64310fbc484392e23f59eb3b475,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8612960945941841150, guid: cd3dc64310fbc484392e23f59eb3b475,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -94777,9 +94824,6 @@ MonoBehaviour:
   animator: {fileID: 1322604947}
   mainRigidbody: {fileID: 1322604944}
   mainCollider: {fileID: 1322604945}
-  hitForce: 20
-  impactForceMultiplier: 1
-  minImpactForce: 10
   hittingSounds:
   - {fileID: 8300000, guid: 9fe36cbf86b2b7f4cab5ec7dabe08a5d, type: 3}
   - {fileID: 8300000, guid: 4afca8adcd975c346ab5c921a4407274, type: 3}
@@ -94847,7 +94891,12 @@ MonoBehaviour:
   distractionId: D_N001_A
   placeId: 
   hitColliders: []
-  debugLog: 1
+  audioSource: {fileID: 0}
+  noiseSfx:
+    sfxId: 
+    clip: {fileID: 0}
+    baseVolume: 1
+  neighborManager: {fileID: 0}
 --- !u!95 &1322604947
 Animator:
   serializedVersion: 5
@@ -96368,9 +96417,6 @@ MonoBehaviour:
   animator: {fileID: 1368517209}
   mainRigidbody: {fileID: 1368517206}
   mainCollider: {fileID: 1368517207}
-  hitForce: 20
-  impactForceMultiplier: 1
-  minImpactForce: 10
   hittingSounds:
   - {fileID: 8300000, guid: 9fe36cbf86b2b7f4cab5ec7dabe08a5d, type: 3}
   - {fileID: 8300000, guid: 4afca8adcd975c346ab5c921a4407274, type: 3}
@@ -96438,7 +96484,12 @@ MonoBehaviour:
   distractionId: D_N001_A
   placeId: 
   hitColliders: []
-  debugLog: 1
+  audioSource: {fileID: 0}
+  noiseSfx:
+    sfxId: 
+    clip: {fileID: 0}
+    baseVolume: 1
+  neighborManager: {fileID: 0}
 --- !u!95 &1368517209
 Animator:
   serializedVersion: 5
@@ -103298,7 +103349,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1540153069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133615,9 +133666,6 @@ MonoBehaviour:
   animator: {fileID: 2114907919}
   mainRigidbody: {fileID: 2114907916}
   mainCollider: {fileID: 2114907917}
-  hitForce: 20
-  impactForceMultiplier: 1
-  minImpactForce: 10
   hittingSounds:
   - {fileID: 8300000, guid: 9fe36cbf86b2b7f4cab5ec7dabe08a5d, type: 3}
   - {fileID: 8300000, guid: 4afca8adcd975c346ab5c921a4407274, type: 3}
@@ -133685,7 +133733,12 @@ MonoBehaviour:
   distractionId: D_N001_A
   placeId: 
   hitColliders: []
-  debugLog: 1
+  audioSource: {fileID: 0}
+  noiseSfx:
+    sfxId: 
+    clip: {fileID: 0}
+    baseVolume: 1
+  neighborManager: {fileID: 0}
 --- !u!95 &2114907919
 Animator:
   serializedVersion: 5
@@ -136454,7 +136507,12 @@ MonoBehaviour:
   distractionId: D_N001_A
   placeId: 
   hitColliders: []
-  debugLog: 1
+  audioSource: {fileID: 0}
+  noiseSfx:
+    sfxId: 
+    clip: {fileID: 0}
+    baseVolume: 1
+  neighborManager: {fileID: 0}
 --- !u!23 &2329884970912555263
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -149560,7 +149618,12 @@ MonoBehaviour:
   distractionId: D_N001_B
   placeId: 
   hitColliders: []
-  debugLog: 1
+  audioSource: {fileID: 0}
+  noiseSfx:
+    sfxId: 
+    clip: {fileID: 0}
+    baseVolume: 1
+  neighborManager: {fileID: 0}
 --- !u!4 &6131975371996277434
 Transform:
   m_ObjectHideFlags: 0
@@ -150344,9 +150407,6 @@ MonoBehaviour:
   animator: {fileID: 5523263046432478932}
   mainRigidbody: {fileID: 7103258224740752759}
   mainCollider: {fileID: 1085606588504752259}
-  hitForce: 20
-  impactForceMultiplier: 1
-  minImpactForce: 10
   hittingSounds:
   - {fileID: 8300000, guid: 9fe36cbf86b2b7f4cab5ec7dabe08a5d, type: 3}
   - {fileID: 8300000, guid: 4afca8adcd975c346ab5c921a4407274, type: 3}
