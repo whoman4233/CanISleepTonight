@@ -21546,7 +21546,7 @@ MonoBehaviour:
   - {fileID: 1903859939}
   minActiveNeighbors: 2
   maxActiveNeighbors: 4
-  locationTracker: {fileID: 0}
+  locationTracker: {fileID: 1830166821}
   noiseDebugLog: 0
 --- !u!4 &389792751
 Transform:
