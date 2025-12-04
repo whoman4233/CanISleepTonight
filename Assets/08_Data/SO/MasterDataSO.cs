@@ -12,9 +12,6 @@ public class MasterGameDataSO : ScriptableObject
 
     public PlaceTableSO placeTable;
 
-    public InteractionListTableSO interactionListTable;
-    public InteractionTableSO interactionTable;
-
     // 이후 필요시 확장용 (지금은 비워두고, 타입만 확보)
     [Header("Optional (Later)")]
     public ScriptableObject entityTable;
