@@ -105,6 +105,9 @@ public class UIManager : MonoBehaviour
     // Retry 버튼 이벤트
     public void OnRetryButtonClicked()
     {
+        Time.timeScale = 1f;
+        ToggleCursor();
+
         // 재시작 로직
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
