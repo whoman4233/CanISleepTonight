@@ -323,8 +323,12 @@ public class GameManager : MonoBehaviour
             if (noiseIntensity <= 0f)
                 continue;
 
+            string neighborPlace = distraction.owner.placeId;
+
+            int distanceLevel = NeighborManager.GetDistanceLevel(neighborPlace);
+
             // 거리 계수 계산
-            float distanceCoefficient = CalculateDistanceCoefficient(distraction);
+            float distanceCoefficient = GetDistanceCoefficientFromLevel(distanceLevel);
 
             // 소음 누적
             totalNoise += noiseIntensity * distanceCoefficient;
@@ -336,27 +340,25 @@ public class GameManager : MonoBehaviour
     private float GetDistractionNoiseIntensity(DistractionRuntime distraction)
     {
         if (distraction.data != null)
-            return distraction.data.level;  
+            return distraction.data.level;
 
         return 0f;
     }
 
-    // TODO : 실제 구체적인 소음 계산식 적용해야 함
-    private float CalculateDistanceCoefficient(DistractionRuntime distraction)
+
+    // 거리 레벨에 따른 계수 반환 (기획서 테이블)
+    private float GetDistanceCoefficientFromLevel(int distanceLevel)
     {
-        if (PlayerLocation == null)
-            return 0.5f; // 기본값
-
-        string playerHouse = PlayerLocation.currentHouseSlotId;
-        string distractionPlace = distraction.placeId;
-
-        // 같은 집 안이면 계수 1.0 (100%)
-        if (!string.IsNullOrEmpty(playerHouse) && playerHouse == distractionPlace)
-            return 1.0f;
-
-        // TODO: 실제 3D 거리 계산 또는 층/방 번호 기반 계산 구현해야 함
-        // 일단 간단히 다른 집이면 0.5 (50%)
-        return 0.5f;
+        switch (distanceLevel)
+        {
+            case 0: return 8f;    // 같은 집
+            case 1: return 6f;    // 거리 1
+            case 2: return 4f;    // 거리 2
+            case 3: return 2f;    // 거리 3
+            case 4: return 1f;    // 거리 4
+            case 5: return 0.5f;  // 거리 5 이상
+            default: return 0.5f;
+        }
     }
 
 
@@ -378,6 +380,7 @@ public class GameManager : MonoBehaviour
         // 현재 소음 확인
         // TODO : 소음 계산식 완성되면, 주석 해제
         //float currentNoise = CalculateCurrentNoise();
+        _currentNoise = CalculateCurrentNoise();
 
         // 소음 >= 60 -> 수면 불가
         if (_currentNoise >= lightSleepNoiseThreshold)

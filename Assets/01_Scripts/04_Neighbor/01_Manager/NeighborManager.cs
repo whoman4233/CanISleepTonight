@@ -541,4 +541,17 @@ public class NeighborManager : MonoBehaviour
         }
     }
 
+    public int GetDistanceLevel(string placeId)
+    {
+        if (masterData == null || masterData.placeTable == null)
+            return 5; // 기본값: 가장 먼 거리 취급
+
+        // placeId로 row 조회
+        var row = masterData.placeTable.GetById(placeId);
+        if (row == null)
+            return 5;
+
+        return row.distanceLevel;
+    }
+
 }
