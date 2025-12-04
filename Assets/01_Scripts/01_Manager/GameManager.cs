@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
 
 
     // 액션 페이즈 타이머
-    public float _actionPhaseTimer = 0f;
+    private float _actionPhaseTimer = 0f;
     private bool _isActionPhaseRunning = false;
 
 
@@ -587,7 +587,7 @@ public class GameManager : MonoBehaviour
 
 
     // 디버그 (에디터 전용)
-#if UNITY_EDITOR
+/*#if UNITY_EDITOR
     [Header("Debug")]
     [SerializeField] private bool showDebugGUI = true;
 
@@ -618,8 +618,8 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
             playerCondition?.AddFatigue(20f);
 
-        /*if (Input.GetKeyDown(KeyCode.Z))
-            OnPlayerStartSleep();*/
+        *//*if (Input.GetKeyDown(KeyCode.Z))
+            OnPlayerStartSleep();*//*
 
         if (Input.GetKeyDown(KeyCode.N) && _currentPhase == GamePhase.Action)
         {
@@ -627,5 +627,5 @@ public class GameManager : MonoBehaviour
             EnterPhase(GamePhase.Settlement);
         }
     }
-#endif
+#endif*/
 }
