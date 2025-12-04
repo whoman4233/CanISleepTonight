@@ -4006,7 +4006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec79c5034a39e7248b38148174b882ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distractionId: D_N006_B
+  distractionId: 
   placeId: 
   hitColliders: []
   audioSource: {fileID: 964699199298143820}
