@@ -41,30 +41,32 @@ public class UIManager : MonoBehaviour
         Instance = this;
     }
 
-    void ToggleCursor()
+    public void ToggleCursor()
     {
         bool isLocked = Cursor.lockState == CursorLockMode.Locked;
-        bool canLook = PlayerManager.Instance.Player.GetComponent<PlayerController>().canLook;
+        PlayerController controller = PlayerManager.Instance.Player.GetComponent<PlayerController>();
 
-        if (UIManager.Instance.IsInventoryOpen || UIManager.Instance.IsSettingOpen)
+        if (IsInventoryOpen || IsSettingOpen || GameManager.Instance.IsGameOver)
         {
-            // ▶ 인벤토리 OR 설정창 열림 상태 : 커서 보이게 + 카메라 회전 끔
+            // ▶ 인벤토리 OR 설정창 열림 상태 / 게임오버 : 커서 보이게 + 카메라 회전 끔
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            canLook = false;
+            controller.canLook = false;
         }
         else
         {
             // ▶ 인벤토리 OR 설정창 닫힘 상태 : 커서 숨기고 + 다시 카메라 회전 켬
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            canLook = true;
+            controller.canLook = true;
         }
     }
 
     // UI Open/Close 요청 함수들
     public void ToggleInventory()
     {
+        if (GameManager.Instance.IsGameOver) return;    // 게임오버 시, 인벤토리창 열 수 없음
+        
         if (IsSettingOpen) return;   // 설정창 열려있으면 인벤토리 못 열게
 
         uiInventory.ToggleInventory();
@@ -73,6 +75,8 @@ public class UIManager : MonoBehaviour
 
     public void ToggleSetting()
     {
+        if (GameManager.Instance.IsGameOver) return;    // 게임오버 시, 설정창 열 수 없음
+
         // 인벤토리 열려있으면 인벤토리 닫기
         if (IsInventoryOpen)
             uiInventory.CloseInventory();

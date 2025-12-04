@@ -45,6 +45,7 @@ public class UIInventory : MonoBehaviour
     public void CloseInventory()
     {
         inventoryPanel.SetActive(false);
+        UIManager.Instance.ToggleCursor();
     }
 
     public void OnSlotSelected(UISlot slot)
