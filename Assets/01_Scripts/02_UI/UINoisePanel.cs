@@ -26,7 +26,7 @@ public class UINoisePanel : MonoBehaviour
         if (noiseBar != null)
         {
             noiseBar.fillAmount = Mathf.Clamp01(noiseValue / 100f);
-            noiseText.text = $"소음 {noiseValue} / 100";
+            noiseText.text = $"소음 {(int)noiseValue} / 100";
 
             // 소음 수치에 따른 색상 변경
             noiseBar.color = GetNoiseColor(noiseValue);
