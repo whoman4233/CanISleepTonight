@@ -109,9 +109,14 @@ public class NeighborManager : MonoBehaviour
                 if (!d.isAlive) continue;
 
                 d.isActiveToday = true;
+                d.wasHitToday = false;
+                d.isSilencedToday = false;
+
                 _activeDistractionsToday.Add(d);
             }
         }
+
+
 
         // ★ 오늘자 소음 후보 디버그 덤프
         if (noiseDebugLog)
