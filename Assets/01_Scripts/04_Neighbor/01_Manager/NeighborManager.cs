@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 
 public class NeighborManager : MonoBehaviour
@@ -408,7 +409,7 @@ public class NeighborManager : MonoBehaviour
             neighbor.houseSlot = slot;
 
             if (!string.IsNullOrEmpty(slot.placeId))
-            {
+            {   
                 neighbor.placeId = slot.placeId;
             }
 
@@ -552,6 +553,14 @@ public class NeighborManager : MonoBehaviour
             return 5;
 
         return row.distanceLevel;
+    }
+
+    public string GetNeighborHouse(string NeighborId)
+    {
+        var n = GetNeighbor("N_003");
+        Debug.Log(n.placeId);   // ex) P_302
+
+        return n.placeId;
     }
 
 }

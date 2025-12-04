@@ -39,6 +39,7 @@ public class DistractionAnchor : MonoBehaviour, IHittable
 
         if (audioSource == null)
             audioSource = GetComponentInChildren<AudioSource>();
+
     }
 
     /// <summary>

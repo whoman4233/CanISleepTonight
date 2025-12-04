@@ -21366,8 +21366,8 @@ MonoBehaviour:
   - {fileID: 1100914128}
   - {fileID: 451744744}
   - {fileID: 1903859939}
-  minActiveNeighbors: 2
-  maxActiveNeighbors: 4
+  minActiveNeighbors: 6
+  maxActiveNeighbors: 8
   locationTracker: {fileID: 1830166821}
   noiseDebugLog: 0
 --- !u!4 &389792751
