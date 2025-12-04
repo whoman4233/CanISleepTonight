@@ -41,28 +41,28 @@ public class GameManager : MonoBehaviour
 
     
     // 게임 설정
-    [Tooltip("액션 페이즈 지속 시간 (초) - 기본 360초 = 6분")]
-    private float actionPhaseDuration = 180f;
+    [Tooltip("액션 페이즈 진행 시간 (초) : 기본 180초 = 3분")]
+    [SerializeField] private float actionPhaseDuration = 180f;
 
     [Tooltip("하루 총 일수 (기본 7일)")]
-    private int totalDays = 7;
+    [SerializeField] private int totalDays = 7;
 
     
     // 소음 기반 수면 설정
     [Tooltip("숙면 가능 최대 소음 (< 30)")]
-    private float deepSleepNoiseThreshold = 30f;
+    [SerializeField] private float deepSleepNoiseThreshold = 30f;
 
     [Tooltip("수면 가능 최대 소음 (< 60)")]
-    private float lightSleepNoiseThreshold = 60f;
+    [SerializeField] private float lightSleepNoiseThreshold = 60f;
 
     [Tooltip("숙면 계수 (초당 피로도 회복) = 0.25")]
-    private float deepSleepRecoveryRate = 0.25f;
+    [SerializeField] private float deepSleepRecoveryRate = 0.25f;
 
-    [Tooltip("수면 계수 (초당 피로도 회복) = 0.20")]
-    private float lightSleepRecoveryRate = 0.20f;
+    [Tooltip("수면 계수 (초당 피로도 회복) = 0.15")]
+    [SerializeField] private float lightSleepRecoveryRate = 0.15f;
 
     [Tooltip("소음 계수 (소음 1당 피로도 회복 감소)")]
-    private float noisePenaltyCoefficient = 0.01f;
+    [SerializeField] private float noisePenaltyCoefficient = 0.2f;
     
 
     public GamePhase _currentPhase = GamePhase.NotStarted;
