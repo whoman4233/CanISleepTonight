@@ -373,12 +373,13 @@ public class GameManager : MonoBehaviour
         }
 
         // 현재 소음 확인
-        float currentNoise = CalculateCurrentNoise();
+        // TODO : 소음 계산식 완성되면, 주석 해제
+        //float currentNoise = CalculateCurrentNoise();
 
         // 소음 >= 60 -> 수면 불가
-        if (currentNoise >= lightSleepNoiseThreshold)
+        if (_currentNoise >= lightSleepNoiseThreshold)
         {
-            reason = $"주변이 너무 시끄러워서 잠들 수 없습니다! (소음: {currentNoise:F1})";
+            reason = $"주변이 너무 시끄러워서 잠들 수 없습니다! (소음: {_currentNoise:F1})";
             return false;
         }
 
@@ -528,6 +529,8 @@ public class GameManager : MonoBehaviour
             _isGameOver = true;
             _currentPhase = GamePhase.GameOver;
             ShowEnding("Bad");
+            _canMove = false;
+            Time.timeScale = 0f;
         }
     }
 
@@ -555,8 +558,8 @@ public class GameManager : MonoBehaviour
 
         OnGameEnded?.Invoke(endingType);
 
-        // TODO: 엔딩 UI 표시
-        // UIManager.Instance?.ShowEndingScreen(endingType);
+        // 엔딩 UI 표시
+        UIManager.Instance?.ShowEndingPanel(endingType);
     }
 
 
@@ -584,7 +587,7 @@ public class GameManager : MonoBehaviour
         if (!showDebugGUI)
             return;
 
-        GUILayout.BeginArea(new Rect(10, 10, 350, 180));
+        /*GUILayout.BeginArea(new Rect(10, 10, 350, 180));
         GUILayout.Box("=== GAME MANAGER DEBUG ===");
         GUILayout.Label($"Phase: {_currentPhase}");
         GUILayout.Label($"Day: {_currentDay + 1} / {totalDays}");
@@ -600,7 +603,7 @@ public class GameManager : MonoBehaviour
 
         GUILayout.Label("");
         GUILayout.Label("Keys: [F]+20피로 [Z]수면 [X]깨기 [N]다음날");
-        GUILayout.EndArea();
+        GUILayout.EndArea();*/
 
         // 디버그 키
         if (Input.GetKeyDown(KeyCode.F))

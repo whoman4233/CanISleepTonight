@@ -41,7 +41,7 @@ public class PlayerManager : MonoBehaviour
 
     // 플레이어 스폰 설정
     [Header("Spawn Settings")]
-    [SerializeField] private Vector3 defaultSpawnPosition = new Vector3(22f, 10f, -15f);    // 303호
+    [SerializeField] private Vector3 defaultSpawnPosition = new Vector3(25f, 10f, -19f);    // 303호
     [SerializeField] private Vector3 defaultSpawnRotation = new Vector3(0, 0, 0);
 
 
