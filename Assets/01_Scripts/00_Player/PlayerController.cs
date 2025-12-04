@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (canLook)
+        if (canLook && GameManager.Instance.CanMove)
         {
             CameraLook();
         }
