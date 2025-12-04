@@ -618,8 +618,8 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
             playerCondition?.AddFatigue(20f);
 
-        if (Input.GetKeyDown(KeyCode.Z))
-            OnPlayerStartSleep();
+        /*if (Input.GetKeyDown(KeyCode.Z))
+            OnPlayerStartSleep();*/
 
         if (Input.GetKeyDown(KeyCode.N) && _currentPhase == GamePhase.Action)
         {
