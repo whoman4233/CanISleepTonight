@@ -173,7 +173,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnAttackInput(InputAction.CallbackContext callbackContext)
     {
-        if (UIManager.Instance.IsInventoryOpen || UIManager.Instance.IsSettingOpen)
+        if (UIManager.Instance.IsInventoryOpen || UIManager.Instance.IsSettingOpen || !GameManager.Instance.CanMove)
             return;
 
         if (callbackContext.phase == InputActionPhase.Started)
