@@ -3,11 +3,6 @@ using UnityEngine;
 
 public class PlayerCondition : MonoBehaviour
 {
-    private bool isLife = true;
-
-    //Condition fatigue { get { return uICondition.health; } }
-    //Condition stress { get { return uICondition.hunger; } }
-
     [SerializeField] private float stress;
     [SerializeField] private float fatigue;
     private float maxValue = 100;
@@ -15,11 +10,15 @@ public class PlayerCondition : MonoBehaviour
     public float Stress => stress;
     public float Fatigue => fatigue;
 
+    private UIManager uiManager;
+
     private void Start()
     {
+        uiManager = UIManager.Instance;
+        
         // 시작 시 UI값 초기 반영
-        UpdateStressUI();
-        UpdateFatigueUI();
+        uiManager.UpdateStressUI(stress, maxValue);
+        uiManager.UpdateFatigueUI(fatigue, maxValue);
     }
 
     private void Update()
@@ -33,32 +32,12 @@ public class PlayerCondition : MonoBehaviour
     public void AddStress(float value)
     {
         stress = Mathf.Clamp(stress + value, 0, 100);
-        UpdateStressUI();
+        uiManager.UpdateStressUI(stress, maxValue);
     }
 
     public void AddFatigue(float value)
     {
         fatigue = Mathf.Clamp(fatigue + value, 0, 100);
-        UpdateFatigueUI();
-    }
-
-    private void UpdateStressUI()
-    {
-        if (UIManager.Instance != null)
-        {
-            UIManager.Instance.StressBar.fillAmount = stress / maxValue;
-        }
-
-        Debug.Log($"스트레스 : {stress} / {maxValue}");
-    }
-
-    private void UpdateFatigueUI()
-    {
-        if (UIManager.Instance != null)
-        {
-            UIManager.Instance.FatigueBar.fillAmount = fatigue / maxValue;
-        }
-
-        Debug.Log($"피로 : {fatigue} / {maxValue}");
+        uiManager.UpdateFatigueUI(fatigue, maxValue);
     }
 }

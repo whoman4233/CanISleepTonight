@@ -10,10 +10,10 @@ public class UIManager : MonoBehaviour
     [Header("HUD UI")]
     [SerializeField] private TextMeshProUGUI promptText;
     [SerializeField] private Image stressBar;
+    [SerializeField] private TextMeshProUGUI stressText;
     [SerializeField] private Image fatigueBar;
-    
-    public Image StressBar => stressBar;
-    public Image FatigueBar => fatigueBar;
+    [SerializeField] private TextMeshProUGUI fatigueText;
+
     public TextMeshProUGUI PromptText => promptText;
 
     [Header("UI References")]
@@ -92,6 +92,18 @@ public class UIManager : MonoBehaviour
         {
             uiNoisePanel.gameObject.SetActive(show);
         }
+    }
+
+    public void UpdateStressUI(float stress, float maxValue)
+    {
+        stressBar.fillAmount = stress / maxValue;
+        stressText.text = $"스트레스 {stress} / {maxValue}";
+    }
+
+    public void UpdateFatigueUI(float fatigue, float maxValue)
+    {
+        fatigueBar.fillAmount = fatigue / maxValue;
+        fatigueText.text = $"피로도 {fatigue} / {maxValue}";
     }
 
     // 소음 수치 업데이트
