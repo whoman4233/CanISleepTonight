@@ -5,23 +5,12 @@ using UnityEngine;
 [Serializable]
 public class HouseLayoutRow
 {
-    [Tooltip("·¹ÀÌ¾Æ¿ô ID (¿¹: L_01)")]
+    [Tooltip("ë ˆì´ì•„ì›ƒ ID (ì˜ˆ: L_01)")]
     public string layoutId;
 
-    [Tooltip("Áı/¹æ ÀÎÅ×¸®¾î ÇÁ¸®ÆÕ (DistractionAnchor Æ÷ÇÔ)")]
+    [Tooltip("ì§‘/ë°© ì¸í…Œë¦¬ì–´ í”„ë¦¬íŒ¹ (DistractionAnchor í¬í•¨)")]
     public GameObject housePrefab;
 
     [TextArea]
     public string description;
-}
-
-[CreateAssetMenu(fileName = "HouseLayoutTable", menuName = "GameData/House Layout Table")]
-public class HouseLayoutTableSO : ScriptableObject
-{
-    public List<HouseLayoutRow> layouts = new List<HouseLayoutRow>();
-
-    public HouseLayoutRow GetById(string layoutId)
-    {
-        return layouts.Find(l => l.layoutId == layoutId);
-    }
 }

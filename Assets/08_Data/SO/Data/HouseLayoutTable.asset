@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: dfe7f909a79372543b2e3382445c0452, type: 3}
   m_Name: HouseLayoutTable
   m_EditorClassIdentifier: Assembly-CSharp::HouseLayoutTableSO
   layouts:
@@ -27,6 +27,10 @@ MonoBehaviour:
     description: 
   - layoutId: L_04
     housePrefab: {fileID: 8573771435043746843, guid: db0bda253e78b7b40a8933f321fce580,
+      type: 3}
+    description: 
+  - layoutId: L_05
+    housePrefab: {fileID: 7024386078109254851, guid: 22202003e1f25bd4f90e96c8fadb0f29,
       type: 3}
     description: 
   - layoutId: L_06
@@ -71,9 +75,5 @@ MonoBehaviour:
     description: 
   - layoutId: N_Room_Player
     housePrefab: {fileID: 680056530095797570, guid: 817407cefa42b964cbb442b6e6745733,
-      type: 3}
-    description: 
-  - layoutId: L_05
-    housePrefab: {fileID: 7024386078109254851, guid: 22202003e1f25bd4f90e96c8fadb0f29,
       type: 3}
     description: 
