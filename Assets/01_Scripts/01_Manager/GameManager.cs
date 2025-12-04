@@ -326,7 +326,7 @@ public class GameManager : MonoBehaviour
     private float GetDistractionNoiseIntensity(DistractionRuntime distraction)
     {
         if (distraction.data != null)
-            return distraction.data.intensity;
+            return distraction.data.level;  
 
         return 0f;
     }

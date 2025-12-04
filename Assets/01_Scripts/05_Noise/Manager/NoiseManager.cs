@@ -110,7 +110,7 @@ public class NoiseManager : MonoBehaviour
                 coef = 0.1f;
             }
 
-            float intensity = d.data != null ? d.data.intensity : 0f;
+            float intensity = d.data != null ? d.data.level : 0f;
             float noise = intensity * coef;
             totalNoise += noise;
             usedCount++;
