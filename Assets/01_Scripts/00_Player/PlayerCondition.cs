@@ -23,6 +23,7 @@ public class PlayerCondition : MonoBehaviour
 
     private void Update()
     {
+        // 디버깅용
         if (Input.GetKeyDown(KeyCode.Alpha1))
             AddStress(10);
         else if (Input.GetKeyDown(KeyCode.Alpha2))
