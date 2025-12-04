@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private UISetting uiSetting;
     [SerializeField] private UITimer uiTimer;
     [SerializeField] private UINoisePanel uiNoisePanel;
+    [SerializeField] private UIEndingPanel uiEndingPanel;
 
     public UIInventory UIInventory => uiInventory;
     public UIItemDetail UIItemDetail => uiItemDetail;
@@ -40,12 +41,34 @@ public class UIManager : MonoBehaviour
         Instance = this;
     }
 
+    void ToggleCursor()
+    {
+        bool isLocked = Cursor.lockState == CursorLockMode.Locked;
+        bool canLook = PlayerManager.Instance.Player.GetComponent<PlayerController>().canLook;
+
+        if (UIManager.Instance.IsInventoryOpen || UIManager.Instance.IsSettingOpen)
+        {
+            // ▶ 인벤토리 OR 설정창 열림 상태 : 커서 보이게 + 카메라 회전 끔
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            canLook = false;
+        }
+        else
+        {
+            // ▶ 인벤토리 OR 설정창 닫힘 상태 : 커서 숨기고 + 다시 카메라 회전 켬
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            canLook = true;
+        }
+    }
+
     // UI Open/Close 요청 함수들
     public void ToggleInventory()
     {
         if (IsSettingOpen) return;   // 설정창 열려있으면 인벤토리 못 열게
 
         uiInventory.ToggleInventory();
+        ToggleCursor();
     }
 
     public void ToggleSetting()
@@ -55,6 +78,7 @@ public class UIManager : MonoBehaviour
             uiInventory.CloseInventory();
 
         uiSetting.ToggleSetting();
+        ToggleCursor();
     }
 
     public void OnStartButtonClicked()
@@ -113,5 +137,11 @@ public class UIManager : MonoBehaviour
         {
             uiNoisePanel.UpdateNoiseLevel(noiseValue);
         }
+    }
+
+    // 엔딩 UI 처리
+    public void ShowEndingPanel(string endingType)
+    {
+        uiEndingPanel.gameObject.SetActive(true);
     }
 }

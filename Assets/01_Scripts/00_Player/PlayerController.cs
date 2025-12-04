@@ -45,7 +45,6 @@ public class PlayerController : MonoBehaviour
         if (GameManager.Instance == null || UIManager.Instance.IsSettingOpen)
             return;
         Cursor.lockState = CursorLockMode.Locked;
-        inventory += ToggleCursor;
     }
 
     void FixedUpdate()
@@ -150,7 +149,6 @@ public class PlayerController : MonoBehaviour
         if (callbackContext.phase == InputActionPhase.Started)
         {
             UIManager.Instance.ToggleInventory();
-            ToggleCursor();
         }
     }
 
@@ -160,7 +158,6 @@ public class PlayerController : MonoBehaviour
         if (callbackContext.phase == InputActionPhase.Started)
         {
             UIManager.Instance.ToggleSetting();
-            ToggleCursor();
         }
     }
 
@@ -188,27 +185,6 @@ public class PlayerController : MonoBehaviour
         if (callbackContext.phase == InputActionPhase.Started)
         {
             builder?.Invoke();
-        }
-    }
-
-    void ToggleCursor()
-    {
-
-        bool isLocked = Cursor.lockState == CursorLockMode.Locked;
-
-        if (UIManager.Instance.IsInventoryOpen || UIManager.Instance.IsSettingOpen)
-        {
-            // ▶ 인벤토리 OR 설정창 열림 상태 : 커서 보이게 + 카메라 회전 끔
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            canLook = false;
-        }
-        else
-        {
-            // ▶ 인벤토리 OR 설정창 닫힘 상태 : 커서 숨기고 + 다시 카메라 회전 켬
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            canLook = true;
         }
     }
 }
