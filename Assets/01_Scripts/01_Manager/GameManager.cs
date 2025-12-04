@@ -585,7 +585,7 @@ public class GameManager : MonoBehaviour
         if (!showDebugGUI)
             return;
 
-        GUILayout.BeginArea(new Rect(10, 10, 350, 180));
+        /*GUILayout.BeginArea(new Rect(10, 10, 350, 180));
         GUILayout.Box("=== GAME MANAGER DEBUG ===");
         GUILayout.Label($"Phase: {_currentPhase}");
         GUILayout.Label($"Day: {_currentDay + 1} / {totalDays}");
@@ -601,7 +601,7 @@ public class GameManager : MonoBehaviour
 
         GUILayout.Label("");
         GUILayout.Label("Keys: [F]+20피로 [Z]수면 [X]깨기 [N]다음날");
-        GUILayout.EndArea();
+        GUILayout.EndArea();*/
 
         // 디버그 키
         if (Input.GetKeyDown(KeyCode.F))
