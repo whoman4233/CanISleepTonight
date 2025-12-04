@@ -15,70 +15,70 @@ MonoBehaviour:
   entries:
   - sfxId: S_001
     clip: {fileID: 8300000, guid: d380afdb9a1ee1e46b1e464829ba65ef, type: 3}
-    baseVolume: 0
+    baseVolume: 0.5
   - sfxId: S_002
     clip: {fileID: 8300000, guid: 0ee87251975a35b4ba6aedd85c267a46, type: 3}
-    baseVolume: 0
+    baseVolume: 0.5
   - sfxId: S_003
     clip: {fileID: 8300000, guid: 9f60954bacff5e14e813f324241e286a, type: 3}
-    baseVolume: 0
+    baseVolume: 0.5
   - sfxId: S_004
     clip: {fileID: 8300000, guid: 01d341a35219d324b910cc158c4513ce, type: 3}
-    baseVolume: 0
+    baseVolume: 0.5
   - sfxId: S_005
     clip: {fileID: 8300000, guid: a19aee37e7744ef4cbf0626c773ebfa9, type: 3}
-    baseVolume: 0
+    baseVolume: 0.5
   - sfxId: S_006
     clip: {fileID: 8300000, guid: 575add3e7e52394448d5bac5faa8c5e4, type: 3}
-    baseVolume: 0
+    baseVolume: 0.5
   - sfxId: S_007
     clip: {fileID: 8300000, guid: 6403decc6730c6745b4ebb67e0605673, type: 3}
-    baseVolume: 0
+    baseVolume: 0.5
   - sfxId: S_008
     clip: {fileID: 8300000, guid: 411643a541c26a9459bc90c856f37494, type: 3}
-    baseVolume: 0
+    baseVolume: 0.5
   - sfxId: S_009
     clip: {fileID: 8300000, guid: 9001f5cee411ebd4cba297193181aa25, type: 3}
-    baseVolume: 0
+    baseVolume: 0.5
   - sfxId: S_010
     clip: {fileID: 8300000, guid: 940674496c228f54c9265da91719253a, type: 3}
-    baseVolume: 0
+    baseVolume: 0.5
   - sfxId: S_011
     clip: {fileID: 8300000, guid: 4ea1bc97e22158d4f863e72539903e47, type: 3}
-    baseVolume: 0
+    baseVolume: 0.5
   - sfxId: S_012
     clip: {fileID: 8300000, guid: 7de5e479d43b1a34ca097c6e0481f828, type: 3}
-    baseVolume: 0
+    baseVolume: 0.5
   - sfxId: S_013
     clip: {fileID: 8300000, guid: 9112f4d9da61264459ccef01f26e79e7, type: 3}
-    baseVolume: 0
+    baseVolume: 0.5
   - sfxId: S_014
     clip: {fileID: 8300000, guid: 1ba43d54f12084d4c93081a244ff3aac, type: 3}
-    baseVolume: 0
+    baseVolume: 0.5
   - sfxId: S_015
     clip: {fileID: 8300000, guid: 0b8511f9b8ba2c54e94d5cf3135a288c, type: 3}
-    baseVolume: 0
+    baseVolume: 0.5
   - sfxId: S_016
     clip: {fileID: 8300000, guid: be93aedbea4d7644da0a211c6b26894c, type: 3}
-    baseVolume: 0
+    baseVolume: 0.5
   - sfxId: S_017
     clip: {fileID: 8300000, guid: bcb1435ef46426b44ae1740f6b8fba2c, type: 3}
-    baseVolume: 0
+    baseVolume: 0.5
   - sfxId: S_018
     clip: {fileID: 8300000, guid: 99371e0576eb1c946836ae8155374982, type: 3}
-    baseVolume: 0
+    baseVolume: 0.5
   - sfxId: S_019
     clip: {fileID: 8300000, guid: 9348d297efe645d4abdfc532f470fc1c, type: 3}
-    baseVolume: 0
+    baseVolume: 0.5
   - sfxId: S_020
     clip: {fileID: 8300000, guid: 7d9bc177dcce1ae4aa22a8d5eb5d0eaf, type: 3}
-    baseVolume: 0
+    baseVolume: 0.5
   - sfxId: S_021
     clip: {fileID: 8300000, guid: ba49de5a48b95ad48803fcf34b543092, type: 3}
-    baseVolume: 0
+    baseVolume: 0.5
   - sfxId: S_022
     clip: {fileID: 8300000, guid: 18c5c3af2c7fc134eb8098140ed82361, type: 3}
-    baseVolume: 0
+    baseVolume: 0.5
   - sfxId: S_023
     clip: {fileID: 8300000, guid: 4be4e9d187c055f4e9d7fa6767432798, type: 3}
-    baseVolume: 0
+    baseVolume: 0.5
