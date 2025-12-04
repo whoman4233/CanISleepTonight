@@ -126,14 +126,14 @@ public class UIManager : MonoBehaviour
 
     public void UpdateStressUI(float stress, float maxValue)
     {
-        stressBar.fillAmount = stress / maxValue;
-        stressText.text = $"스트레스 {stress} / {maxValue}";
+        stressBar.fillAmount = (int)stress / maxValue;
+        stressText.text = $"스트레스 {(int)stress} / {maxValue}";
     }
 
     public void UpdateFatigueUI(float fatigue, float maxValue)
     {
-        fatigueBar.fillAmount = fatigue / maxValue;
-        fatigueText.text = $"피로도 {fatigue} / {maxValue}";
+        fatigueBar.fillAmount = (int)fatigue / maxValue;
+        fatigueText.text = $"피로도 {(int)fatigue} / {maxValue}";
     }
 
     // 소음 수치 업데이트
