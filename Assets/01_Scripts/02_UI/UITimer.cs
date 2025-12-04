@@ -14,7 +14,7 @@ public class UITimer : MonoBehaviour
             dayText.text = "Day 1";
 
         if (timerText != null)
-            timerText.text = "06 : 00";
+            timerText.text = "00 : 00";
     }
 
     // Day 텍스트 업데이트

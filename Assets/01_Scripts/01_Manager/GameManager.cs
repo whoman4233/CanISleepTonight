@@ -8,7 +8,7 @@ public enum GamePhase
     NotStarted,   // 인트로 화면
     Preparation,  // 준비 페이즈
     Commute,      // 퇴근 페이즈
-    Action,       // 액션 페이즈 (6분 플레이 타임 6분)
+    Action,       // 액션 페이즈 (플레이 타임 3분)
     Settlement,   // 정산 페이즈
     GoToWork,     // 출근 페이즈
     GameOver      // 게임 오버
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     
     // 게임 설정
     [Tooltip("액션 페이즈 지속 시간 (초) - 기본 360초 = 6분")]
-    private float actionPhaseDuration = 360f;
+    private float actionPhaseDuration = 180f;
 
     [Tooltip("하루 총 일수 (기본 7일)")]
     private int totalDays = 7;
