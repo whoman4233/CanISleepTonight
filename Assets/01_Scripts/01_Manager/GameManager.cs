@@ -373,12 +373,13 @@ public class GameManager : MonoBehaviour
         }
 
         // 현재 소음 확인
-        float currentNoise = CalculateCurrentNoise();
+        // TODO : 소음 계산식 완성되면, 주석 해제
+        //float currentNoise = CalculateCurrentNoise();
 
         // 소음 >= 60 -> 수면 불가
-        if (currentNoise >= lightSleepNoiseThreshold)
+        if (_currentNoise >= lightSleepNoiseThreshold)
         {
-            reason = $"주변이 너무 시끄러워서 잠들 수 없습니다! (소음: {currentNoise:F1})";
+            reason = $"주변이 너무 시끄러워서 잠들 수 없습니다! (소음: {_currentNoise:F1})";
             return false;
         }
 
