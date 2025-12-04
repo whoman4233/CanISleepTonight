@@ -46,7 +46,7 @@ public class UIManager : MonoBehaviour
         bool isLocked = Cursor.lockState == CursorLockMode.Locked;
         PlayerController controller = PlayerManager.Instance.Player.GetComponent<PlayerController>();
 
-        if (IsInventoryOpen || IsSettingOpen || GameManager.Instance.IsGameOver)
+        if (IsInventoryOpen || IsSettingOpen || GameManager.Instance.IsGameOver || GameManager.Instance.IsGameEnded)
         {
             // ▶ 인벤토리 OR 설정창 열림 상태 / 게임오버 : 커서 보이게 + 카메라 회전 끔
             Cursor.lockState = CursorLockMode.None;
@@ -65,7 +65,8 @@ public class UIManager : MonoBehaviour
     // UI Open/Close 요청 함수들
     public void ToggleInventory()
     {
-        if (GameManager.Instance.IsGameOver) return;    // 게임오버 시, 인벤토리창 열 수 없음
+        // 게임오버 or 게임종료 시, 인벤토리창 열 수 없음
+        if (GameManager.Instance.IsGameOver || GameManager.Instance.IsGameEnded) return;
         
         if (IsSettingOpen) return;   // 설정창 열려있으면 인벤토리 못 열게
 
@@ -75,7 +76,8 @@ public class UIManager : MonoBehaviour
 
     public void ToggleSetting()
     {
-        if (GameManager.Instance.IsGameOver) return;    // 게임오버 시, 설정창 열 수 없음
+        // 게임오버 or 게임종료 시, 설정창 열 수 없음
+        if (GameManager.Instance.IsGameOver || GameManager.Instance.IsGameEnded) return;
 
         // 인벤토리 열려있으면 인벤토리 닫기
         if (IsInventoryOpen)
@@ -146,7 +148,19 @@ public class UIManager : MonoBehaviour
     // 엔딩 UI 처리
     public void ShowEndingPanel(string endingType)
     {
+        if (uiEndingPanel == null)
+        {
+            Debug.LogError("[UIManager] UIEndingPanel이 연결되지 않았습니다!");
+            return;
+        }
+
+        // 엔딩 패널 활성화
         uiEndingPanel.gameObject.SetActive(true);
+
+        // 특정 엔딩 스크린 표시
+        uiEndingPanel.ShowEndingScreen(endingType);
+
+        // 커서 표시
         ToggleCursor();
     }
 }

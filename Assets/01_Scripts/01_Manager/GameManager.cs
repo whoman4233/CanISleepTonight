@@ -88,6 +88,9 @@ public class GameManager : MonoBehaviour
     private float _currentNoise;
     public float CurrentNoise => _currentNoise;
 
+    private bool _isGameEnded = false;
+    public bool IsGameEnded => _isGameEnded;
+
 
     // 프로퍼티
     public GamePhase CurrentPhase => _currentPhase;
@@ -530,7 +533,6 @@ public class GameManager : MonoBehaviour
             _currentPhase = GamePhase.GameOver;
             ShowEnding("Bad");
             _canMove = false;
-            Time.timeScale = 0f;
         }
     }
 
@@ -546,6 +548,8 @@ public class GameManager : MonoBehaviour
 
     private void ShowEnding(string endingType)
     {
+        _isGameEnded = true;
+
         Debug.Log($"[GameManager] =============================");
         Debug.Log($"[GameManager]    {endingType} 엔딩");
         Debug.Log($"[GameManager] =============================");
