@@ -29,10 +29,6 @@ MonoBehaviour:
     housePrefab: {fileID: 8573771435043746843, guid: db0bda253e78b7b40a8933f321fce580,
       type: 3}
     description: 
-  - layoutId: L_05
-    housePrefab: {fileID: 7024386078109254851, guid: 22202003e1f25bd4f90e96c8fadb0f29,
-      type: 3}
-    description: 
   - layoutId: L_06
     housePrefab: {fileID: 3133755779912912021, guid: 08aae860a83ddd5499d0564c34586efe,
       type: 3}
@@ -71,5 +67,13 @@ MonoBehaviour:
     description: 
   - layoutId: EMPTY
     housePrefab: {fileID: 680056530095797570, guid: 1d9f11a477af8d44493ea6f6e2700b23,
+      type: 3}
+    description: 
+  - layoutId: N_Room_Player
+    housePrefab: {fileID: 680056530095797570, guid: 817407cefa42b964cbb442b6e6745733,
+      type: 3}
+    description: 
+  - layoutId: L_05
+    housePrefab: {fileID: 7024386078109254851, guid: 22202003e1f25bd4f90e96c8fadb0f29,
       type: 3}
     description: 

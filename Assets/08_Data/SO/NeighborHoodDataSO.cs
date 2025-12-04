@@ -9,13 +9,13 @@ using UnityEngine;
 [Serializable]
 public class NeighborDataRow
 {
-    [Tooltip("Neighbor ID (¿¹: N_001)")]
+    [Tooltip("Neighbor ID (ì˜ˆ: N_001)")]
     public string neighborId;
 
-    [Tooltip("Ç¥½Ã¿ë ÀÌ¸§ (¿¹: ±ÙÀ°³ú)")]
+    [Tooltip("í‘œì‹œìš© ì´ë¦„ (ì˜ˆ: ê·¼ìœ¡ë‡Œ)")]
     public string displayName;
 
-    [Tooltip("±âÈ¹¼­¿¡ Á¤ÀÇµÈ LayoutID (¿¹: L_01)")]
+    [Tooltip("ê¸°íšì„œì— ì •ì˜ëœ LayoutID (ì˜ˆ: L_01)")]
     public string layoutId;
 
     [TextArea]
@@ -33,37 +33,6 @@ public class NeighborTableSO : ScriptableObject
     }
 }
 
-// ============================
-// Distraction
-// ============================
-
-[Serializable]
-public class DistractionDataRow
-{
-    [Tooltip("Distraction ID (¿¹: D_N001_A)")]
-    public string distractionId;
-
-    [Tooltip("ÁÖÀÎ Neighbor ID (¿¹: N_001)")]
-    public string ownerId;
-
-    [Tooltip("½ÇÁ¦ ¼ÒÀ½¿øÀ» ´ëÇ¥ÇÏ´Â ID (Neighbor or Entity ID µî)")]
-    public string sourceId;
-
-    [Tooltip("ÅÂ±× (¿¹: sound µî)")]
-    public string tag;
-
-    [Tooltip("°­µµ (1~6)")]
-    public int intensity;
-
-    [Tooltip("È¿°úÀ½ ID (¿¹: S_001)")]
-    public string sfxId;
-
-    [Tooltip("±âº» À§Ä¡ PlaceID (¿¹: P_303). ÇÁ¸®ÆÕ¿¡¼­ Override °¡´É")]
-    public string placeId;
-
-    [TextArea]
-    public string description;
-}
 
 [CreateAssetMenu(fileName = "DistractionTable", menuName = "GameData/Distraction Table")]
 public class DistractionTableSO : ScriptableObject
