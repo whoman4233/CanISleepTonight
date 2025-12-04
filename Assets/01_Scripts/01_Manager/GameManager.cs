@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float noisePenaltyCoefficient = 0.2f;
     
 
-    public GamePhase _currentPhase = GamePhase.NotStarted;
+    private GamePhase _currentPhase = GamePhase.NotStarted;
     private int _currentDay = 0;
 
 
