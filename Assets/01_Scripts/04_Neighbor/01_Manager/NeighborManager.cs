@@ -136,26 +136,133 @@ public class NeighborManager : MonoBehaviour
         }
     }
 
-    // 특정 Distraction을 Dead 처리 (상호작용 시스템에서 호출)
     public void SetDistractionDead(string distractionId)
     {
         if (!_distractionsById.TryGetValue(distractionId, out var runtime))
             return;
 
-        runtime.wasHitToday = true;
-        runtime.isSilencedToday = true;
+        // 하루 동안만 OFF
         runtime.isActiveToday = false;
 
-        // 캐시 리스트에서도 제거
+        // 굳이 isAlive를 false로 둘 필요 없음 (영구 죽음 없음)
+        // runtime.isAlive = false;  // <-- 이 줄은 제거
+
+        // 오늘자 활성 리스트에서 제거
         _activeDistractionsToday.Remove(runtime);
 
-        // 이웃의 모든 Distraction이 Dead이면, 이웃도 Dead 처리할 여지
-        var owner = runtime.owner;
-        if (owner != null && owner.distractions.All(d => !d.isAlive))
-        {
-            SetNeighborDead(owner.Id);
-        }
+        // 이웃 전체를 죽이는 로직도 지금은 필요 없음
+        // (영구 Dead 개념을 안 쓸 거라면)
     }
+
+    public void ResetHousesForNewDay()
+    {
+        if (masterData == null || masterData.houseLayoutTable == null)
+        {
+            Debug.LogWarning("[NeighborManager] ResetHousesForNewDay: houseLayoutTable 이 없습니다.");
+            return;
+        }
+
+        if (houseSlots == null || houseSlots.Count == 0)
+        {
+            Debug.LogWarning("[NeighborManager] ResetHousesForNewDay: houseSlots 가 비어 있습니다.");
+            return;
+        }
+
+        // 0) 전체 슬롯의 기존 인테리어 프리팹 제거
+        foreach (var slot in houseSlots)
+        {
+            if (slot == null || slot.InteriorRoot == null)
+                continue;
+
+            for (int i = slot.InteriorRoot.childCount - 1; i >= 0; i--)
+            {
+                Destroy(slot.InteriorRoot.GetChild(i).gameObject);
+            }
+        }
+
+        // 1) EMPTY / PlayerRoom 레이아웃 캐싱
+        var emptyRow = masterData.houseLayoutTable.GetById("EMPTY");
+        var playerRoomRow = masterData.houseLayoutTable.GetById("N_Room_Player");
+
+        if (emptyRow == null || emptyRow.housePrefab == null)
+        {
+            Debug.LogWarning("[NeighborManager] ResetHousesForNewDay: EMPTY 레이아웃이 없습니다.");
+        }
+
+        if (playerRoomRow == null || playerRoomRow.housePrefab == null)
+        {
+            Debug.LogWarning("[NeighborManager] ResetHousesForNewDay: N_Room_Player 레이아웃이 없습니다.");
+        }
+
+        // 2) 어떤 슬롯에 이미 뭔가를 뿌렸는지 체크용
+        var usedSlots = new System.Collections.Generic.HashSet<HouseSlot>();
+
+        // 3) 이웃들이 배정된 슬롯에 각자 레이아웃 프리팹 재생성
+        foreach (var neighbor in _neighbors)
+        {
+            var slot = neighbor.houseSlot;
+            if (slot == null || slot.InteriorRoot == null)
+                continue;
+
+            var layoutRow = masterData.houseLayoutTable.GetById(neighbor.data.layoutId);
+            if (layoutRow == null || layoutRow.housePrefab == null)
+            {
+                Debug.LogWarning($"[NeighborManager] ResetHousesForNewDay: layoutId={neighbor.data.layoutId} 프리팹 없음 (NeighborId={neighbor.Id})");
+                continue;
+            }
+
+            var instance = Instantiate(layoutRow.housePrefab, slot.InteriorRoot, false);
+            InitTransform(instance.transform);
+
+            neighbor.houseInstance = instance;
+            usedSlots.Add(slot);
+        }
+
+        // 4) 플레이어 방 슬롯 찾고, 플레이어 전용 방 프리팹 재생성
+        HouseSlot playerSlot = null;
+        if (!string.IsNullOrEmpty(locationTracker.currentHouseSlotId))
+        {
+            playerSlot = houseSlots.Find(s => s != null && s.placeId == locationTracker.currentHouseSlotId);
+        }
+
+        if (playerSlot != null && playerSlot.InteriorRoot != null &&
+            playerRoomRow != null && playerRoomRow.housePrefab != null)
+        {
+            var instance = Instantiate(playerRoomRow.housePrefab, playerSlot.InteriorRoot, false);
+            InitTransform(instance.transform);
+
+            usedSlots.Add(playerSlot);
+
+            Debug.Log($"[NeighborManager] ResetHousesForNewDay: PlayerRoom at Slot={playerSlot.houseSlotId} (placeId={playerSlot.placeId})");
+        }
+        else
+        {
+            if (playerSlot == null)
+                Debug.LogWarning($"[NeighborManager] ResetHousesForNewDay: playerPlaceId={locationTracker.currentHouseSlotId} 슬롯을 찾지 못했습니다.");
+        }
+
+        // 5) 남은 슬롯들은 EMPTY 프리팹으로 채우기
+        if (emptyRow != null && emptyRow.housePrefab != null)
+        {
+            foreach (var slot in houseSlots)
+            {
+                if (slot == null || slot.InteriorRoot == null)
+                    continue;
+
+                if (usedSlots.Contains(slot))
+                    continue;
+
+                var instance = Instantiate(emptyRow.housePrefab, slot.InteriorRoot, false);
+                InitTransform(instance.transform);
+
+                Debug.Log($"[NeighborManager] ResetHousesForNewDay: EMPTY at Slot={slot.houseSlotId} (placeId={slot.placeId})");
+            }
+        }
+
+        // 6) 새로 생성된 프리팹들 기준으로 DistractionAnchor ↔ DistractionRuntime 재연결
+        LinkDistractionAnchors();
+    }
+
 
     public void SetNeighborDead(string neighborId)
     {
