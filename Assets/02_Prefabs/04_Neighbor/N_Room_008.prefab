@@ -6007,7 +6007,7 @@ GameObject:
   - component: {fileID: 1730013989117163123}
   - component: {fileID: 3128347167195188400}
   m_Layer: 9
-  m_Name: D_N008_A
+  m_Name: D_N008_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6063,7 +6063,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec79c5034a39e7248b38148174b882ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distractionId: D_N008_A
+  distractionId: D_N008_B
   placeId: 
   hitColliders: []
   audioSource: {fileID: 0}
