@@ -1,7 +1,11 @@
 # CanISleepTonight
 CanISleepTonight?(오늘은 잠들 수 있을까?)
 
-# 이웃 & 소음 시스템 (Neighbor / Distraction / Noise)
+---
+
+# 🛠️ 구현 기능 (손준형)
+
+## 이웃 & 소음 시스템 (Neighbor / Distraction / Noise)
 
 ## 1. 개요
 이 시스템은 아파트 형태의 맵에서 **이웃(Neighbor)** 과 그들이 만들어내는 **방해 요소(Distraction, 소음원)** 를 데이터 기반으로 관리하고, 게임 내 하루(Day) 단위로 **랜덤 소음 발생 / 플레이어의 제압(때리기) / 다음 날 리셋** 흐름을 구성하는 역할을 합니다.
@@ -201,3 +205,68 @@ CanISleepTonight?(오늘은 잠들 수 있을까?)
 아파트 층별 이웃 및 소음 시스템을 설계/구현했습니다.
 
 * CSV + ScriptableObject 기반의 Neighbor/Distraction/Place 테이블을 바탕으로, 하루마다 랜덤으로 시끄러운 이웃을 선정하고, 플레이어의 상호작용(타격)에 따라 해당 날짜 동안만 소음이 비활성화되며, 다음 날에는 프리팹 재생성과 함께 전체 구조가 리셋되는 **데이터 드리븐 형태의 이웃/소음 관리 시스템을 구현했습니다.**
+
+---
+# 🛠️ 구현 기능 (장현우)
+
+## ⚔️ Combat & Physics System (전투 및 물리 시스템)
+
+### 1. Ragdoll 피격 처리 (Ragdoll Hit Reaction)
+
+**사용 스크립트**
+* `RagdollSetting.cs`: NPC에 부착되어 신체 부위별 물리(Rigidbody/Collider)를 제어하는 핵심 스크립트.
+
+**동작 개요**
+1.  **Idle State:** NPC는 기본적으로 `Animator`가 활성화되어 있고, 메인 콜라이더(Box Collider)와 Rigidbody만 켜진 상태로 서 있습니다.
+2.  **Impact:** 플레이어의 공격 성공 시, 무기에서 계산된 **충격 방향(Vector3)**과 **힘(float)** 데이터를 `RagdollSetting`으로 전달합니다.
+3.  **Transition:**
+    * `Animator` 비활성화 (애니메이션 중단)
+    * 메인 콜라이더 비활성화
+    * 각 관절(Limb)의 리지드바디/콜라이더 활성화
+4.  **Physics Reaction:** 피격 위치를 기준으로 `AddForce`를 적용하여, NPC가 단순히 제자리에서 멈추는 것이 아니라 **타격 방향으로 날아가며 쓰러지는 물리적 연출**을 구현했습니다.
+
+![Ragdoll Physics Demo](https://github.com/user-attachments/assets/f7bfc058-4e02-40bb-8c02-3a43746f9caa)
+
+---
+
+### 2. Raycast 기반 근접 공격 (Ray-based Melee Attack)
+
+**사용 스크립트**
+* `EquipItem.cs`: 무기(망치)의 실질적인 공격 로직 수행.
+* `WeaponVelocityTracker.cs`: 무기의 휘두르는 속도를 계산하여 타격감(충격량)에 반영.
+* `AttackSFXRelay.cs`: 애니메이션 이벤트와 동기화되어 `OnHit` 호출 및 효과음 재생.
+
+**동작 개요**
+1.  **Input & Event:** 공격 버튼 입력 시 애니메이션이 재생되며, 타격 타이밍(Animation Event)에 `AttackSFXRelay`가 `EquipItem.OnHit()`을 호출합니다.
+2.  **Raycast Detection:**
+    * 망치 자체의 콜라이더가 아닌, **카메라 화면 중앙(Crosshair)**을 기준으로 `ScreenPointToRay()`를 발사하는 FPS 스타일의 판정을 사용합니다.
+    * `Interactable`, `Neighbor` 레이어를 가진 오브젝트만 감지합니다.
+3.  **Force Calculation:**
+    * `WeaponVelocityTracker`에서 추적한 **무기 스윙 속도**와 `RagdollSetting`의 기본 힘 값을 조합하여 최종 **충격량(Impact Force)**을 계산합니다.
+4.  **Apply Hit:**
+    * Ray에 맞은 오브젝트가 `RagdollSetting`을 가지고 있다면 `ApplyHit(방향, 힘)`을 호출합니다.
+    * NPC는 계산된 힘만큼 밀려나며 레그돌 상태로 전환됩니다.
+    * `WeaponSFX`를 통해 타격음을 재생하여 타격감을 보강합니다.
+
+![Attack System Demo](https://github.com/user-attachments/assets/f0308947-468d-442f-8475-51c3d01f9054)
+---
+
+# 🛠️ 구현 기능 (조아라)
+
+### 1. Core Systems (GameManager)
+**`GameManager.cs`** 를 중심으로 게임의 전반적인 흐름과 주요 상태를 제어하는 코어 로직을 구현했습니다.
+* **Game Loop Control:** 게임의 시작, 진행, 종료 등 전체적인 루프(State Loop)를 제어합니다.
+* **Noise Logic:** 게임 내 소음도(Noise Level)를 계산하고 반영하는 핵심 로직을 처리합니다.
+* **Fatigue & Sleep System:** 플레이어의 피로도 시스템을 관리하며, '취침' 상호작용을 통해 피로도를 회복하고 시간을 경과시키는 로직을 구현했습니다.
+
+### 2. UI System (UIManager)
+**`UIManager.cs`** 를 통해 중앙 집중식 UI 관리 시스템을 구축하고, 유지보수성을 높였습니다.
+* **Centralized Management:** `UIManager`가 씬 내의 모든 UI 팝업과 뷰를 중앙에서 관리합니다.
+* **Modular Design:** 뷰의 활성화/비활성화 등 공통 기능은 매니저가 담당하고, 각 UI의 구체적인 동작 로직은 개별 스크립트로 분리하여 의존성을 낮췄습니다.
+
+### 3. Audio System (AudioManager)
+**`AudioManager.cs`** 를 통해 사운드 리소스 및 볼륨을 통합 관리합니다.
+* **Volume Control:** 설정창(Settings) UI와 연동하여 Master, BGM, SFX 등 채널별 볼륨을 조절하는 시스템을 구현했습니다.
+
+### 4. Item System
+* **Item Logic:** 게임 내 등장하는 아이템의 데이터 구조 및 사용/획득 관련 스크립트를 작성했습니다.
