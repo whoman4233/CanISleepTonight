@@ -60,7 +60,6 @@ public class PlayerManager : MonoBehaviour
         // 스폰 포인트 기본 좌표로
         playerTransform.position = defaultSpawnPosition;
         playerTransform.rotation = Quaternion.Euler(defaultSpawnRotation);
-        Debug.LogWarning("[PlayerManager] 기본 스폰 위치 (303호) 로 이동");
 
         // PlayerLocationTracker 업데이트
         var locationTracker = FindObjectOfType<PlayerLocationTracker>();

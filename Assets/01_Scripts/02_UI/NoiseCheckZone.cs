@@ -6,8 +6,6 @@ public class NoiseCheckZone : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;    // Player 가 Zone 에 들어온 게 아니라면, return
 
-        Debug.Log("Player 가 NoiseCheckZone 에 진입하였습니다!");
-
         // 소음 UI 표시
         if (UIManager.Instance != null)
         {
@@ -34,8 +32,6 @@ public class NoiseCheckZone : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Player")) return;    // Player 가 Zone 에서 나간 게 아니라면, return
-
-        Debug.Log("Player 가 NoiseCheckZone 에서 나갔습니다!");
 
         // 소음 UI 숨김
         if (UIManager.Instance != null)
