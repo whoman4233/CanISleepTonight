@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfe7f909a79372543b2e3382445c0452, type: 3}
+  m_Name: HouseLayoutTable
+  m_EditorClassIdentifier: Assembly-CSharp::HouseLayoutTableSO
+  layouts:
+  - layoutId: L_01
+    housePrefab: {fileID: 8423230325077608420, guid: 4b06c969eb63c3e4e98fe45c56a7f6d4,
+      type: 3}
+    description: 
+  - layoutId: L_02
+    housePrefab: {fileID: 1389120840723910165, guid: 17cf4bbfc4592f24f9f61a8a2b667052,
+      type: 3}
+    description: 
+  - layoutId: L_03
+    housePrefab: {fileID: 5150124018982203627, guid: 2cc8e1b17fa5ad5499cab352c1c9a42a,
+      type: 3}
+    description: 
+  - layoutId: L_04
+    housePrefab: {fileID: 8573771435043746843, guid: db0bda253e78b7b40a8933f321fce580,
+      type: 3}
+    description: 
+  - layoutId: L_05
+    housePrefab: {fileID: 7024386078109254851, guid: 22202003e1f25bd4f90e96c8fadb0f29,
+      type: 3}
+    description: 
+  - layoutId: L_06
+    housePrefab: {fileID: 3133755779912912021, guid: 08aae860a83ddd5499d0564c34586efe,
+      type: 3}
+    description: 
+  - layoutId: L_07
+    housePrefab: {fileID: 6587119734548478654, guid: 7596c3a6538710049ae04cad8ba9e55d,
+      type: 3}
+    description: 
+  - layoutId: L_08
+    housePrefab: {fileID: 6181912490900766675, guid: b783cdf2409fae047b7407c033388bdd,
+      type: 3}
+    description: 
+  - layoutId: L_09
+    housePrefab: {fileID: 3436527185091438435, guid: 272db11075652e7489d176fd5b233a15,
+      type: 3}
+    description: 
+  - layoutId: L_10
+    housePrefab: {fileID: 3704678973622349442, guid: 7ca675e66666e764d90bbb221292252c,
+      type: 3}
+    description: 
+  - layoutId: L_11
+    housePrefab: {fileID: 1845576607785231497, guid: 58643479de7222c45b3f9b530e3695d7,
+      type: 3}
+    description: 
+  - layoutId: L_12
+    housePrefab: {fileID: 5325518159688714515, guid: d4ff38520375973458d2bc9702d8e588,
+      type: 3}
+    description: 
+  - layoutId: L_13
+    housePrefab: {fileID: 2411787923329385441, guid: f28b9482c0de16043b3bae5e281c363e,
+      type: 3}
+    description: 
+  - layoutId: L_14
+    housePrefab: {fileID: 2002213239743755487, guid: 02d7eadc0a3fd4641aaffdf32aefaed0,
+      type: 3}
+    description: 
+  - layoutId: EMPTY
+    housePrefab: {fileID: 680056530095797570, guid: 1d9f11a477af8d44493ea6f6e2700b23,
+      type: 3}
+    description: 
+  - layoutId: N_Room_Player
+    housePrefab: {fileID: 680056530095797570, guid: 817407cefa42b964cbb442b6e6745733,
+      type: 3}
+    description: 

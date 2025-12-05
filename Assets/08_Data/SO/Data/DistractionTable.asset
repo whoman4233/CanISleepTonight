@@ -1,0 +1,183 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: DistractionTable
+  m_EditorClassIdentifier: Assembly-CSharp::DistractionTableSO
+  distractions:
+  - distractionId: D_N001_A
+    ownerId: N_001
+    noiseId: 
+    tag: sound
+    level: 3
+    sfxId: S_003
+    placeId: 
+    info: WeightLifting
+  - distractionId: D_N002_A
+    ownerId: N_002
+    noiseId: 
+    tag: sound
+    level: 4
+    sfxId: S_004
+    placeId: 
+    info: ScuffleWife
+  - distractionId: D_N002_B
+    ownerId: N_002
+    noiseId: 
+    tag: sound
+    level: 4
+    sfxId: S_005
+    placeId: 
+    info: ScuffleHusband
+  - distractionId: D_N003_A
+    ownerId: N_003
+    noiseId: 
+    tag: sound
+    level: 3
+    sfxId: S_006
+    placeId: 
+    info: GamerRage
+  - distractionId: D_N003_B
+    ownerId: N_003
+    noiseId: 
+    tag: sound
+    level: 3
+    sfxId: S_007
+    placeId: 
+    info: PlayingGame
+  - distractionId: D_N004_A
+    ownerId: N_004
+    noiseId: 
+    tag: sound
+    level: 2
+    sfxId: S_008
+    placeId: 
+    info: SportsYelling
+  - distractionId: D_N004_B
+    ownerId: N_004
+    noiseId: 
+    tag: sound
+    level: 3
+    sfxId: S_009
+    placeId: 
+    info: SportTV
+  - distractionId: D_N005_A
+    ownerId: N_005
+    noiseId: 
+    tag: sound
+    level: 3
+    sfxId: S_010
+    placeId: 
+    info: PlayingGuitar
+  - distractionId: D_N005_B
+    ownerId: N_005
+    noiseId: 
+    tag: sound
+    level: 4
+    sfxId: S_011
+    placeId: 
+    info: PlayingBass
+  - distractionId: D_N005_C
+    ownerId: N_005
+    noiseId: 
+    tag: sound
+    level: 5
+    sfxId: S_012
+    placeId: 
+    info: PlayingDrum
+  - distractionId: D_N006_A
+    ownerId: N_006
+    noiseId: 
+    tag: sound
+    level: 3
+    sfxId: S_013
+    placeId: 
+    info: PlayingBasketball
+  - distractionId: D_N008_A
+    ownerId: N_008
+    noiseId: 
+    tag: sound
+    level: 3
+    sfxId: S_014
+    placeId: 
+    info: VintageRadio
+  - distractionId: D_N009_A
+    ownerId: N_009
+    noiseId: 
+    tag: sound
+    level: 3
+    sfxId: S_015
+    placeId: 
+    info: BadOperaSinging
+  - distractionId: D_N010_A
+    ownerId: N_010
+    noiseId: 
+    tag: sound
+    level: 1
+    sfxId: S_016
+    placeId: 
+    info: ManCrying
+  - distractionId: D_N011_A
+    ownerId: N_011
+    noiseId: 
+    tag: sound
+    level: 3
+    sfxId: S_017
+    placeId: 
+    info: JoyfulShoutBabys
+  - distractionId: D_N011_B
+    ownerId: N_011
+    noiseId: 
+    tag: sound
+    level: 2
+    sfxId: S_018
+    placeId: 
+    info: SatisfiedLaughing
+  - distractionId: D_N012_A
+    ownerId: N_012
+    noiseId: 
+    tag: sound
+    level: 3
+    sfxId: S_019
+    placeId: 
+    info: BadPianoPlaying
+  - distractionId: D_N013_A
+    ownerId: N_013
+    noiseId: 
+    tag: sound
+    level: 4
+    sfxId: S_020
+    placeId: 
+    info: JoyfulShoutMale
+  - distractionId: D_N013_B
+    ownerId: N_013
+    noiseId: 
+    tag: sound
+    level: 4
+    sfxId: S_022
+    placeId: 
+    info: JoyfulShoutMale_03
+  - distractionId: D_N013_C
+    ownerId: N_013
+    noiseId: 
+    tag: sound
+    level: 5
+    sfxId: S_021
+    placeId: 
+    info: ClubBeat
+  - distractionId: D_N014_A
+    ownerId: N_014
+    noiseId: 
+    tag: sound
+    level: 1
+    sfxId: S_023
+    placeId: 
+    info: Cackling

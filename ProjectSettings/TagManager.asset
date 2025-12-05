@@ -8,9 +8,13 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Terrain
   - Water
   - UI
+  - Player
+  - Interactable
+  - Equipment
+  - Neighbor
   - 
   - 
   - 
@@ -32,11 +36,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Wave
   m_SortingLayers:
   - name: Default
     uniqueID: 0
